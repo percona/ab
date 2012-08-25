@@ -1,0 +1,18 @@
+for dir in flashmax ; do
+for bp in  100 200 ; do
+
+engine_line="defaults-file=conf/tpcc/tpccw2500-innodb.cnf,innodb_buffer_pool_size=${bp}G,innodb_io_capacity=10000,innodb_log_file_size=4G,innodb_doublewrite=1"
+
+#./ab.sh --test=conf/tpcc/ab_tpccw2500.cnf --servers=/data/opt/alexey.s/bin64_5525a-ps-neighbor/ \
+#./ab.sh --test=conf/tpcc/ab_tpccw2500.cnf --servers=/usr/local/ps-5.5.27-full/ \
+#--autobench-datadir=/mnt/${dir}/data --threads=32 --duration=3600 --mode=run \
+#--engine=innodb,${engine_line},comment=$dir.ibp${bp}G.capa10k --start-and-exit
+#--autobench-datadir=/mnt/${dir}/data --threads=32 --duration=3600  --mode=prepare-restore,run,cleanup \
+
+./ab.sh --test=conf/tpcc/ab_tpccw2500.cnf --servers=/usr/local/ps-5.5.27-rel-fix-flush/ \
+--autobench-datadir=/mnt/${dir}/data --threads=32 --duration=3600  --mode=run,cleanup \
+--engine=innodb,${engine_line},comment=$dir.ibp${bp}G.dw0.capa10k
+
+done
+done
+

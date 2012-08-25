@@ -1,0 +1,186 @@
+v0.37
+
+- Removed use of the $SHELL environment variable so the kit is more portable.
+
+v0.36
+
+- Added a check for ulimit -n.
+- Fixed the response time calculations to be after all threads have started.
+
+v0.35
+
+- Critial fix for the data generator.
+- Critial fix for the Payment transaction when using MySQL.
+- Changed the database integrity check into a command line option.
+
+v0.34
+
+- Calculate 90th percentile reponse times in scripts/mix_analyzer.pl.
+- Fix up in run_mysql.sh.in.
+
+v0.33
+
+- Script improvements.
+- Fixed the Makefile for funcs.so.
+- Collect callgraph data with oprofile.  Only really works for ia32 and ARM
+  due to oprofile support.
+
+v0.32
+
+- Updated the autoconf scripts to not fail if pg_autovacuum is not found.
+  With 8.1 coming up, it is part of the backend now.
+- Fixed scripts/pgsql/analyze_stats.pl to work correctly.
+
+v0.31
+
+- Modified the table creation and index creation scripts so that the primary
+  keys are created as part of the index builds.
+- Modified the autoconf scripts so that using odbc libraries is a feature that
+  needs to be enabled with the database that will be tested.
+- Fixed some compiler warnings and errors when building against odbc.
+- Fixed a bug in src/libpq/dbc_payment.c where the wrong parameter was being
+  passed.
+
+v0.30
+
+- Added x- and y-axis lines for the PostgreSQL database charts.
+- Fixed the autoconf files to include files for MySQL with no stored procedures.
+
+v0.29
+
+- Removed default configure to PostgreSQL in configure.ac.  It will prompt for
+  the database to be specified if none is given.
+- Tidied up the autoconf files a little more.
+- Added x- and y-axis lines to scripts/notpm.input.
+- Fixed mix_analyzer.pl to stop counting failed transactions as successful
+  transactions.
+
+v0.28
+
+- Improved configure.ac to check for headers for PostgreSQL.
+- Fixed Makefile.am to include the README-* files in a 'make dist'.
+
+v0.27
+
+- Fixed Makefiles for 'make dist'.
+- Modified scripts for PostgreSQL so that tablespaces can be used.
+  README-POSTGRESQL has been updated with notes on how to use tablespaces.
+
+v0.26
+
+- Improved configure.in to set executable permission onfiles it generated.
+- More fixes related to setting the stack size in the C programs.
+- Added headers to files where previously missing.
+
+v0.25
+
+- PostgreSQL requires pg_autovacuum now, but you could edit the kit so it can
+  still run without it.
+- Removed results and moved its functionality into mix_analyzer.pl.
+- Now you don't need to modify pg_config_manual.h in order to use the kit with
+  PostgreSQL.
+- Various little script fixes and enhancements.
+- Fixed a problem with getting plans for PostgreSQL during the run.
+- Stock setting stack size in the shell scripts.  Setting the stack size where
+  appropriate in the C programs.
+- gen_html.sh is now used automatically to generate results in HTML.
+- Other misc. script fixes and enhancements for PostgreSQL.
+
+v0.24
+
+- Changed the format of the vmstat data files that are graphed.
+- Fix for results.c for some 64 bit platform.
+
+v0.23
+
+- MySQL support.
+- Minor bug fix with generating data for the payment transaction.
+
+v0.22
+
+- Build environment updates
+
+v0.21.1
+
+- User Guide updates.
+
+v0.21
+
+- Fixed a bug in in _accept().
+- Updated the user's guide.
+- Changed the column data types in various tables for performance.
+
+v0.20
+
+- Fixed a bug in the New-Order transaction that was introduced into v0.19
+  by accident.
+
+v0.19
+
+- Fixed a query in the New-Order transaction to reduce the number of rollbacks.
+v0.18
+
+- Fixed a bug in the driver regarding the assignment of warehouse id's to each
+  thread.
+
+v0.17
+
+- Fixed a bug in the New-Order transaction in the PostgreSQL C function.
+- More work on the run_workload.sh script.
+
+v0.16
+
+- Replaced the OpenOffice text documents with LaTeX versions.
+- Fixed the rollback logic for the New-Order transaction with SAP DB.
+- Added backup and restore scripts for PostgreSQL.
+
+v0.15
+
+- Fixed the rollback logic in the New-Order transaction.
+- Added more status output in the client.
+- Fixed a bug in get_node that cause memory violations for multiple
+  connections.
+- Really fixed the stored procedures for SAP DB 7.3.0.25 this time.
+- Fixed logic in New-Order that screwed up the stock table.
+
+v0.14
+
+- Removed nonblocking socket code.
+
+v0.13
+
+- Fixed the default stored procedures to work with 7.3.0.25.
+- Undid code to use nonblocking sockets, I just don't know how to do it right.
+- Fixed a bug with get_node() in listener.c.
+- Fixed the sleep control for the connection rates between components in
+  a multi-tier environment.
+- Added more status output in the client.
+
+v0.12
+
+- Started using nonblocking sockets for communication with the client.
+- Added some more status information to the client.
+- Control the sleep time between openning connections to the client in
+  a multi-tier environment.  Maybe cause problems when attempting to drive
+  many many users.
+
+v0.11
+- Fixed db_setup.sh.in for SAP DB to generate the correct data.
+- Fixed the tools directory Makefile.in for SAP DB.
+
+v0.10
+
+- Changed default altered mode to 0.
+- Cleaned out lingering CVS directories.
+
+v0.9
+
+- Fixed funcs.c (the stored functions) to correctly escape a couple more
+  characters.
+- Fixed the random seeding of threads.
+- Fixed passing of transaction status in the multi-tier environment.
+
+v0.8
+
+- Fixed the client and driver to work in a multi-tier environment with
+  PostgreSQL.

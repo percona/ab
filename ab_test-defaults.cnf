@@ -1,0 +1,75 @@
+#!/bin/bash
+########################################################################
+#
+#               Autobench test configuration file
+#
+########################################################################
+
+#profile information
+USE_OPROFILE=0
+VMLINUX=""
+
+#System statistic information: sar/vmstat/iostat
+COLLECT_STAT=1
+TEST_STAT_SAMPLE=10 # Get sample each 10 seconds
+
+#Stack size
+STACKSIZE=128
+
+#Test name
+TEST_NAME=""
+
+#
+TEST_COMMENT=""
+
+#If test have subtests specify them here
+TEST_CASES=""
+
+#Test basedir
+TEST_BASEDIR=""
+
+#Does test support multi-user mode.
+TEST_MULTIUSER_MODE=""
+
+#Test options
+THREADS=""
+ITERATIONS=""
+DURATION=""
+
+#Database settings
+SERVER_DB="test"
+SERVER_HOST=""
+SERVER_PORT=""
+SERVER_USER="root"
+SERVER_SOCKET="/tmp/mysql.sock"
+
+ENGINE=""
+TEST_DB_ENGINE=""
+
+TEST_STAGE_PREPARE_GENERATE="" # GENERATE INITIAL DATASET AND LOAD IT
+TEST_STAGE_PREPARE_RESTORE=""  # RESTORE DATADIR FROM BACKUP
+TEST_STAGE_PREPARE_INSTALL=""  # INSTALL CLEAN DB
+TEST_STAGE_RUN=""              # RUN TEST
+TEST_STAGE_HELP=""             # HELP 
+TEST_STAGE_WARMUP=""           # RUN WARMUP WORKLOAD
+TEST_STAGE_CLEANUP=""          # CLEANUP
+
+TEST_STAGE_PREPARE_GENERATE_EXE=""
+TEST_STAGE_RUN_EXE=""
+TEST_STAGE_CLEANUP_EXE=""
+
+TEST_ARGS_STAGE_PREPARE=""
+TEST_ARGS_STAGE_RUN=""
+TEST_ARGS_STAGE_CLEANUP=""
+
+TEST_ARGS_COMMON=""
+TEST_ARGS_TEMPLATE=""
+
+unset -f test_pre_run
+unset -f test_post_run
+unset -f test_stage_run_pre
+unset -f test_stage_run_post
+unset -f test_stage_prepare_pre
+unset -f test_stage_prepare_post
+unset -f test_stage_cleanup_pre
+unset -f test_stage_cleanup_post

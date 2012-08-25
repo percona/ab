@@ -1,0 +1,7 @@
+plot "n_tran.data" using 1:2 title "n_tran" 
+set term png small
+set output "n_tran_bar.png"
+set grid xtics ytics
+set xlabel "Elapsed Time (Minutes)"
+set ylabel "Response Time (Seconds)"
+replot

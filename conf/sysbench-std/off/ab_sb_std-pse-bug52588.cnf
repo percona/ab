@@ -1,0 +1,77 @@
+########################################################################
+#
+#   Autobench test configuration file for mysql-bench benchmark
+#
+########################################################################
+
+TEST_MODULE=sysbench_standard
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+. $AUTOBENCH_INCDIR/engine_stat.inc.1
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="sysbench_standard"
+  
+  #If test have subtests specify them here
+  TEST_CASES="OLTP_RW"
+
+  # Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-standard"
+  TEST_BACKUP_BASEDIR="/data1/qauser/autobench-backup-5.1/backup-sysbench"
+
+  TEST_STAGE_PREPARE_GENERATE="1"  # GENERATE INITIAL DATASET AND LOAD IT
+  TEST_STAGE_PREPARE_RESTORE=""  # RESTORE DATADIR FROM BACKUP
+  TEST_STAGE_RUN="1"              # RUN || "" - RUN STAGE WILL BE SKIPPED
+  TEST_STAGE_CLEANUP="1"          #
+
+
+  # Number of rows for sbtest database
+  SYSBENCH_NUM_ROWS=100000
+  SB_NUM_ROWS_PREPARE=100000
+
+
+  DURATION=60
+  THREADS=100
+
+  IMONITOR=1
+  IMONITOR_INTERVAL=5
+
+  # sysbench binary
+  TEST_STAGE_RUN_EXE=$SYSBENCH_0_4_EXE
+
+  #
+  ENGINE_DEFAULTS_FILE_INNODB="$TEST_CNF_DIR/sysbench-std-innodb-bug52588.cnf"
+  ENGINE_DEFAULTS_FILE_MYISAM=$TEST_CNF_DIR/sysbench-std-myisam-bug52588.cnf
+  #ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+
+  #ENGINE_DEFAULTS_FILE_MYISAM_NOAINC=$TEST_CNF_DIR/sysbench-std-myisam.cnf
+  #ENGINE_DEFAULTS_FILE_INNODB_NOAINC=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+ 
+}
+
+
+test_stage_run_pre()
+{
+  engine_stat.setup
+  engine_stat.pse_start
+}
+
+test_stage_run_post()
+{
+  engine_stat.stop
+  engine_stat.pse_stop
+}
+

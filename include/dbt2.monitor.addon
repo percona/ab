@@ -1,0 +1,37 @@
+dbt2.test_stage_run_pre()
+{
+
+
+(
+trap 'echo "Got TERM signal."; \
+      exit ' TERM
+
+trap 'echo "Got INT signal."; \
+      exit ' INT
+
+while [ true ]; do
+output_date=`date +%s`
+output=`mysql -uroot -e'show engine  innodb mutex\G; show engine innodb status\G' -S /tmp/mysql.sock 2>&1`
+if [ $? -eq 0 ]; then
+  let diff=$ok_date-$output_date
+  echo "DUMP_DATE=$output_date INTERVAL: $diff " >> $TEST_OUTDIR/innodb-monitor.out
+  echo "$output" >>$TEST_OUTDIR/innodb-monitor.out
+  echo  >>$TEST_OUTDIR/innodb-monitor.out
+  ok_date=$output_date
+fi
+sleep 30
+done
+
+)&
+        
+MONITOR_PID=$!
+              
+}
+
+dbt2.test_stage_run_post()
+{
+  if [ -n "$MONITOR_PID" ]; then 
+    kill -15 $MONITOR_PID
+    MONITOR_PID=""
+  fi
+}

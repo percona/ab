@@ -1,0 +1,13 @@
+/data0/ranger/mysql-test-extra-5.1/mysql-test/test_tools/scripts/autobench/tests/dbt2/dbt2-0.37-fixed-23.10.2007/scripts/../scripts/sysstats.sh: line 90: run_number: No such file or directory
+expr: syntax error
+expr: syntax error
+starting system statistics data collection
+Linux 2.6.32-100.28.11.el6.x86_64 (caneland.se.oracle.com) 	09/23/2011 	_x86_64_	(24 CPU)
+
+10:05:19 AM     CPU     %user     %nice   %system   %iowait    %steal     %idle
+10:06:19 AM     all      1.12      0.00      0.70     38.49      0.00     59.68
+10:07:19 AM     all      2.47      0.00      1.54     43.02      0.00     52.96
+10:08:19 AM     all      6.71      0.00      3.59     36.02      0.00     53.69
+10:09:19 AM     all     12.76      0.00      6.33     22.23      0.00     58.69
+10:10:19 AM     all     16.71      0.00      8.05     11.23      0.00     64.00
+10:11:19 AM     all     18.87      0.00      8.80      7.51      0.00     64.83

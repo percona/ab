@@ -1,0 +1,33 @@
+AC_INIT(bench-init.pl.sh)
+# The Docs Makefile.am parses this line!
+AM_INIT_AUTOMAKE(mysql-bench, 2)
+
+AC_PROG_CXX
+AC_PROG_CPP
+
+AC_PATH_PROG(MV, mv, mv)
+AC_PATH_PROG(RM, rm, rm)
+AC_PATH_PROG(CP, cp, cp)
+AC_PATH_PROG(SED, sed, sed)
+AC_PATH_PROG(CHMOD, chmod, chmod)
+
+AC_PATH_PROG(PERL, perl, no)
+if test "$PERL" != "no" && $PERL -e 'require 5' > /dev/null 2>&1
+then
+  PERL5=$PERL
+else
+  AC_PATH_PROG(PERL5, perl5, no)
+  if test "$PERL5" != no
+  then
+    PERL=$PERL5
+    ac_cv_path_PERL=$ac_cv_path_PERL5
+  fi
+fi
+
+AC_SUBST(PERL)
+AC_SUBST(PERL5)
+
+
+
+AC_OUTPUT(Makefile misc/Makefile misc/as3apgen/Makefile) 
+

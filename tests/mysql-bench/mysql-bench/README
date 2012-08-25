@@ -1,0 +1,210 @@
+The MySQL Benchmarks
+
+Overview
+
+Currently the following servers are supported:
+Access, Adabas, AdabasD, Empress, Oracle, Informix, DB2, mSQL, MS-SQL,
+MySQL, Pg, Solid, Sybase, SAPdb, and SQLite
+
+The benchmark directory contains scripts, query files, and raw data
+files used to populate the MySQL benchmark tables. In order to run the
+benchmarks, you should normally execute a command such as the following:
+
+perl run-all-tests --server=mysql --cmp=mysql,pg,solid --user=test \
+    --password=test --log
+
+This means that you want to run the benchmarks with MySQL. The limits
+should be taken from all of MySQL, PostgreSQL, and Solid.  The login name
+and password for connecting to the server both are ``test''.  The result
+should be saved as a RUN file in the output directory.
+
+When run-all-tests has finished, the individual results and the summary
+output RUN-file will have been written to the output directory.
+
+If you want to look at some old results, use the compare-results script.
+For example:
+
+perl compare-results --dir=output --cmp=mysql,pg,solid
+perl compare-results --dir=output --cmp=mysql,pg,solid --relative
+
+perl compare-results --dir=output --cmp=msql,mysql,pg,solid
+perl compare-results --dir=output --cmp=msql,mysql,pg,solid --relative
+
+perl compare-results --dir=output --server=mysql --same-server \
+    --cmp=mysql,pg,solid
+
+
+Prerequisites
+
+To use the benchmark suite, the following requirements must be
+satisified:
+
+- You must download and install the MySQL benchmark suite itself.
+
+- The benchmark scripts are written in Perl, so Perl must be installed.
+
+- The benchmark scripts use the Perl DBI module to access database
+  servers, so DBI must be installed.  You will also need the server-specific
+  DBD drivers for each of the servers you want to test.  For example, to
+  test MySQL, PostgreSQL, and DB2, the DBD::mysql, DBD::Pg, and DBD::DB2
+  modules must be installed.
+
+If it is available, the Perl Time::HiRes timer module is used in the MySQL
+benchmark suite to get acceptable measurement precision, so please check if
+this module is installed on your system.
+
+If you are missing any of the Perl modules, you can install them from
+CPAN.  For example, to find the timer module, search for 'Time::HiRes'
+at http://search.cpan.org/.
+
+
+Installation
+
+Follow these steps to install the distribution:
+
+  1. Unpack the mysql-bench-2.tar.bz2 archive in the directory where you
+     want to install the benchmark suite.
+
+  2. Change location into the benchmark directory.
+
+  3. Run the './Build' script to create the Makefiles.
+
+  4. Run 'make' to build the project files.
+
+  5. Run 'make install' to install the project files.  (This step is optional,
+     because you can run the benchmarks in the build directory without
+     installing the files anywhere.)
+
+You can customize the directory under which the project files should be
+installed by modifying the '--prefix=<dir>' statement in the 'Build' script.
+The default location is '/usr/local/mysql/'.
+
+Running the Benchmarks
+
+To start working with the benchmark suite, use the following procedure:
+
+  1. Change location to the mysql-bench-2 project directory:
+     cd <dir>/mysql-bench-2
+
+     This directory can be either the directory into which you installed the
+     benchmark files during the installation process, or the directory in
+     which you built the files.
+
+  2. You can either run all tests using the 'run-all-tests' script 
+     or run individual tests ('test-create', 'test-insert', and so forth).
+     See below for examples.
+
+     # Run all tests for MySQL server
+     perl run-all-tests --log
+
+     # Run all tests for a specific server (by default, use MySQL)
+     perl run-all-tests --log --server=server_name
+
+     When the run-all-tests script has finished executing, you will have
+     individual result files per test and the total RUN- file in the output/
+     directory where all results are stored by default.
+
+     # Run only the 'test-create' test for a specific server
+     perl test-create --server=server_name
+
+Many options are available for customizing how tests are run. For a complete
+list, invoke 'perl run-all-tests --help'.
+
+Some of the most useful options are described below:
+
+--small-test
+  This option runs some tests with smaller limits to get a faster test.
+  It can be used if you just want to verify that the database works, but
+  don't have time to run a full test.
+
+--small-tables
+  This option causes some tests that normally generate large tables to use
+  fewer rows.  It can be used with databases that can't handle the normal
+  table sizes because of pre-sized partitions.
+
+--suffix='string' (Default: )
+  The suffix that is added to the database name in the benchmark output
+  filename. By varying the suffix, you can run benchmarks several times
+  with different server options without overwriting existing output files.
+  If you specify the --fast option, the suffix is automatically set to
+  '_fast'.
+
+--log
+  Option for 'run-all-tests' to specify that benchmark summary results
+  should be written to a RUN file in the output directory.  Without this
+  option, summary results are written to stdout.
+
+--dir (Default: output)
+  Option for 'run-all-tests' to specify the directory where the benchmark
+  result output files should be stored.
+
+--fast
+  Allow the benchmark tests to use non-standard SQL statements to make the
+  tests go faster.
+
+--create-options='string'
+  Additional options for CREATE TABLE statements.  For example, to
+  create all MySQL tables as BDB tables, use:
+  --create-options=TYPE=BDB
+
+--connect-options='some connect options'
+  Additional options to be used when DBI connects to the server.
+  For example:
+  --connect-options=mysql_read_default_file=/etc/my.cnf
+  --connect-options=mysql_socket=/tmp/mysql.sock
+
+
+File                    Description
+
+README             This file
+Data/ATIS          Directory that contains data for 29 related tables
+                   used in the ATIS tests
+Data/Wisconsin     Directory that contains data for the Wisconsin benchmark
+Data/AS3AP         Directory that contains data for the AS3AP benchmark
+
+run-all-tests      Use this to run all tests. When all tests are run,
+                   use the --log --use-old options to get a RUN-file.
+compare-results    Generate a comparison table from different RUN files.
+server-cfg         Contains the limits and functions for all supported
+                   SQL servers.  If you want to add a new server, this
+                   should be the only file that neads to be changed.
+
+innotest*          InnoDB stress tests 
+test-ATIS          Creation of 29 tables and a lot of selects on them
+test-as3ap         Single-user and multi-user parts of AS3AP benchmark
+test-big-tables    Test DBMS speed in case of large number of table columns
+test-connect       Test how fast a connection to the server is
+test-create        Test how fast a table is created
+test-extra         Test some advanced features of SQL servers
+test-insert        Test create and fill of a table
+test-select        Test estimation of optimizer of DBMS
+test-transactions  Test transaction performance
+test-wisconsin     A port of the PostgreSQL version of this benchmark
+
+The following remarks about the Wisconsin benchmark are taken from
+a paper at: http://www.mgt.ncu.edu.tw/CSIM/Paper/sixth/11.html
+The paper seems no longer to be available, however.
+
+The Wisconsin Benchmark
+
+The Wisconsin Benchmark described in [Bitton, DeWitt, and Turbyfill
+1983] [Boral and DeWitt 1984] [Bitton and Turbyfill 1985] [Bitton and
+Turbyfill 1988], and [DeWitt 1993] is the first effort to
+systematically measure and compare the performance of relational
+database systems with database machines.  The benchmark is a
+single-user and single-factor experiment using a synthetic database
+and a controlled workload.  It measures the query optimization
+performance of database systems with 32 query types to exe cise the
+components of the proposed systems.  The query suites include
+selection, join, projection, aggregate, and simple update queries.
+
+The test database consists of four generic relations.  The tenk
+relation is the key table and most used. Two data types of small
+integer number and character string are utilized.  Data values are
+uniformly distributed. The primary metric is the query elapsed
+time. The main criticisms of the benchmark include the nature of
+single-user workload, the simplistic database structure, and the
+unrealistic query tests.  A number of efforts have been made to extend
+the benchmark to incorporate the multi-user test.  However, they do
+not receive the same acceptance as the original Wisconsin benchmark
+except an extension work called the AS3AP benchmark.

@@ -1,0 +1,145 @@
+
+database table cardinalities:
+warehouses = 10
+districts = 10
+customers = 3000
+items = 100000
+orders = 3000
+stock = 100000
+new-orders = 900
+
+transaction mix:
+new-order mix 0.45
+payment mix 0.43
+order-status mix 0.04
+delivery mix 0.04
+stock-level mix 0.04
+
+transaction thresholds:
+new-order threshold 0.45
+payment threshold 0.88
+order-status threshold 0.92
+delivery threshold 0.96
+stock-level threshold 1.00
+
+delivery keying time 0 s
+new_order keying time 0 s
+order-status keying time 0 s
+payment keying time 0 s
+stock-level keying time 0 s
+
+delivery thinking time 0 ms
+new_order thinking time 0 ms
+order-status thinking time 0 ms
+payment thinking time 0 ms
+stock-level thinking time 0 ms
+
+w_id range 1 to 10
+
+10 terminals per warehouse
+
+900 second steady state duration
+
+driver is starting to ramp up at time 1307404469
+driver will ramp up in  9 seconds
+will stop test at time 1307405378
+seed: 785654317
+seed: 778935014
+seed: 778199945
+seed: 778236992
+seed: 778222874
+seed: 786331168
+seed: 785791262
+seed: 785826340
+seed: 786000631
+seed: 786289119
+seed: 785930910
+seed: 785654654
+seed: 785101950
+seed: 785120519
+seed: 785081800
+seed: 785026742
+seed: 785043856
+seed: 785013315
+seed: 785236794
+seed: 784903124
+seed: 787823785
+seed: 788104478
+seed: 788393520
+seed: 788403897
+seed: 787914604
+seed: 787947576
+seed: 788482760
+seed: 788476847
+seed: 786474080
+seed: 786697535
+seed: 786535816
+seed: 787324427
+seed: 786499367
+seed: 786608023
+seed: 786575410
+seed: 337410293
+seed: 336601987
+seed: 336892955
+seed: 337058947
+seed: 337634637
+seed: 337612339
+seed: 337000185
+seed: 337035192
+seed: 336183364
+seed: 336423229
+seed: 336122343
+seed: 335840330
+seed: 336096568
+seed: 336328132
+seed: 336313944
+seed: 336275204
+seed: 339431422
+seed: 339464375
+seed: 339499368
+seed: 339264058
+seed: 339028655
+seed: 339311994
+seed: 339592670
+seed: 339324503
+seed: 338089757
+seed: 338059212
+seed: 338682026
+seed: 338643322
+seed: 337687030
+seed: 337918552
+seed: 337740605
+seed: 470951463
+seed: 470961792
+seed: 471004827
+seed: 470908847
+seed: 471697395
+seed: 470820945
+seed: 471109951
+seed: 471275954
+seed: 470770203
+seed: 470715030
+seed: 470252950
+seed: 470214212
+seed: 470683386
+seed: 470652733
+seed: 470360041
+seed: 470057062
+seed: 473557191
+seed: 473592252
+seed: 473610690
+seed: 473637461
+seed: 473601302
+seed: 473636293
+seed: 473671249
+seed: 473435967
+seed: 472151969
+seed: 472512564
+seed: 472727780
+seed: 472820016
+seed: 472273399
+seed: 472373786
+seed: 472788112
+seed: 126895389
+seed: 127200762
+seed: 127096404

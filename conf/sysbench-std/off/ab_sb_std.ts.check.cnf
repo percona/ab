@@ -1,0 +1,104 @@
+########################################################################
+#
+#   Autobench test configuration file for mysql-bench benchmark
+#
+########################################################################
+
+TEST_MODULE=sysbench_standard
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=1
+  #VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+  #VMLINUX=/tmp/vmlinux-2.6.16.60-0.21-smp
+  #VMLINUX=/tmp/vmlinux-2.6.18-92.1.18.el5
+  #VMLINUX=/data0/ranger/vmlinux-2.6.27.25-170.2.72.oprofile_fix.fc10.x86_64
+  echo "VMLINUX $VMLINUX"
+  VMLINUX=$VMLINUX  
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="sysbench_standard"
+  
+  #If test have subtests specify them here
+  TEST_CASES="OLTP_RW OLTP_RO UPDATE_KEY UPDATE_NO_KEY \
+  SELECT_DISTINCT_RANGES \
+  SELECT_ORDER_RANGES \
+  SELECT_SUM_RANGES \
+  SELECT_SIMPLE_RANGES \
+  POINT_SELECT"
+
+  # Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-standard"
+  TEST_BACKUP_BASEDIR="/data0/ranger/ab/backup/sysbench-std-1M"
+
+  TEST_STAGE_PREPARE_GENERATE=""  # GENERATE INITIAL DATASET AND LOAD IT
+  TEST_STAGE_PREPARE_RESTORE="1"  # RESTORE DATADIR FROM BACKUP
+
+  # Number of rows for sbtest database
+  SYSBENCH_NUM_ROWS=1000000
+  TEST_STAGE_WARMUP="1"
+
+  # sysbench binary
+  TEST_STAGE_RUN_EXE=$SYSBENCH_0_4_EXE
+
+  
+    
+  #
+  ENGINE_DEFAULTS_FILE_MYISAM=$TEST_CNF_DIR/sysbench-std-myisam.cnf
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+
+  ENGINE_DEFAULTS_FILE_INNODB_BINLOG=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_BINLOG_RBR=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_BASE=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+
+  ENGINE_DEFAULTS_FILE_MYISAM_NOAUTOINC=$TEST_CNF_DIR/sysbench-std-myisam.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_NOAUTOINC=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+
+  ENGINE_DEFAULTS_FILE_INNODB_BARRACUDA=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+
+}
+
+test_pre_run()
+{
+  if [ -n "$MYSQL_CREATE_OPTIONS" ]; 
+  then 
+    SB_ARGS=$SB_ARGS' --mysql-create-options="$MYSQL_CREATE_OPTIONS"'
+    echo "HERE $MYSQL_CREATE_OPTIONS"
+  fi
+
+  TEST_ARGS_STAGE_PREPARE='--db-name=$SERVER_DB --mysql-bin=$MYSQL \
+                           --mysql-args=\"$MYSQL_ARGS\" \
+                           --sysbench-bin=$TEST_STAGE_RUN_EXE \
+                           --sysbench-args=\"'$SB_ARGS' prepare\"'
+
+  TEST_ARGS_STAGE_RUN=$SB_ARGS' ${!TEST_CASE} run'
+
+   if [ -n "$S_TS" ]; then 
+     MYSQLD_ENV="taskset -c $S_TS "
+   fi
+
+   if [ -n "$C_TS" ]; then 
+     TEST_ENV="taskset -c $C_TS "
+   fi
+
+  TEST_STAGE_WARMUP_EXE=$MYSQL
+  TEST_ARGS_STAGE_WARMUP=" -uroot sbtest $MYSQL_ARGS -e\'check table sbtest\'"
+
+#  MYSQLD_ENV="taskset -c $S_TS "
+#  TEST_ENV="taskset -c $C_TS "
+
+  echo "ENV|$MYSQLD_ENV|$TEST_ENV|"
+
+#  MYSQLD_ENV='LD_PRELOAD=/data0/ranger/bin64_558/lib/libtcmalloc_minimal.so'
+#  TEST_STAGE_RUN_EXE="taskset -c 18-23 $SYSBENCH_0_4_EXE"
+
+}

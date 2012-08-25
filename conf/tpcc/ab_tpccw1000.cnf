@@ -1,0 +1,57 @@
+########################################################################
+#
+#   Autobench test configuration file for tpcc test
+#
+########################################################################
+
+TEST_MODULE=tpcc
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+test_setup()
+{
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+  VMLINUX=""
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+  
+  #Test name
+  TEST_NAME="tpccw1000"
+
+  #If test have subtests specify them here
+  TEST_CASES="tpccw1000"
+
+  #Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BASEDIR/backup/tpcc-w10"
+  #TEST_BACKUP_BASEDIR="/home/ranger/tpccw10"
+  TEST_BACKUP_BASEDIR="$AUTOBENCH_BASEDIR/backup/tpccw10"
+  TEST_BACKUP_BASEDIR="/data/bench/1000w"
+
+
+  #TPCC options
+  #ScaleFactor(number of warehouses)
+  TPCC_SF=1000
+  TPCC_DATASET_DIR=$AUTOBENCH_TMPDIR/tpccw10
+
+  #SERVER DB
+  SERVER_DB="w1000"
+  
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/tpccw1000-innodb.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_BARRACUDA=$TEST_CNF_DIR/tpccw10-innodb.cnf
+  TEST_STAGE_WARMUP=""
+
+  MYSQLD_ENV="numactl --interleave=all "
+
+  if [ -d "/data/opt/alexey.s/numactl-2.0.7" ]; then 
+    MYSQLD_ENV="LD_PRELOAD=/data/opt/alexey.s/numactl-2.0.7/libnuma.so /data/opt/alexey.s/numactl-2.0.7/numactl --interleave=all "
+  fi
+}
+
+test_pre_run()
+{
+ TEST_STAGE_WARMUP_EXE=$MYSQL
+ TEST_ARGS_STAGE_WARMUP=" -uroot $SERVER_DB $MYSQL_ARGS -e\'check table stock,customer,history,item,new_order,order_line,orders\'"
+}

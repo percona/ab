@@ -1,0 +1,190 @@
+########################################################################
+#
+#   Autobench test configuration file for dbt2 test
+#
+########################################################################
+
+TEST_MODULE=dbt2
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+test_setup()
+{
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+  
+  #Test name
+  TEST_NAME="dbt2w50"
+
+  #If test have subtests specify them here
+  TEST_CASES="dbt2w50-backup"
+
+  #Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/dbt2-w10"
+  TEST_BACKUP_BASEDIR=/home/ranger/dbt2w50
+  
+  # DBT2 options
+  # IMPORTANT: ScaleFactor(number of warehouses).
+  DBT2_SF=50
+
+  #SERVER DB
+  SERVER_DB="dbt2w50"
+
+  IBACKUP_INC_ARGS='--inc-count=3 --inc-interval=150'
+
+  #BACKGROUND TASK
+  TEST_BG_TASK="backup of dbt2w50 database"
+  #TEST_BG_TASK=""
+
+  if [[ -n $TEST_BG_TASK ]]; then
+    TEST_BG_TASK_MODULE=backup
+    . $AUTOBENCH_INCDIR/$TEST_BG_TASK_MODULE.inc
+
+    TEST_BG_TASK_DELAY=120
+    TEST_BG_TASK_RUN_EXE="$AUTOBENCH_LIBDIR/backup.sh"
+
+    #MODES: BACKUP | DUMP | RESTORE | RESTORE_OVERWTITE | RESTORE_DUMP
+    DUMP_MODE="IBACKUP"
+
+    DUMP_DIR=/home/ranger/meb
+    KEEP_DUMP_FILE=""
+  fi
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/dbt2w50-innodb.cnf
+}
+
+#test_stage_run_pre()
+#{
+#  if [[ -n $TEST_BG_TASK ]]; then
+#    check_and_run ${TEST_BG_TASK_MODULE}.bg_task.test_stage_run_pre
+#  fi
+#}
+
+#test_stage_cleanup_post()
+#{
+#  if [[ -n $TEST_BG_TASK ]]; then
+#    check_and_run ${TEST_BG_TASK_MODULE}.bg_task.test_stage_cleanup_post
+#  fi
+#}
+
+
+test_stage_run_pre()
+{
+  local filter
+  if [ $ENGINE_NAME == "INNODB" ]; then 
+    filter="Com_commit"
+  else
+    filter="Com_unlock_tables"
+  fi
+
+  #Save extended stat information from mysql server
+  command_exec "$MYSQL $MYSQL_ARGS -e'show global status'" "$TEST_OUTDIR/mysql-show-global-status.run_pre.out"
+  MY_TPS=$($MYSQL  $MYSQL_ARGS -e'show global status' | grep "$filter")
+  echo "start_test:" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/backup.tps"
+  echo "mark: test_start" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/my_stat.marks.out"
+}
+
+test_stage_run_post()
+{
+  local filter
+  if [ $ENGINE_NAME == "INNODB" ]; then 
+    filter="Com_commit"
+  else
+    filter="Com_unlock_tables"
+  fi
+
+  #Save extended stat information from mysql server
+  command_exec "$MYSQL $MYSQL_ARGS -e'show global status'" "$TEST_OUTDIR/mysql-show-global-status.run_post.out"
+  MY_TPS=$($MYSQL  $MYSQL_ARGS -e'show global status' | grep "$filter")
+  echo "stop_test:" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/backup.tps"
+  echo "mark: test_stop" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/my_stat.marks.out"
+}
+
+
+
+test_stage_cleanup_post()
+{
+  if [[ -n $TEST_BG_TASK ]]; then
+    check_and_run ${TEST_BG_TASK_MODULE}.bg_task.test_stage_cleanup_post
+  fi
+  
+  rm -rf /home/ranger/meb/*
+}
+
+bg_task.test_stage_run_pre()
+{
+  local filter
+  if [[ -n $TEST_BG_TASK ]]; then 
+    check_and_run ${TEST_BG_TASK_MODULE}.bg_task.test_stage_run_pre
+  fi
+  if [ $ENGINE_NAME == "INNODB" ]; then 
+    filter="Com_commit"
+  else
+    filter="Com_unlock_tables"
+  fi
+
+  #Save extended stat information from mysql server
+  command_exec "$MYSQL $MYSQL_ARGS -e'show global status'" "$TEST_OUTDIR/mysql-show-global-status.bg_task.run_pre.out"
+  MY_TPS=$($MYSQL  $MYSQL_ARGS -e'show global status' | grep "$filter")
+  echo "start_backup:" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/backup.tps"
+  echo "mark: start_backup" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/my_stat.marks.out"
+}
+
+bg_task.test_stage_run_post()
+{
+  local filter
+  if [ $ENGINE_NAME == "INNODB" ]; then 
+    filter="Com_commit"
+  else
+    filter="Com_unlock_tables"
+  fi
+
+  #Save extended stat information from mysql server
+  command_exec "$MYSQL $MYSQL_ARGS -e'show global status'" "$TEST_OUTDIR/mysql-show-global-status.bg_task.run_post.out"
+  MY_TPS=$($MYSQL  $MYSQL_ARGS -e'show global status' | grep "$filter")
+  echo "stop_backup:" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/backup.tps"
+  echo "mark: stop_backup" `date '+%s'` "$MY_TPS" >> "$TEST_OUTDIR/my_stat.marks.out"
+
+}
+
+_stat_start()
+{
+  (
+    count=0;
+#    TEST_STAT_ITER=5;
+#    TEST_STAT_SAMPLE=1;
+    sample_time=0;
+    MY_STAT_HEADER="";
+    while [ $(($sample_time)) -le $TEST_STAT_ITER  ] ; do
+       count=$(( $count+1 )) ;
+       sample_time=$(( $sample_time+$TEST_STAT_SAMPLE )) ;
+       status_data=$(mysql -uroot -h127.0.0.1 -P3306 -s -e'show global status') 2>/dev/null
+       if [ $? -eq 0 ]; then
+         if [ -z "$MY_STAT_HEADER" ]; then
+           ( echo -n "Timestamp ";
+             echo "$status_data" | sed -e "s/[[:space:]].*//g"
+           ) | tr \\n ' ' ; echo
+           MY_STAT_HEADER="1"
+         fi
+         ( date +%s; echo -n "";
+           echo "$status_data" | sed -e "s/\t$/\tnone/g" | sed -e "s/^[A-Za-z_]\+\t//g"
+         ) | tr \\n ' ' ; echo
+       else
+         (date +%s; echo -n ""; echo "no data")
+       fi
+       sleep $TEST_STAT_SAMPLE
+    done
+  ) > $TEST_OUTDIR/my_stat.out 2>&1  &
+  MY_STAT_PID=$!
+}
+
+_stat_stop()
+{
+  if [ -n "$MY_STAT_PID" ]; then 
+    kill $MY_STAT_PID
+  fi
+  perl $TEST_BASEDIR/mrate.pl $TEST_OUTDIR/my_stat.out > $TEST_OUTDIR/my_stat.filtered.out
+}

@@ -1,0 +1,223 @@
+Testing server 'MySQL 5.5.2 m2/x86_64' at 2010-04-01 14:58:43
+
+Start AS3AP benchmark
+
+Start to generate AS3AP database files.
+Logical size of database is 40 Mb.
+AS3AP database text files succsesfully generated.
+
+Time for as3apgen(1): 2.568 wallclock secs ( 0.00 usr  0.00 sys +  2.44 cusr  0.12 csys =  2.56 CPU)
+
+Load DATA
+
+Time for Load Data - (400001): 23.072 wallclock secs ( 3.99 usr  4.81 sys +  0.00 cusr  0.00 csys =  8.80 CPU)
+
+Create Index
+
+create_idx_updates_key_bt
+time for create_idx_as3ap(1) create_idx_updates_key_bt: 0.426 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_updates_int_bt
+time for create_idx_as3ap(1) create_idx_updates_int_bt: 0.675 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_updates_code_h
+time for create_idx_as3ap(1) create_idx_updates_code_h: 0.859 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_updates_decim_bt
+time for create_idx_as3ap(1) create_idx_updates_decim_bt: 1.497 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_updates_double_bt
+time for create_idx_as3ap(1) create_idx_updates_double_bt: 1.086 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_uniques_key_bt
+time for create_idx_as3ap(1) create_idx_uniques_key_bt: 0.655 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_hundred_key_bt
+time for create_idx_as3ap(1) create_idx_hundred_key_bt: 0.508 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_key_bt
+time for create_idx_as3ap(1) create_idx_tenpct_key_bt: 0.513 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_key_code_bt
+time for create_idx_as3ap(1) create_idx_tenpct_key_code_bt: 0.804 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tiny_key_bt
+time for create_idx_as3ap(1) create_idx_tiny_key_bt: 0.244 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_int_bt
+time for create_idx_as3ap(1) create_idx_tenpct_int_bt: 0.590 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_signed_bt
+time for create_idx_as3ap(1) create_idx_tenpct_signed_bt: 0.891 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_uniques_code_h
+time for create_idx_as3ap(1) create_idx_uniques_code_h: 0.878 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_double_bt
+time for create_idx_as3ap(1) create_idx_tenpct_double_bt: 1.390 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_float_bt
+time for create_idx_as3ap(1) create_idx_tenpct_float_bt: 1.146 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_decim_bt
+time for create_idx_as3ap(1) create_idx_tenpct_decim_bt: 1.275 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_hundred_code_h
+time for create_idx_as3ap(1) create_idx_hundred_code_h: 0.716 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_name_h
+time for create_idx_as3ap(1) create_idx_tenpct_name_h: 1.337 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_tenpct_code_h
+time for create_idx_as3ap(1) create_idx_tenpct_code_h: 1.544 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+Start Single-user AS3AP benchmark
+
+sel_1_cl
+Time to sel_as3ap(1) sel_1_cl: 0.001 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+join_3_cl
+Time to join_as3ap(1) join_3_cl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+sel_100_ncl
+Time to sel_as3ap(1) sel_100_ncl: 0.001 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+table_scan
+Time to table_scan(1) table_scan: 0.017 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+agg_func
+Time for agg_as3ap(1) agg_func: 0.064 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+agg_scal
+Time for agg_as3ap(1) agg_scal: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+sel_100_cl
+Time for sel_as3ap(1) sel_100_cl: 0.001 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+join_3_ncl
+Time for join_as3ap(1) join_3_ncl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+sel_10pct_ncl
+Time for sel_as3ap(1) sel_10pct_ncl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+agg_simple_report
+Time for agg_as3ap(1) agg_simple_report: 0.414 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+agg_info_retrieval
+Time for agg_as3ap(1) agg_info_retrieval: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+agg_create_view
+Time for agg_as3ap(1) agg_create_view: 0.284 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+agg_subtotal_report
+Time for agg_as3ap(1) agg_subtotal_report: 0.011 wallclock secs ( 0.01 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.01 CPU)
+
+agg_total_report
+Time for agg_as3ap(1) agg_total_report: 0.006 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+join_2_cl
+Time for join_as3ap(1) join_2_cl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+join_2
+Time for join_as3ap(1) join_2: 0.063 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+sel_variable_select_low
+Time for sel_as3ap(1) sel_variable_select_low: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+sel_variable_select_high
+Time for sel_as3ap(1) sel_variable_select_high: 0.148 wallclock secs ( 0.07 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.07 CPU)
+
+join_4_cl
+Time for join_as3ap(1) join_4_cl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+proj_100
+Time for proj_100(1) proj_100: 0.226 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+join_4_ncl
+Time for join_as3ap(1) join_4_ncl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+proj_10pct
+Time for proj_10pct(1) proj_10pct: 0.446 wallclock secs ( 0.24 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.25 CPU)
+
+sel_1_ncl
+Time for sel_as3ap(1) sel_1_ncl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+join_2_ncl
+Time for join_as3ap(1) join_2_ncl: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+Drop updates keys
+Time for drop_updates_keys(1) Drop updates keys: 2.810 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+bulk_save
+Time for bulk_as3ap(1) bulk_save: 0.004 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+bulk_modify
+Time for bulk_as3ap(1) bulk_modify: 0.010 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_append_duplicate
+Time for upd_as3ap(1) upd_append_duplicate: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_remove_duplicate
+Time for upd_as3ap(1) upd_remove_duplicate: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_app_t_mid
+Time for upd_as3ap(1) upd_app_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_mod_t_mid
+Time for upd_as3ap(1) upd_mod_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_del_t_mid
+Time for upd_as3ap(1) upd_del_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_app_t_end
+Time for upd_as3ap(1) upd_app_t_end: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_mod_t_end
+Time for upd_as3ap(1) upd_mod_t_end: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_del_t_end
+Time for upd_as3ap(1) upd_del_t_end: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_updates_code_h
+time for create_idx_as3ap(1) create_idx_updates_code_h: 0.538 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_app_t_mid
+Time for upd_as3ap(1) upd_app_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_mod_t_cod
+Time for upd_as3ap(1) upd_mod_t_cod: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_del_t_mid
+Time for upd_as3ap(1) upd_del_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+create_idx_updates_int_bt
+time for create_idx_as3ap(1) create_idx_updates_int_bt: 0.812 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_app_t_mid
+Time for upd_as3ap(1) upd_app_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_mod_t_int
+Time for upd_as3ap(1) upd_mod_t_int: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+upd_del_t_mid
+Time for upd_as3ap(1) upd_del_t_mid: 0.000 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+bulk_append
+Time for bulk_as3ap(1) bulk_append: 0.014 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+bulk_delete
+Time for bulk_as3ap(1) bulk_delete: 0.016 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+Removing tables
+Time to drop_table (7): 0.032 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+Total time for AS3AP_SingleUser_Test(1): 6.045 wallclock secs ( 0.33 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.34 CPU)
+
+Stop AS3AP benchmark
+
+Clean up AS3AP files: Done.
+
+If you want to leave as3ap files please use '--as3ap-no-cleanup' option
+
+Total time: 6.046 wallclock secs ( 0.33 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.34 CPU)
+

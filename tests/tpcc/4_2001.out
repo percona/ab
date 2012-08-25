@@ -1,0 +1,283 @@
+*************************************
+*** ###easy### TPC-C Data Loader  ***
+*************************************
+<Parameters>
+     [server]: 127.0.0.1
+     [port]: 3306
+     [DBname]: tpccw2500
+       [user]: root
+       [pass]: 
+  [warehouse]: 2500
+  [part(1-4)]: 4
+     [MIN WH]: 2001
+     [MAX WH]: 2500
+TPCC Data Load Started...
+Loading Orders for D=1, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=2, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=3, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=4, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=5, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=6, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=7, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=8, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=9, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=10, W= 2001
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=1, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=2, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=3, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=4, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=5, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=6, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=7, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=8, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=9, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=10, W= 2002
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=1, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=2, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=3, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=4, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=5, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=6, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=7, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=8, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=9, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=10, W= 2003
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=1, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=2, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=3, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=4, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=5, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=6, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=7, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=8, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=9, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=10, W= 2004
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=1, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=2, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=3, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=4, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=5, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=6, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=7, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=8, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=9, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=10, W= 2005
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=1, W= 2006
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=2, W= 2006
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=3, W= 2006
+.......... 1000
+.......... 2000
+.......... 3000
+Orders Done.
+Loading Orders for D=4, W= 2006
+.......... 1000
+.......... 2000
+...

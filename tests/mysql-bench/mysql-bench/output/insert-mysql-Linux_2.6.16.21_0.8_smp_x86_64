@@ -1,0 +1,8 @@
+Testing server 'MySQL 5.5.2 m2/x86_64' at 2010-04-01 15:03:10
+
+Testing the speed of inserting data into 1 table and do some selects on it.
+The tests are done with a table that has 300000 rows.
+
+Generating random keys
+Creating tables
+Inserting 100000 rows in order

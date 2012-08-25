@@ -1,0 +1,533 @@
+#!/bin/bash
+########################################################################
+#
+#   Autobench test configuration file for dbt2 test
+#
+########################################################################
+
+
+engine_stat.setup()
+{
+
+if [ "$ENGINE_NAME" == "INNODB" ]; then 
+
+echo
+echo "INNODB MONITORING=$IMONITOR"
+echo
+
+if [ -n "$IMONITOR" ]; then 
+
+if [ -z "$IMONITOR_SLEEP_DELAY" ]; then 
+  IMONITOR_SLEEP_DELAY=30
+fi
+
+echo "Starting InnoDB monitor thread in background: $TEST_OUTDIR/innodb-monitor.out $$"
+
+(
+trap 'echo "Got TERM signal."; \
+      exit ' TERM
+
+trap 'echo "Got INT signal."; \
+      exit ' INT
+
+while [ true ]; do
+output_date=`date +%s`
+output=`mysql -uroot -e'show engine  innodb mutex; show engine innodb status\G' -S /tmp/mysql.sock 2>&1`
+if [ $? -eq 0 ]; then
+  let diff=$ok_date-$output_date
+  echo "DUMP_DATE=$output_date INTERVAL: $diff $$" >> $TEST_OUTDIR/innodb-monitor.out
+  echo "$output" >>$TEST_OUTDIR/innodb-monitor.out
+  echo  >>$TEST_OUTDIR/innodb-monitor.out
+  ok_date=$output_date
+fi
+sleep $IMONITOR_SLEEP_DELAY
+done
+
+)&
+        
+MONITOR_PID=$!
+echo $MONITOR_PID
+              
+fi
+fi
+
+if [ "$ENGINE_NAME" == "PBXT" ]; then
+
+echo
+echo "PBXT MONITORING=$PMONITOR"
+echo
+
+if [ -n "$PMONITOR" ]; then
+echo "Starting PBXT  monitor thread in background: $TEST_OUTDIR/pbxt-monitor.out"
+
+#(
+#trap 'echo "Got TERM signal.";   exit ' TERM
+#trap 'echo "Got INT signal.";   exit ' INT
+nohup /data0/ranger/5.1.43-pbxt1.0.10g/bin/xtstat -d pbxt -D5 > $TEST_OUTDIR/pbxt-monitor.out  &
+
+#) &  
+
+
+MONITOR_PID=$!
+
+echo $MONITOR_PID
+fi
+fi
+}
+
+engine_stat.stop()
+{
+echo "MONITOR STOP 1 $MONITOR_PID"
+if [ -n "$IMONITOR" -o -n "$PMONITOR" ]; then
+
+echo "MONITOR STOP 2 $MONITOR_PID"
+  if [ -n "$MONITOR_PID" ]; then 
+    echo "MONITOR STOP 3 $MONITOR_PID"
+    echo "Killing $MONITOR_PID I:$IMONITOR P:$PMONITOR"
+    kill -15 $MONITOR_PID
+    MONITOR_PID=""
+  fi
+fi
+}
+
+
+engine_stat.pse_table_init()
+{
+  PS_TABLE_CASE=`$MYSQL $MYSQL_ARGS performance_schema -e"show tables like 'setup_timers'" -ss`
+
+  echo "PS_TABLE_CASE: $PS_TABLE_CASE"
+
+  if [ -z $PS_TABLE_CASE ]; then 
+    EVENTS_WAITS_SUMMARY_BY_EVENT_NAME=EVENTS_WAITS_SUMMARY_BY_EVENT_NAME
+    FILE_SUMMARY_BY_INSTANCE=FILE_SUMMARY_BY_INSTANCE
+    FILE_SUMMARY_BY_EVENT_NAME=FILE_SUMMARY_BY_EVENT_NAME
+    EVENTS_WAITS_SUMMARY_GLOBAL_BY_EVENT_NAME=EVENTS_WAITS_SUMMARY_GLOBAL_BY_EVENT_NAME
+    EVENTS_WAITS_SUMMARY_BY_THREAD_BY_EVENT_NAME=EVENTS_WAITS_SUMMARY_BY_THREAD_BY_EVENT_NAME
+    EVENTS_WAITS_SUMMARY_BY_INSTANCE=EVENTS_WAITS_SUMMARY_BY_INSTANCE
+    PERFORMANCE_TIMERS=PERFORMANCE_TIMERS
+    SETUP_CONSUMERS=SETUP_CONSUMERS
+    SETUP_INSTRUMENTS=SETUP_INSTRUMENTS
+    SETUP_TIMERS=SETUP_TIMERS
+    RWLOCK_INSTANCES=RWLOCK_INSTANCES
+    MUTEX_INSTANCES=MUTEX_INSTANCES
+    EVENTS_WAITS_HISTORY=EVENTS_WAITS_HISTORY
+    EVENTS_WAITS_CURRENT=EVENTS_WAITS_CURRENT
+    EVENTS_WAITS_HISTORY_LONG=EVENTS_WAITS_HISTORY_LONG
+  else
+    MUTEX_INSTANCES=mutex_instances
+    RWLOCK_INSTANCES=rwlock_instances
+    SETUP_TIMERS=setup_timers
+    SETUP_INSTRUMENTS=setup_instruments
+    SETUP_CONSUMERS=setup_consumers
+    PERFORMANCE_TIMERS=performance_timers
+    EVENTS_WAITS_SUMMARY_BY_EVENT_NAME=events_waits_summary_by_event_name
+    EVENTS_WAITS_SUMMARY_BY_INSTANCE=events_waits_summary_by_instance
+    EVENTS_WAITS_SUMMARY_BY_THREAD_BY_EVENT_NAME=events_waits_summary_by_thread_by_event_name
+    EVENTS_WAITS_SUMMARY_GLOBAL_BY_EVENT_NAME=events_waits_summary_global_by_event_name
+    FILE_SUMMARY_BY_EVENT_NAME=file_summary_by_event_name
+    FILE_SUMMARY_BY_INSTANCE=file_summary_by_instance
+    EVENTS_WAITS_HISTORY=events_waits_history
+    EVENTS_WAITS_CURRENT=events_waits_current
+    EVENTS_WAITS_HISTORY_LONG=events_waits_history_long
+
+    EVENTS_STATEMENTS_SUMMARY_GLOBAL_BY_EVENT_NAME=events_statements_summary_global_by_event_name
+    EVENTS_STAGES_SUMMARY_GLOBAL_BY_EVENT_NAME=events_stages_summary_global_by_event_name
+  fi
+}
+
+
+engine_stat.pse_start()
+{
+
+P_S=""
+P_S=`$MYSQL $MYSQL_ARGS -e"show variables like 'performance_schema'" -sss | grep ON`
+
+echo "PERFORMANCE_SHEMA: | $P_S | MYSQLD VERSION $MYSQLD_VERSION |"
+
+
+V56=`echo "$MYSQLD_VERSION"| grep -o "5.6."`
+
+echo "V56 - |$V56|"
+
+if [ -n "$PSE_MIX" ]; then 
+  echo "PSE_MIX - $PSE_MIX"
+  if [ "$PSE_MIX" == "WAIT.ALL" ]; then
+     PSE_WAIT_MODE=WAIT.ALL
+     PSE_WAIT_TYPE=WAIT.ALL
+  fi
+  if [ -z "$PSE_CONSUMER_MODE" ]; then
+    if [ -n "$V56" ]; then 
+      PSE_CONSUMER_MODE=THREAD
+    else
+      PSE_CONSUMER_MODE=SUMMARY
+    fi
+  fi
+fi
+
+
+if [ -n "$PSE_MIX" -a "$PSE_MIX" == "ALL" ]; then 
+PSE_WAIT_MODE=WAIT.ALL
+PSE_WAIT_TYPE=WAIT.ALL
+#PSE_CONSUMER_MODE=THREAD
+elif [ -n "$PSE_MIX" -a "$PSE_MIX" == "ALL_INNODB" ]; then
+PSE_WAIT_MODE=INNODB
+PSE_WAIT_TYPE=ALL
+PSE_CONSUMER_MODE=BIGBANG
+elif [ -n "$PSE_MIX" -a "$PSE_MIX" == "ALL_NOT_INNODB" ]; then
+PSE_WAIT_MODE=ALL_NOT_INNODB
+PSE_WAIT_TYPE=ALL
+PSE_CONSUMER_MODE=BIGBANG
+fi
+
+if [ -z "$PS_TEST_STAGE" ]; then 
+ PS_TEST_STAGE="run"
+fi
+
+PSE_TEST_OUTDIR="$TEST_OUTDIR/$PS_TEST_STAGE"
+mkdir $PSE_TEST_OUTDIR > /dev/null 2>&1
+
+
+#
+engine_stat.pse_table_init
+
+
+if [ -n "$P_S" ]; then 
+
+echo
+echo "PSE MONITORING ON: PSE_MODE:$PSE_MODE PSE_WAIT_MODE: '$PSE_WAIT_MODE' PSE_WAIT_TYPE: '$PSE_WAIT_TYPE' PSE_CONSUMER_MODE: '$PSE_CONSUMER_MODE'"
+echo
+
+echo $PSE_TEST_OUTDIR/pse_start.out
+echo "$PSE_TEST_OUTDIR/pse_start.out" >> $PSE_TEST_OUTDIR/pse_start.out
+
+#DISABLE AND RESET PSE
+mysql -f -vvv $MYSQL_ARGS 2>/dev/null >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'NO',TIMED='YES';
+UPDATE performance_schema.$SETUP_CONSUMERS  set enabled='NO';
+
+truncate table  performance_schema.$EVENTS_WAITS_CURRENT;
+truncate table  performance_schema.$EVENTS_WAITS_HISTORY;
+truncate table  performance_schema.$EVENTS_WAITS_HISTORY_LONG;
+truncate table  performance_schema.$EVENTS_WAITS_SUMMARY_BY_EVENT_NAME;
+truncate table  performance_schema.$EVENTS_WAITS_SUMMARY_GLOBAL_BY_EVENT_NAME;
+truncate table  performance_schema.$EVENTS_WAITS_SUMMARY_BY_INSTANCE;
+truncate table  performance_schema.$EVENTS_WAITS_SUMMARY_BY_THREAD_BY_EVENT_NAME;
+truncate table  performance_schema.$FILE_SUMMARY_BY_EVENT_NAME;
+truncate table  performance_schema.$FILE_SUMMARY_BY_INSTANCE;
+SQL1EOF
+
+mysql -f -vvv $MYSQL_ARGS 2>/dev/null >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+truncate table  performance_schema.${EVENTS_STATEMENTS_SUMMARY_GLOBAL_BY_EVENT_NAME};
+truncate table  performance_schema.${EVENTS_STAGES_SUMMARY_GLOBAL_BY_EVENT_NAME};
+SQL1EOF
+
+
+
+#ENABLE PSE_INSTRUMENTS
+
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/sql/LOCK_global%';
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/sql/MDL%';
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/rwlock/sql/MDL%';
+
+
+#mysql -vvv $MYSQL_ARGS >> $TEST_OUTDIR/test_stage_run_pre.out << SQL1EOF
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/sql/LOCK_open%';
+#SQL1EOF
+
+#mysql -vvv $MYSQL_ARGS >> $TEST_OUTDIR/test_stage_run_pre.out << SQL1EOF
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/innodb/lock_mutex%';
+#SQL1EOF
+
+
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/sql/LOCK_PROBE%';
+
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/innodb/kernel_mutex%';
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/mutex/innodb/srv_innodb_mutex_probe%';
+#UPDATE performance_schema.$SETUP_INSTRUMENTS  set enabled='YES', timed='YES' where NAME like '%wait/synch/rwlock/sql/LOCK_grant%';
+
+
+
+#PSE_WAIT_MODE=$1
+#PSE_WAIT_TYPE=$2
+
+#CONSTRUCT PSE_COND
+
+
+
+if [ -n "$PSE_WAIT_MODE" -a -n "$PSE_WAIT_TYPE" ]; then
+
+join_cond="or"
+prefix_cond=""
+pse_wait_mode=""
+PSE_COND=""
+exclude_cond=""
+if [ $PSE_WAIT_MODE == "WAIT.ALL" ]; then
+ pse_wait_mode="%"
+elif [ $PSE_WAIT_MODE == "WAIT.INNODB" ]; then
+ pse_wait_mode="innodb"
+elif [ $PSE_WAIT_MODE == "WAIT.ALL_NOT_INNODB" ]; then
+ join_cond="and"
+ prefix_cond="not"
+ pse_wait_mode="%"
+ exclude_cond="and NAME not like 'wait/%/%/innodb/%'"
+else
+  echo "PSE_WAIT_MODE=$PSE_WAIT_MODE WRONG PSE_WAIT_MODE=$PSE_WAIT_MODE"
+  exit 255
+fi
+
+save_ifs="$IFS"
+IFS=","
+for pse_wait_type in $PSE_WAIT_TYPE ; do
+if [ "$pse_wait_type" == "WAIT.ALL" ]; then
+  PSE_COND=" NAME like 'wait/%/%/$pse_wait_mode/%'"
+elif [ $pse_wait_type == "WAIT.mutex" -o $pse_wait_type == "WAIT.rwlock" -o $pse_wait_type == "WAIT.cond" ]; then
+  if [ -z "$PSE_COND" ]; then
+    PSE_COND=" NAME like 'wait/synch/$pse_wait_type/$pse_wait_mode/%'"
+  else
+     PSE_COND="$PSE_COND or NAME like 'wait/synch/$pse_wait_type/$pse_wait_mode/%'"
+  fi
+elif [ $pse_wait_type == "WAIT.io" ]; then
+  if [ -z "$PSE_COND" ]; then
+    PSE_COND=" NAME like 'wait/io/file/$pse_wait_mode/%'"
+  else
+    PSE_COND="$PSE_COND or NAME like 'wait/io/file/$pse_wait_mode/%'"
+  fi
+else
+  echo "PSE_WAIT_TYPE=$PSE_WAIT_TYPE WRONG pse_wait_type=$pse_wait_type"
+  exit 255
+fi
+done
+IFS="$save_ifs"
+
+if [ -n "$exclude_cond" ]; then 
+  PSE_COND="( $PSE_COND ) $exclude_cond"
+fi
+
+mysql -vvv $MYSQL_ARGS >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'YES' where $PSE_COND
+SQL1EOF
+
+
+
+
+mysql -f -vvv $MYSQL_ARGS >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'NO' where NAME like 'wait/synch/rwlock/innodb/buf_block_lock';
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'NO' where NAME like 'wait/synch/mutex/innodb/buffer_block_mutex';
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'NO' where NAME like 'wait/lock/table/sql/handler';
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'NO' where NAME like 'wait/io/table/sql/handler';
+SQL1EOF
+
+
+fi
+
+if [ -n "$PSE_MODE" ]; then 
+
+join_cond="or"
+prefix_cond=""
+pse_wait_mode=""
+PSE_COND=""
+exclude_cond=""
+
+if [ $PSE_MODE == "STAGES" ]; then
+  PSE_COND=" NAME like 'stage/%/%'"
+elif [ $PSE_MODE == "STMTS" ]; then
+  PSE_COND=" NAME like 'statement/%/%'"
+else
+  echo "PSE_MODE=$PSE_MODE WRONG PSE_MODE=$PSE_MODE"
+  exit 255
+fi
+
+mysql -vvv $MYSQL_ARGS >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'YES' where $PSE_COND
+SQL1EOF
+
+
+fi
+
+
+
+#ENABLE PSE_CONSUMERS                                                                                                         
+if [ -n "$PSE_CONSUMER_MODE" ]; then                                                                                          
+                                                                                                                              
+  if [ $PSE_CONSUMER_MODE = "CURRENT" ]; then
+    PSE_CONSUMERS_COND="where name='EVENTS_WAITS_CURRENT' or name='thread_instrumentation' or name='global_instrumentation'"
+  elif [ $PSE_CONSUMER_MODE = "BIGBANG" ]; then
+    PSE_CONSUMERS_COND=""
+  elif [ $PSE_CONSUMER_MODE = "THREAD" ]; then
+    PSE_CONSUMERS_COND="where name='thread_instrumentation' or name='global_instrumentation'"                                 
+  elif [ $PSE_CONSUMER_MODE = "GLOBAL" ]; then                                                                                
+    PSE_CONSUMERS_COND="where name='global_instrumentation'"                                                                  
+  elif [ $PSE_CONSUMER_MODE = "HISTORY" ]; then                                                                               
+    PSE_CONSUMERS_COND="where name='events_waits_history' or name='EVENTS_WAITS_CURRENT' or name='thread_instrumentation' or name='global_instrumentation'"                                                                                                 
+  elif [ $PSE_CONSUMER_MODE = "HISTORY_LONG" ]; then                                                                          
+    PSE_CONSUMERS_COND="where name='events_waits_history_long' or name='EVENTS_WAITS_CURRENT' or name='thread_instrumentation' or name='global_instrumentation'"                                                                                            
+  elif [ $PSE_CONSUMER_MODE = "SUMMARY" ]; then
+    PSE_CONSUMERS_COND="where name like 'events_waits_summary_by%' or name='EVENTS_WAITS_CURRENT'"
+  else                                                                                                                        
+    echo "PSE_CONSUMERS_COND=$PSE_CONSUMER_MODE WRONG PSE_CONSUMERS_COND=$PSE_CONSUMER_MODE"                                  
+  fi
+
+mysql -vvv $MYSQL_ARGS >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+UPDATE performance_schema.$SETUP_CONSUMERS  set enabled='YES' $PSE_CONSUMERS_COND;
+SQL1EOF
+fi
+
+#REMAIN PSE_INITIALIZATION
+mysql -vvv $MYSQL_ARGS >> $PSE_TEST_OUTDIR/pse_start.out << SQL1EOF
+
+UPDATE performance_schema.$SETUP_TIMERS   set timer_name='CYCLE';
+#UPDATE performance_schema.$SETUP_TIMERS   set timer_name='NANOSECOND';
+
+select max(TIMER_START) from performance_schema.$EVENTS_WAITS_HISTORY into @marker_begin;
+select @marker_begin;
+
+
+select version();
+show engine performance_schema status;
+show variables like "performance%";
+show status like "performance%";
+
+select * from performance_schema.$PERFORMANCE_TIMERS;
+select * from performance_schema.$SETUP_CONSUMERS;
+select * from performance_schema.$SETUP_INSTRUMENTS;
+select * from performance_schema.$SETUP_TIMERS;
+SQL1EOF
+
+PSE_LOST=`grep lost $PSE_TEST_OUTDIR/pse_start.out | grep -v "| 0"`
+if [ -n "$PSE_LOST" ]; then 
+ echo "$PSE_LOST"
+ show_msg ""
+ show_msg "================================================================================="
+ show_msg "WARNING: Lost PSE instruments detected on START"
+ show_msg "$PSE_LOST" 
+ show_msg "================================================================================="
+ show_msg ""
+fi
+
+fi 
+
+}
+
+
+engine_stat.pse_stop()
+{
+
+engine_stat.pse_table_init
+
+if [ -z "$PS_TEST_STAGE" ]; then
+ PS_TEST_STAGE="run"  
+fi
+ 
+PSE_TEST_OUTDIR="$TEST_OUTDIR/$PS_TEST_STAGE"
+mkdir $PSE_TEST_OUTDIR > /dev/null 2>&1
+ 
+
+P_S=""
+P_S=`mysql $MYSQL_ARGS -e"show variables like 'performance_schema'" -sss | grep ON`
+
+echo "PERFORMANCE_SHEMA: | $P_S | MYSQLD VERSION $MYSQLD_VERSION |"  
+
+if [ -n "$P_S" ]; then 
+
+mysql -f -vvv $MYSQL_ARGS >> $PSE_TEST_OUTDIR/pse_stop.out << SQL2EOF
+
+select * from performance_schema.$SETUP_INSTRUMENTS;
+UPDATE performance_schema.$SETUP_INSTRUMENTS SET ENABLED = 'NO';
+
+select max(TIMER_START) from performance_schema.$EVENTS_WAITS_HISTORY into @marker_end;
+select @marker_end;
+
+
+show engine performance_schema status;
+show variables like "performance%";
+show status like "performance%";
+
+select * from performance_schema.$PERFORMANCE_TIMERS;
+select * from performance_schema.$SETUP_CONSUMERS;
+select * from performance_schema.$SETUP_TIMERS;
+SQL2EOF
+
+PSE_LOST=`grep lost $PSE_TEST_OUTDIR/pse_stop.out | grep -v "| 0"`
+if [ -n "$PSE_LOST" ]; then 
+ show_msg ""
+ show_msg "================================================================================="
+ show_msg "WARNING: Lost PSE instruments detected on STOP"
+ show_msg "$PSE_LOST" 
+ show_msg "================================================================================="
+ show_msg ""
+fi
+
+#mysql $MYSQL_ARGS -vvvv performance_schema \
+#-e ' select THREAD_ID, EVENT_ID, EVENT_NAME, TIMER_WAIT, SOURCE, TIMER_START, OBJECT_INSTANCE_BEGIN, OPERATION from EVENTS_WAITS_HISTORY_LONG order by TIMER_START asc' > $TEST_OUTDIR/pse.EWHL.out
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select EVENT_NAME, SOURCE, sum(TIMER_WAIT) as SUM_TIMER_WAIT \
+    from $EVENTS_WAITS_HISTORY_LONG group by EVENT_NAME,SOURCE order by EVENT_NAME,SOURCE,SUM_TIMER_WAIT desc" >> \
+    $PSE_TEST_OUTDIR/pse.SUM_EVENT_NAME.DETAIL
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select EVENT_NAME, SOURCE, sum(TIMER_WAIT) as SUM_TIMER_WAIT \
+    from $EVENTS_WAITS_HISTORY_LONG group by EVENT_NAME,SOURCE order by SUM_TIMER_WAIT desc" >> \
+    $PSE_TEST_OUTDIR/pse.SUM_EVENT_NAME.DETAIL
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select sum(count_star) from $EVENTS_WAITS_SUMMARY_BY_EVENT_NAME" > $PSE_TEST_OUTDIR/pse.SUM_EVENT_COUNT 2>/dev/null;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select sum(count_star) from $EVENTS_WAITS_SUMMARY_GLOBAL_BY_EVENT_NAME" > \
+$PSE_TEST_OUTDIR/pse.SUM_EVENT_GLOBAL_COUNT 2>/dev/null;
+
+
+L="EVENT_NAME,COUNT,SUM_TIMER_WAIT/power(10, 12) as SUM_TIMER, \
+   MIN_TIMER_WAIT/power(10, 12) as MIN_TIMER,AVG_TIMER_WAIT/power(10, 12) as AVG_TIMER, \
+   MAX_TIMER_WAIT/power(10, 12) as MAX_TIMER"
+
+L="EVENT_NAME,COUNT_STAR as COUNT,SUM_TIMER_WAIT/power(10, 12) as 'SUM_TIMER.sec', \
+   MIN_TIMER_WAIT/power(10, 12) as 'MIN_TIMER.sec',AVG_TIMER_WAIT/power(10, 12) as 'AVG_TIMER.sec', \
+   MAX_TIMER_WAIT/power(10, 12) as 'MAX_TIMER.sec'"
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select $L from $EVENTS_WAITS_SUMMARY_BY_EVENT_NAME order by SUM_TIMER_WAIT desc" > \
+$PSE_TEST_OUTDIR/pse.SUM_EVENT_NAME 2>/dev/null;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select $L from $EVENTS_WAITS_SUMMARY_GLOBAL_BY_EVENT_NAME order by SUM_TIMER_WAIT desc" > \
+$PSE_TEST_OUTDIR/pse.SUM_EVENT_GLOBAL_NAME 2>/dev/null;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select * from $EVENTS_WAITS_SUMMARY_BY_THREAD_BY_EVENT_NAME order by SUM_TIMER_WAIT desc " > $PSE_TEST_OUTDIR/pse.SUM_THREAD_EVENT_NAME;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select * from $EVENTS_WAITS_SUMMARY_BY_INSTANCE order by SUM_TIMER_WAIT desc" > $PSE_TEST_OUTDIR/pse.SUM_INSTANCE;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select THREAD_ID, SUM(COUNT_STAR), SUM(SUM_TIMER_WAIT) from \
+       $EVENTS_WAITS_SUMMARY_BY_THREAD_BY_EVENT_NAME group by THREAD_ID" >> $PSE_TEST_OUTDIR/pse.MISC;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select * FROM $MUTEX_INSTANCES " >> $PSE_TEST_OUTDIR/pse.MUTEX;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select * FROM $RWLOCK_INSTANCES " >> $PSE_TEST_OUTDIR/pse.RW_LOCK;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select * from performance_schema.$FILE_SUMMARY_BY_EVENT_NAME" > $PSE_TEST_OUTDIR/pse.FILE_SUM_EVENT_NAME;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select * from performance_schema.$FILE_SUMMARY_BY_INSTANCE" > $PSE_TEST_OUTDIR/pse.FILE_SUM_INSTANCE;
+
+mysql $MYSQL_ARGS performance_schema -vvvv \
+-e "select EVENT_NAME,SOURCE,count(SOURCE),sum(TIMER_WAIT) from $EVENTS_WAITS_HISTORY_LONG  group by 1,2 order by 1 desc" > $PSE_TEST_OUTDIR/pse.EVENTS_WAITS_HISTORY_LONG;
+
+mysql -f $MYSQL_ARGS performance_schema -vvvv \
+-e "select $L from performance_schema.$EVENTS_STATEMENTS_SUMMARY_GLOBAL_BY_EVENT_NAME  order by SUM_TIMER_WAIT desc" > $PSE_TEST_OUTDIR/pse.SUM_STMTS 2>/dev/null;
+
+mysql -f $MYSQL_ARGS performance_schema -vvvv \
+-e "select $L from performance_schema.$EVENTS_STAGES_SUMMARY_GLOBAL_BY_EVENT_NAME  order by SUM_TIMER_WAIT desc" > $PSE_TEST_OUTDIR/pse.SUM_STAGES 2>/dev/null;
+
+
+fi
+
+}
+

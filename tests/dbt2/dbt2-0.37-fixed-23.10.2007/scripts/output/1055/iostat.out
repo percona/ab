@@ -1,0 +1,8 @@
+Linux 2.6.32-100.28.11.el6.x86_64 (caneland.mysql.com) 	07/03/11 	_x86_64_	(24 CPU)
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        1.91        62.75        22.16   30006972   10598430
+cciss/c0d1       18.38        44.08       674.73   21076619  322635634
+dm-0              3.40        62.73        22.16   29995554   10598368
+dm-1              0.00         0.00         0.00       1130         48
+

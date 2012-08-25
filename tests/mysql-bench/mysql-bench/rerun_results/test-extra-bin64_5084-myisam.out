@@ -1,0 +1,84 @@
+Testing server 'MySQL 5.0.84 enterprise/' at 2009-08-18 14:30:49
+
+Extra tests 1
+
+Creating tables
+Inserting data to bench1
+Inserting 100000 rows
+Time for insert (100000): 5.132 wallclock secs ( 1.18 usr  0.45 sys +  0.00 cusr  0.00 csys =  1.63 CPU)
+
+Fill tables for unions (bench4)
+Inserting data to bench3
+Inserting 100000 rows
+Time for insert (100000): 5.109 wallclock secs ( 1.13 usr  0.58 sys +  0.00 cusr  0.00 csys =  1.71 CPU)
+
+Time for insert_without_fk (500000): 32.448 wallclock secs ( 7.26 usr  6.14 sys +  0.00 cusr  0.00 csys = 13.40 CPU)
+
+Inserting 500000 rows with FK checking
+Time for insert_with_fk (500000): 69.326 wallclock secs (18.65 usr  9.90 sys +  0.00 cusr  0.00 csys = 28.55 CPU)
+
+Inserting 500000 rows with FK checking
+Time for insert_with_fk_non_exists (500000): 38.970 wallclock secs (14.18 usr  6.89 sys +  0.00 cusr  0.00 csys = 21.07 CPU)
+
+Deleting 100000 rows with cascade delete
+Time for cascade_delete (100000): 16.539 wallclock secs ( 1.40 usr  2.26 sys +  0.00 cusr  0.00 csys =  3.66 CPU)
+
+Testing UNION
+Time for select_union (25:12500000): 45.030 wallclock secs (27.12 usr  0.55 sys +  0.00 cusr  0.00 csys = 27.67 CPU)
+
+Testing UNION ALL
+Time for select_union_all (25:15000000): 39.846 wallclock secs (32.19 usr  0.77 sys +  0.00 cusr  0.00 csys = 32.96 CPU)
+
+Multitable delete 100000 rows
+Time for mutlitable_delete (100000): 13.072 wallclock secs ( 0.68 usr  0.78 sys +  0.00 cusr  0.00 csys =  1.46 CPU)
+
+Fill tables for subqueries (bench5)
+Fill tables for subqueries (bench6)
+Time for insert_subq (20000): 1.515 wallclock secs ( 0.28 usr  0.28 sys +  0.00 cusr  0.00 csys =  0.56 CPU)
+
+SUBQUERIES in SELECT LIST
+Uncorrelated
+Time for select_subq_sel_uncorr (1000:98990): 0.640 wallclock secs ( 0.33 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.34 CPU)
+
+Correlated
+Time for select_subq_sel_corr (100:100): 47.136 wallclock secs ( 0.01 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.02 CPU)
+
+Correlated, references on alias
+Time for select_subq_sel_corref (1000:98990): 0.988 wallclock secs ( 0.38 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.39 CPU)
+
+SUBQUERIES in WHERE
+Uncorrelated
+Time for select_subq_where_uncor (10000:10000): 1.392 wallclock secs ( 0.69 usr  0.14 sys +  0.00 cusr  0.00 csys =  0.83 CPU)
+
+Correlated
+Note: Query took longer then time-limit: 600
+Estimating end time based on:
+611 queries in 611 loops of 1000 loops took 600.851614952087 seconds
+Estimated time for select_subq_where_cor (1000:611): 983.391 wallclock secs ( 0.07 usr  0.02 sys +  0.00 cusr  0.00 csys =  0.08 CPU)
+
+SUBQUERIES in GROUP BY
+Uncorrelated
+Time for select_subq_grp_uncorr (100:100): 0.251 wallclock secs ( 0.01 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.01 CPU)
+
+Correlated
+Time for select_subq_grp_corr (10:20): 557.927 wallclock secs ( 0.00 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.00 CPU)
+
+SUBQUERIES in ORDER BY - Uncorrelated
+Time for select_subq_orderby_uncorr (100:1000000): 2.776 wallclock secs ( 2.62 usr  0.02 sys +  0.00 cusr  0.00 csys =  2.64 CPU)
+
+Correlated
+Time for select_subq_orderby_corr (10:100000): 563.963 wallclock secs ( 0.24 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.25 CPU)
+
+SUBQUERIES in FROM - Uncorrelated
+Time for select_subq_from_uncorr (100:100): 0.131 wallclock secs ( 0.01 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.01 CPU)
+
+SUBQUERIES - ALL
+Time for select_subq_all (100:499900): 10.167 wallclock secs ( 1.28 usr  0.01 sys +  0.00 cusr  0.00 csys =  1.29 CPU)
+
+SUBQUERIES - SOME
+Time for select_subq_some (100:1000000): 4.004 wallclock secs ( 2.55 usr  0.02 sys +  0.00 cusr  0.00 csys =  2.57 CPU)
+
+SUBQUERIES - ANY
+Time for select_subq_any (100:1000000): 4.018 wallclock secs ( 2.57 usr  0.03 sys +  0.00 cusr  0.00 csys =  2.60 CPU)
+
+Estimated total time: 2443.862 wallclock secs (114.83 usr 28.89 sys +  0.00 cusr  0.00 csys = 143.71 CPU)

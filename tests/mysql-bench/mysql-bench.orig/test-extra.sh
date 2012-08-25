@@ -1,0 +1,708 @@
+# -*- perl -*-
+# Copyright (C) 2000 MySQL AB & MySQL Finland AB & TCX DataKonsult AB
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+# MA 02111-1307, USA
+#
+##################### Standard benchmark inits##############################
+use DBI;
+use Benchmark;
+use My::Timer;
+
+$opt_loop_count=100000;            # Number of records in the main table
+# $opt_childs records in bench2 reference to a record in the bench1
+$opt_childs = 5; 
+$bench2counter=0;
+
+# some useful constants
+
+$MUST_REFUSE = 1;
+$MUSTNOT_REFUSE = 0;
+
+chomp($pwd = `pwd`); $pwd = "." if ($pwd eq '');
+require "$pwd/bench-init.pl" || die "Can't read Configuration file: $!\n";
+
+if ($opt_small_test)
+{
+  $opt_loop_count/=100;
+}
+elsif ($opt_small_tables)
+{
+  $opt_loop_count=10000;		
+}
+
+$union_loop_count=max(1,$opt_loop_count / 4000);
+$subs_loop_count=$opt_loop_count / 10;
+$subs_small_loop_count=max(1,$subs_loop_count/10);
+
+print "Extra tests 1\n\n";
+
+
+####
+####  Connect and start timeing
+####
+
+$dbh = $server->connect();
+$start_time=My::Timer::get_timer();
+
+init_tables_for_fk_test();
+fill_tables_for_unions();
+
+test_insert_with_fk("insert_with_fk",$MUSTNOT_REFUSE);
+test_insert_with_fk("insert_with_fk_non_exists",$MUST_REFUSE);
+test_delete_with_fk();
+test_union();
+test_union_all();
+test_multitable_delete();
+test_subselects();
+drop_table_fk_test();
+
+end_benchmark($start_time);
+
+
+
+# drop tables that wsas used in FK test.
+sub drop_table_fk_test 
+{
+  $dbh->do("drop table bench2" . $server->{'drop_attr'});
+  $dbh->do("drop table bench1" . $server->{'drop_attr'});
+  $dbh->do("drop table bench4" . $server->{'drop_attr'});
+  $dbh->do("drop table bench3" . $server->{'drop_attr'});
+  $dbh->do("drop table bench5" . $server->{'drop_attr'});
+  $dbh->do("drop table bench6" . $server->{'drop_attr'});
+  $dbh->disconnect;
+}
+
+
+####
+#### Create needed tables and fill them
+####
+sub init_tables_for_fk_test 
+{
+  print "Creating tables\n";
+  
+  $dbh->do("drop table bench2" . $server->{'drop_attr'});
+  $dbh->do("drop table bench1" . $server->{'drop_attr'});
+  do_many($dbh,$server->create("bench1",
+			       ["id int NOT NULL",
+				"name char(30)"],
+			       ["primary key(id)"]));
+  
+  do_many($dbh, $server->create("bench2",
+				["id int NOT NULL",
+				 "bench1_id int NOT NULL" ],
+				["primary key (id)",
+				 "index bench2i (bench1_id)"], undef,
+				['foreign key (bench1_id) references bench1(id) on delete cascade']
+				));                         
+  if ($opt_fast && defined($server->{vacuum}))
+  {
+    $server->vacuum(0,\$dbh);
+  }
+
+  insert_data_into_primary_table("bench1");
+}
+  
+sub insert_data_into_primary_table
+{
+  my $table = shift;
+  ####
+  #### Insert data
+  ####
+  
+  print "Inserting data to $table\n";
+  $loop_time=My::Timer::get_timer();
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->{AutoCommit} = 0;
+    print "Transactions enabled\n" if ($opt_debug);
+  }
+  my $total_rows = 0;
+  my $i;
+  $sth = $dbh->prepare("insert into $table values (?,'ABCDEFGHIJ')") 
+      or die $DBI::errstr;
+  print "Inserting $opt_loop_count rows\n";
+  for ($i=0 ; $i < $opt_loop_count ; $i++)
+  {
+    $sth->bind_param(1,$i,DBI::SQL_INTEGER);
+    $sth->execute() or die $DBI::errstr;
+    $total_rows++;
+  }
+  
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->commit;
+    $dbh->{AutoCommit} = 1;
+  }
+  
+  $end_time=My::Timer::get_timer();
+  print "Time for insert (" . ($total_rows) . "): " .
+      My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+  
+  if ($opt_fast && defined($server->{vacuum}))
+  {
+    $server->vacuum(1,\$dbh);
+  }
+  
+}  
+
+sub test_insert_with_fk 
+{
+  my ($parameter, $must_refuse) = @_;
+  $loop_time=My::Timer::get_timer();
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->{AutoCommit} = 0;
+    print "Transactions enabled\n" if ($opt_debug);
+  }
+  local $total_rows = 0;
+
+  print "Inserting ". ($opt_loop_count*$opt_childs)." rows with FK checking\n";
+
+  local $sth_insert_b2 = $dbh->prepare("insert into bench2 values (?,?)") 
+      or die $DBI::errstr;  
+  local $sth_check = $dbh->prepare("select count(*) from bench1 where id=?") 
+      or die $DBI::errstr;
+  
+  
+  for ($i= 0 ; $i < $opt_loop_count ; $i++)
+  {
+    for($j=0; $j < $opt_childs; $j++) {
+      if ($must_refuse) {
+	insert_with_ref_check($bench2counter,$i+$opt_loop_count+1,
+			      $must_refuse);
+      } 
+      else 
+      {
+	insert_with_ref_check($bench2counter,$i,$must_refuse);
+      }
+      $bench2counter++;    
+    }           
+  }
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->commit;
+    $dbh->{AutoCommit} = 1;
+  }
+  
+  $end_time=My::Timer::get_timer();
+  print "Time for $parameter (" . ($total_rows) . "): " .
+      My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+  
+  if ($opt_fast && defined($server->{vacuum}))
+  {
+    $server->vacuum(1,\$dbh);
+  }
+  $sth_insert_b2->finish;
+  $sth_check->finish;
+}
+
+
+sub insert_with_ref_check
+{
+  my ($bench2counter, $i, $must_fail) = @_;
+  $sth_insert_b2->bind_param(1,$bench2counter,DBI::SQL_INTEGER);
+  $sth_insert_b2->bind_param(2,$i,DBI::SQL_INTEGER);
+
+  if ($limits->{'fk'}) {
+
+    if ($sth_insert_b2->execute())
+    { 
+      die "Didn't return error ($bench2counter $i)" if ($must_fail);
+    } 
+    else 
+    {
+      die $DBI::errstr unless ($must_fail);
+    };
+    $total_rows++;
+  } else {
+    my $bench1_has_that_id = 0;
+    $sth_check->bind_param(1,$i,DBI::SQL_INTEGER) or die $DBI::errstr;
+    $sth_check->execute;
+    $sth_check->bind_col(1,\$bench1_has_that_id);
+    $sth_check->fetch(); 
+    if ($bench1_has_that_id ne 0) 
+    {
+      $sth_insert_b2->execute() or die $DBI::errstr;
+    }       
+    $total_rows++;
+    
+  }
+}
+
+sub test_delete_with_fk 
+{
+  $loop_time=My::Timer::get_timer();
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->{AutoCommit} = 0;
+    print "Transactions enabled\n" if ($opt_debug);
+  }
+  my $total_rows = 0;
+  
+  print "Deleting ". ($opt_loop_count)." rows with cascade delete\n";
+  
+  for ($i= 0 ; $i < $opt_loop_count ; $i++)
+  {
+    if ($limits->{'fk'}) 
+    {
+      $dbh->do("delete from bench1 where id=$i") or
+	  die "Check integrity error on cascade_delete ($i)";
+      $total_rows++;
+    } 
+    else 
+    {
+      $dbh->do("delete from bench2 where bench1_id=$i") 
+	  or die "Check integrity error on cascade_delete (bench2) ($i)";
+      $dbh->do("delete from bench1 where id=$i") 
+	  or die "Check integrity error on cascade_delete ($i)";
+      $total_rows++;
+    }
+  }
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->commit;
+    $dbh->{AutoCommit} = 1;
+  }
+  
+  $end_time=My::Timer::get_timer();
+  print "Time for cascade_delete (" . ($total_rows) . "): " .
+      My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+  
+  if ($opt_fast && defined($server->{vacuum}))
+  {
+    $server->vacuum(1,\$dbh);
+  }
+  
+}
+
+
+sub test_union
+{
+  return if (not $limits->{'union'});
+  $query = 'select id from bench3 union select id from bench4';
+  time_fetch_all_rows("Testing UNION",
+		      "select_union", $query, $dbh,
+		      $union_loop_count);
+
+}
+
+sub test_union_all
+{
+  return if (not $limits->{'union_all'});
+  $query = 'select id from bench3 union all select id from bench4';
+  time_fetch_all_rows("Testing UNION ALL",
+		      "select_union_all", $query, $dbh,
+		      $union_loop_count);
+
+}
+
+
+
+
+sub test_multitable_delete 
+{
+  return if (not $limits->{'multitable_delete'});
+  $loop_time=My::Timer::get_timer();
+  
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->{AutoCommit} = 0;
+    print "Transactions enabled\n" if ($opt_debug);
+  }
+  my $total_rows = 0;
+  
+  print "Multitable delete ". ($opt_loop_count)." rows\n";
+  
+  for ($i= 0 ; $i < $opt_loop_count ; $i++)
+  {
+    $dbh->do("delete bench3, bench4  from bench4,bench3 where bench3.id=$i and bench4.bench3_id=bench3.id") or
+	die "error in the multitable delete ".$DBI::errstr;
+    $total_rows++;
+  }
+  
+    if ($opt_fast && $server->{transactions})
+    {
+      $dbh->commit;
+      $dbh->{AutoCommit} = 1;
+    }
+  
+  $end_time=My::Timer::get_timer();
+  print "Time for mutlitable_delete (" . ($total_rows) . "): " .
+      My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+  
+  if ($opt_fast && defined($server->{vacuum}))
+  {
+    $server->vacuum(1,\$dbh);
+  }
+}
+
+sub fill_tables_for_unions
+{
+  $dbh->do("drop table bench4" . $server->{'drop_attr'});
+  $dbh->do("drop table bench3" . $server->{'drop_attr'});
+  do_many($dbh,$server->create("bench3",
+			       ["id int NOT NULL",
+				"name char(30)"],
+                               ["primary key (id)"]));
+  
+  do_many($dbh, $server->create("bench4",
+				["id int NOT NULL",
+				 "bench3_id int NOT NULL" ],
+				["primary key (id)",
+				 "index bench4_b3id (bench3_id)"]));
+  
+  print "Fill tables for unions (bench4)\n";
+  &insert_data_into_primary_table("bench3");
+
+  my $loop_time = My::Timer::get_timer();
+
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->{AutoCommit} = 0;
+    print "Transactions enabled\n" if ($opt_debug);
+  }
+
+  my $bench4count=0;
+  $sth = $dbh->prepare("insert into bench4 values(?,?)") or die $DBI::errstr;
+  for ($i=0; $i<$opt_loop_count; $i++)
+  {
+    for ($j=0; $j<$opt_childs; $j++){
+      $sth->bind_param(1,$bench4count,DBI::SQL_INTEGER);
+      $sth->bind_param(2,$i,DBI::SQL_INTEGER);
+      $sth->execute;
+      $bench4count++;
+    }
+  }
+  $sth->finish;
+
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->commit;
+    $dbh->{AutoCommit} = 1;
+  }
+  
+  $end_time=My::Timer::get_timer();
+  print "Time for insert_without_fk (" . ($bench4count) . "): " .
+      My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+
+  if ($opt_fast && defined($server->{vacuum}))
+  {
+    $server->vacuum(0,\$dbh);
+  }
+}
+
+
+sub test_subselects
+{
+    return if (not $server->{'limits'}{'subqueries'});
+    fill_tables_for_subselect();
+    subselect_scalar_test();
+}
+
+sub fill_tables_for_subselect
+{
+    $dbh->do("drop table bench6" . $server->{'drop_attr'});
+    $dbh->do("drop table bench5" . $server->{'drop_attr'});
+    do_many($dbh,$server->create("bench5",
+				 ["id int NOT NULL",
+				  "b int",
+				"c char(3)"],
+				 ["index bench6i1 (b)","primary key (id)"]));
+  
+    do_many($dbh, $server->create("bench6",
+				  ["id int NOT NULL",
+				   "b int",
+				   "c char(3)"],
+				  ["index bench6i (b)","primary key (id)"]));
+    
+    print "Fill tables for subqueries (bench5)\n";
+    
+    my $loop_time = My::Timer::get_timer();
+    
+    if ($opt_fast && $server->{transactions})
+    {
+	$dbh->{AutoCommit} = 0;
+	print "Transactions enabled\n" if ($opt_debug);
+    }
+    
+    my $b5count=0;
+    $sth = $dbh->prepare("insert into bench5 values(?,?,?)") or die $DBI::errstr;
+    for ($i=0; $i<$subs_loop_count; $i++)
+    {
+	$sth->bind_param(1,$i,DBI::SQL_INTEGER);
+	$sth->bind_param(2,$b5count,DBI::SQL_INTEGER);
+	$sth->bind_param(3,"GPL",DBI::SQL_CHAR);
+	$sth->execute;
+	$b5count =  $i % 100;
+    }
+    $sth->finish;
+    
+    print "Fill tables for subqueries (bench6)\n";
+    
+    my $b6count=0;
+    my $str;
+    $sth = $dbh->prepare("insert into bench6 values(?,?,?)") or die $DBI::errstr;
+    for ($i=0; $i<$subs_loop_count; $i++)
+    {
+	$sth->bind_param(1,$i,DBI::SQL_INTEGER);
+	$sth->bind_param(2,$b6count,DBI::SQL_INTEGER);
+	$str =  ( $i < ($subs_loop_count / 2) ) ? "GPL":"BSD"; 
+	$sth->bind_param(3,$str,DBI::SQL_CHAR);
+	$sth->execute;
+	$b6count =  $i % 100;
+    }
+    $sth->finish;
+    
+    if ($opt_fast && $server->{transactions})
+    {
+	$dbh->commit;
+	$dbh->{AutoCommit} = 1;
+    }
+    
+    $end_time=My::Timer::get_timer();
+    print "Time for insert_subq (" . ($subs_loop_count*2) . "): " .
+	My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+    
+    if ($opt_fast && defined($server->{vacuum}))
+    {
+	$server->vacuum(0,\$dbh);
+  }
+}
+
+sub subselect_scalar_test
+{
+    
+    my($tests, $i,$loop_time,$end_time,$count,$rows,$estimated);
+    
+    if ($limits->{'subqueries_select'})
+    {    
+	print "SUBQUERIES in SELECT LIST\nUncorrelated\n";
+	$count=$rows=0;
+	$loop_time=My::Timer::get_timer();
+      MAINLOOP: 
+	for ($tests=0; $tests < 10; $tests++)
+	{
+	    for ($i=1 ; $i <= 100 ; $i++)
+	    {
+		$count++;
+		$rows+=fetch_all_rows($dbh,"select (select max(id) from bench6 where b=$i group by b) as x,b from bench5 where b=$i");
+		$end_time=My::Timer::get_timer();
+		last MAINLOOP if ($estimated=predict_query_time($loop_time,$end_time,\$count,$tests*100+$i,
+								1000));
+	    }
+	}
+	if ($estimated)
+	{ print "Estimated time"; }
+	else
+	{ print "Time"; }
+	print " for select_subq_sel_uncorr ($count:$rows): " .
+	    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+	
+	if ($limits->{'subqueries_correlated'})
+        {
+	    
+	    time_fetch_all_rows("Correlated",
+				"select_subq_sel_corr", 
+				"select avg((select max(b) from bench5 where bench5.b=bench6.b)) from bench6",
+				$dbh, 100);
+	}		    
+    };
+    
+    if ($limits->{'subqueries_alias'}) 
+    {
+	print "Correlated, references on alias\n";
+	$count=$rows=0;
+	$loop_time=My::Timer::get_timer();
+      LOOP1: 
+	for ($tests=0; $tests < 10; $tests++)
+	{
+	    for ($i=1 ; $i <= 100 ; $i++)
+	    {
+		$count++;
+		$rows+=fetch_all_rows($dbh,"select id+b as d, (select max(b) from bench6 where id=d) as e from bench5 where b=$i") or die $DBI::errstr;
+		$end_time=My::Timer::get_timer();
+		last LOOP1 if ($estimated=predict_query_time($loop_time,$end_time,\$count,$tests*100+$i,
+							     1000));
+	    }
+	}
+	if ($estimated)
+	{ print "Estimated time"; }
+	else
+	{ print "Time"; }
+	print " for select_subq_sel_corref ($count:$rows): " .
+	    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+    };	    
+    
+    if ($limits->{'subqueries_where'}) 
+    {
+	print "SUBQUERIES in WHERE\nUncorrelated\n";
+	$count=$rows=0;
+	$loop_time=My::Timer::get_timer();
+	for ($i=1 ; $i <= $subs_loop_count; $i++)
+	{
+	    $count++;
+	    $rows+=fetch_all_rows($dbh,"select count(*) from bench5 where (select bench6.c from bench6 where bench6.id=$i ) = 'GPL'") or die $DBI::errstr;
+	    $end_time=My::Timer::get_timer();
+	    last if ($estimated=predict_query_time($loop_time,$end_time,\$count,$i,
+						   $subs_loop_count));
+	}
+	if ($estimated)
+	{ print "Estimated time"; }
+	else
+	{ print "Time"; }
+	print " for select_subq_where_uncor ($count:$rows): " .
+	    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+	
+	if ($limits->{'subqueries_correlated'})
+        {
+	    print "Correlated\n";
+	    $count=$rows=0;
+	    $loop_time=My::Timer::get_timer();
+	    for ($i=1 ; $i <= $subs_small_loop_count; $i++)
+	    {
+		$count++;
+		$rows+=fetch_all_rows($dbh,"select count(*) from bench5 where ( select max(bench6.c) from bench6 where bench6.b=bench5.b) = 'GPL'") or die $DBI::errstr;
+		$end_time=My::Timer::get_timer();
+		last if ($estimated=predict_query_time($loop_time,$end_time,\$count,$i,
+						       $subs_small_loop_count));
+	    }
+	    if ($estimated)
+	    { print "Estimated time"; }
+	    else
+	    { print "Time"; }
+	    print " for select_subq_where_cor ($count:$rows): " .
+		My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+	};    
+    };
+    
+    if ($limits->{'subqueries_groupby'}) 
+    {
+	print "SUBQUERIES in GROUP BY\n";
+	time_fetch_all_rows("Uncorrelated",
+			    "select_subq_grp_uncorr", 
+			    "select count(*) from bench5 group by (select min(id) from bench5)",
+			    $dbh, 100);
+	if ($limits->{'subqueries_correlated'})
+        {
+	    
+	    time_fetch_all_rows("Correlated",
+				"select_subq_grp_corr", 
+				"select count(*) from bench5 group by (select min(bench6.id) from bench6 where bench6.b<bench5.b)",
+				$dbh, 10); 
+	};
+    };
+    
+    
+    if ($limits->{'subquerires_having'}) 
+    {
+	print "SUBQUERIES in HAVING\nUncorrelated\n";
+	$count=$rows=0;
+	$loop_time=My::Timer::get_timer();
+	for ($i=1 ; $i <= $subs_loop_count; $i++)
+	{
+	    $count++;
+	    $rows+=fetch_all_rows(
+				  $dbh,
+				  "select bench5.b, max(bench5.id) as m from bench5 group by bench5.b having 10 > (select min(bench6.id) from bench6 where bench6.b=$i)") 
+		or die $DBI::errstr;
+	    $end_time=My::Timer::get_timer();
+	    last if ($estimated=predict_query_time($loop_time,$end_time,\$count,$i,
+						   $subs_loop_count));
+	}
+	if ($estimated)
+	{ print "Estimated time"; }
+	else
+	{ print "Time"; }
+	print " for select_subq_having_uncor ($count:$rows): " .
+	    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+	if ($limits->{'subqueries_correlated'})
+        {
+	    
+	    time_fetch_all_rows("Correlated",
+				"select_subq_having_corr", 
+				"select bench5.b, min(bench5.id) as m from bench5 group by bench5.b having 10 > (select min(bench6.id) from bench6 where bench6.b=bench5.b)",
+				$dbh, 10);
+	};
+    };
+    
+    if ($limits->{'subqueries_orderby'})
+    { 
+	time_fetch_all_rows("SUBQUERIES in ORDER BY - Uncorrelated",
+			    "select_subq_orderby_uncorr", 
+			    "select * from bench5 order by (select min(bench6.id) from bench6)",
+			    $dbh, 100);
+	if ($limits->{'subqueries_correlated'})
+        {
+	    
+	    time_fetch_all_rows("Correlated",
+				"select_subq_orderby_corr", 
+				"select id from bench5 order by (select min(bench6.id) from bench6 where bench6.b<bench5.b)",
+				$dbh, 10);
+	}
+    };
+    
+    if ($limits->{'subqueries_from'})
+    { 
+	time_fetch_all_rows("SUBQUERIES in FROM - Uncorrelated",
+			    "select_subq_from_uncorr", 
+			    "select max(bench5.b) from bench5,(select id as y from bench6 where b=1) t3 where bench5.b = t3.y",
+			    $dbh, 100);
+#       Uncomment it when finish #WL461	
+#	time_fetch_all_rows("Correlated",
+#			    "select_subq_from_corr", 
+#			    "select max(bench5.b) from bench5 where (select max(t3.id) from (select * from bench6 where bench6.id=bench5.b) t3) > 0",
+#			    $dbh, 100);
+    };
+    
+    if ($limits->{'subqueries_all'})
+    { 
+	time_fetch_all_rows("SUBQUERIES - ALL",
+			    "select_subq_all", 
+			    "select * from bench5 where (b+50) <> all (select b from bench6)",
+			    $dbh, 100);
+    };				 
+    
+    if ($limits->{'subqueries_some'})
+    {
+	time_fetch_all_rows("SUBQUERIES - SOME",
+			    "select_subq_some", 
+			    "select * from bench5 where c = some (select c from bench6)",
+			    $dbh, 100);
+    };
+    
+    if ($limits->{'subqueries_any'})
+    { 
+	time_fetch_all_rows("SUBQUERIES - ANY",
+			    "select_subq_any", 
+			    "select * from bench5 where c = any (select c from bench6)",
+			    $dbh, 100);
+    };
+    
+    if ($limits->{'subqueries_exists'})
+    { time_fetch_all_rows("SUBQUERIES - EXISTS",
+			  "select_subq_exists", 
+			  "select * from bench5 where exists (select b from bench6)",
+			  $dbh, 100);
+      
+  };
+    
+}

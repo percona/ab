@@ -1,0 +1,178 @@
+For PostgreSQL 7.4 and earlier the kit is configured to expect PostgreSQL
+to have trusted connections defined.  So in the pg_hba.conf file, if you
+want to trust everyone, define this:
+
+local        all                                           trust
+host         all         127.0.0.1     255.0.0.0           trust
+host         all         0.0.0.0       0.0.0.0             reject
+
+-----
+
+For PostgreSQL 7.4 edit the line in postgresql.conf that says
+"tcpip_socket = false", uncomment, set to true, and restart the daemon.
+
+-----
+
+Contrary to the documentation, run 'make' instead of 'make standalone' and
+run the kit in a multi-tier environment for PostgreSQL.
+
+-----
+
+make install-all-headers
+
+Do this from the postgresql src if you're installing postgresql from source
+to make sure the server include files get installed.
+
+This command does not need to be run as of 8.0beta4.
+
+-----
+
+For PostgreSQL 8.0, run configure with the --enable-thread-safety to
+avoid SIGPIPE handling for the multi-thread dbt2 client program.
+
+-----
+
+The kit now requires pg_autovacuum to be install from the PostgreSQL source.
+It's in contrib/pg_autovacuum.  Not sure which beta it was released in, but
+it's in 8.0 now, and current releases of 7.4 if you insist on using that
+release.
+
+-----
+
+A really quick howto.
+
+Edit scripts/pgsql/pgsql_profile.in and follow the notes for the PGDATA and
+DBDATA directory.  PGDATA is where the database directory will be created and
+DBDATA is where the database table data will be generated.
+
+Run configure after editing scripts/pgsql/pgsql_profile.in.
+
+Create a 1 warehouse database by running scripts/pgsql/build_db.sh:
+	build_db.sh -g -w 1
+
+Additional flags:
+
+	-g    -  Create the table data in $DBDATA.
+	-r    -  Drop the database before loading, for rebuilding the database.
+	-w #  -  Set the warehouse scale factor.
+	-t    -  Use tablespaces, read tablespace notes below.
+
+
+Run a 5 minute (300 second) test by running scripts/run_workload.sh:
+	run_workload.sh -d 300 -w 1
+
+Additional flags:
+
+	-o    -  Collect oprofile data.
+	-c #  -  Set the number of database connections.
+	-w #  -  Set the warehouse scale factor.
+	-t    -  Use tablespaces, read tablespace notes below.
+
+-----
+
+Tablespace Notes
+
+The scripts assumes a specfic tablespace layout.
+
+The $TSDIR variable in pgsql_profile.in defines the directory where all
+tablespace devices will be mounted.  Directories or symlinks can be substituted
+for what is assumed to be a mount point from this point forward.
+
+In create_tables.sh is where the tablespaces are created.
+
+The mount points that need to be created, and must be owned by the user running
+the scripts are:
+	${TSDIR}/warehouse
+	${TSDIR}/district
+	${TSDIR}/customer
+	${TSDIR}/history
+	${TSDIR}/new_order
+	${TSDIR}/orders
+	${TSDIR}/order_line
+	${TSDIR}/item
+	${TSDIR}/stock
+	${TSDIR}/index1
+	${TSDIR}/index2
+
+-----
+
+Tablespace Notes
+
+The scripts assumes a specfic tablespace layout.
+
+The $TSDIR variable in pgsql_profile.in defines the directory where all
+tablespace devices will be mounted.  Directories or symlinks can be substituted
+for what is assumed to be a mount point from this point forward.
+
+In create_tables.sh is where the tablespaces are created.
+
+The mount points that need to be created, and must be owned by the user running
+the scripts are:
+	${TSDIR}/warehouse
+	${TSDIR}/district
+	${TSDIR}/customer
+	${TSDIR}/history
+	${TSDIR}/new_order
+	${TSDIR}/orders
+	${TSDIR}/order_line
+	${TSDIR}/item
+	${TSDIR}/stock
+	${TSDIR}/index1
+	${TSDIR}/index2
+
+-----
+
+A (slightly less) quick howto run the test (Thanks Min!):
+
+small db 2 warehouse;
+big db 20 warehouse,
+tiny db 500 warehouse (scaling other factors)
+
+generated from: (tpcc only allow scaling warehouse)
+mkdir DB.small
+./src/datagen --pgsql -w 2 -d DB.small -c 300 -i 10000 -o 300 -n 90
+mkdir DB.big
+./src/datagen --pgsql -w 20 -d DB.big -c 300 -i 10000 -o 300 -n 90
+
+# scaling the other factor
+mkdir DB.tiny
+./src/datagen --pgsql -w 500 -d DB.tiny -c 3 -i 10 -o 3 -n 9
+
+You can get # of warehouse from psql: select count(*) from warehouse;
+
+Then load database data using load_db.sh, make sure DBDATA variable
+is pointing to the correct directory you just generated above.
+
+Then run "client" program manually,
+you can monitor the query queue length by type "status" command.
+
+cd <dbt2_home>/scripts/pgsql
+../../src/client -d localhost -c 2 -l 5432 -o ../output/0
+
+Then run "driver" program manually,
+you can control tpw (terminal per warehouse) and think time etc.
+
+../../src/driver -d localhost -l 360 -wmin 1 -wmax 20 -w 20 \
+  -c 3 -i 10 -o 3 -n 9 \
+  -ktd 0 -ktn 0 -kto 0 -ktp 0 -kts 0 \
+  -ttd 0 -ttn 0 -tto 0 -ttp 0 -tts 0 -tpw 80 -outdir ../output/0
+
+Finally, look in ../output/0 directory for the possible error output
+
+tuning:
+
+1. If you have fsync on then the daemon will be waiting for disk I/O
+   for writing log (WAL)
+2. For 1 warehouse, increase currency hurt per cpu utilization.
+   1 daemon 1 terminal: 12% in 8 way system
+   2 daemon 2 terminal: 9.2%
+   3 daemon 3 terminal: 6.7%
+   4 daemon 4 terminal: 5.5%
+
+  Note the tpc-c model: company scales with # of warehouses;
+    each warehouse supports 10 districts;
+    each district serves 3000 customers;
+    each warehouse maintains stock level of 100,000 items;
+    require ~10% orders are fullfilled from other warehouses due to not have
+      all items in the company's catalog;
+

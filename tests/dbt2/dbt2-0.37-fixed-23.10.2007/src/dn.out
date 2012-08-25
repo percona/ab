@@ -1,0 +1,14 @@
+Type: d
+warehouses = 2500
+districts = 10
+customers = 3000
+items = 100000
+orders = 3000
+stock = 100000
+new_orders = 900
+
+Output directory of data files: /mnt/tachion/
+
+Generating data files for 2500 warehouse(s)...
+Generating district table data...
+Finished district table data...

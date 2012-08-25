@@ -1,0 +1,62 @@
+########################################################################
+#
+#   Autobench test configuration file for dbt2 test
+#
+########################################################################
+
+TEST_MODULE=dbt2
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+. $AUTOBENCH_INCDIR/engine_stat.inc.1
+
+test_setup()
+{
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+  
+  #Test name
+  TEST_NAME="dbt2w10"
+
+  #If test have subtests specify them here
+  TEST_CASES="dbt2w10_stat"
+
+  #Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BASEDIR/backup/dbt2-w10"
+  TEST_BACKUP_BASEDIR="/home/ranger/dbt2w10"
+  TEST_BACKUP_BASEDIR="/export/home/tmp/dbt2w10"
+
+  #DBT2 options
+  #ScaleFactor(number of warehouses)
+  DBT2_SF=10
+  DBT2_DATASET_DIR=$AUTOBENCH_TMPDIR/dbt2w10
+
+  #SERVER DB
+  SERVER_DB="dbt2w10"
+  
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/dbt2w10-innodb.stat.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_BARRACUDA=$TEST_CNF_DIR/dbt2w10-innodb.cnf
+  TEST_STAGE_WARMUP="1"
+}
+
+test_pre_run()
+{
+ TEST_STAGE_WARMUP_EXE=$MYSQL
+ TEST_ARGS_STAGE_WARMUP=" -uroot dbt2w10 $MYSQL_ARGS -e\'check table stock,customer,history,item,new_order,order_line,orders\'"
+}
+
+test_stage_run_pre()
+{
+  engine_stat.setup
+  engine_stat.pse_start
+}
+
+test_stage_run_post()
+{
+  engine_stat.stop
+  engine_stat.pse_stop
+}

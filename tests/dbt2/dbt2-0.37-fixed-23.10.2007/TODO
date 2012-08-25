@@ -1,0 +1,14 @@
+General
+-------
+
+MySQL
+-----
+  - to add possibility to check number of warehouses before starting of
+    driver. Because we will got wrong results in case someone will start
+    test with number of warehouses greater than exist in database.
+
+  - to adjust sysstat.sh 
+
+PostgreSQL
+----------
+

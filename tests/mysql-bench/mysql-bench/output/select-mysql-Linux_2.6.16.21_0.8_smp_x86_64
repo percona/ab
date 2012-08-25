@@ -1,0 +1,7 @@
+Testing server 'MySQL 5.5.2 m2/x86_64' at 2010-04-01 15:03:11
+
+Testing the speed of selecting on keys that consist of many parts
+The test-table has 10000 rows and the test is done with 500 ranges.
+
+Creating table
+Inserting 20000 rows into 2 tables

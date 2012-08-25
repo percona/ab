@@ -1,0 +1,7 @@
+aclocal
+autoconf
+automake
+
+./configure --prefix=/usr/local/mysql
+
+

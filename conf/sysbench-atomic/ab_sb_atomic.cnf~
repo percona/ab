@@ -1,0 +1,61 @@
+########################################################################
+#
+#   Autobench test configuration file for sysbench-atomic test
+#
+########################################################################
+
+TEST_MODULE=sysbench_atomic
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="sysbench_atomic"
+  
+  #If test have subtests specify them here
+  TEST_CASES="READ_KEY_POINT \
+  READ_KEY_POINT_NO_DATA \
+  READ_KEY_POINT \
+  READ_KEY_POINT_NO_DATA \
+  READ_KEY_POINT_LIMIT \
+  READ_KEY_POINT_NO_DATA_LIMIT \
+  READ_PK_POINT \
+  READ_PK_POINT_INDEX \
+  READ_PK_RANGE \
+  READ_PK_RANGE_INDEX \
+  READ_KEY_RANGE \
+  READ_KEY_RANGE_LIMIT \
+  READ_KEY_RANGE_NO_DATA \
+  READ_KEY_RANGE_NO_DATA_LIMIT"
+
+#  READ_FTS"
+
+  # Basedir for backup datafiles
+#  TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-atomic"
+
+  TEST_BACKUP_BASEDIR="/home/ranger/sysbench-atomic-1M"
+
+  # Number of rows for sbtest database
+  SYSBENCH_NUM_ROWS=1000000
+
+  # sysbench binary
+  TEST_STAGE_RUN_EXE=$SYSBENCH_0_5_EXE
+  
+  #
+  ENGINE_DEFAULTS_FILE_MYISAM=$TEST_CNF_DIR/sysbench-atomic-myisam.cnf
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-atomic-innodb.cnf
+
+
+}
+

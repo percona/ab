@@ -1,0 +1,10 @@
+[mysqld]
+user=root
+port=3306
+max_connections=2000
+max_connect_errors=10 
+performance_schema 
+performance_schema_max_mutex_instances=500000 
+performance_schema_max_rwlock_instances=500000 
+performance_schema_max_rwlock_classes=30
+#optimizer_switch=index_merge=on,index_merge_union=on,index_merge_sort_union=on,index_merge_intersection=on,engine_condition_pushdown=on,index_condition_pushdown=off

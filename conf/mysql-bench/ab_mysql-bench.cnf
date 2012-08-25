@@ -1,0 +1,27 @@
+#!/bin/bash
+########################################################################
+#
+#   Autobench test configuration file for dbt2 test
+#
+########################################################################
+
+TEST_MODULE=mysql_bench
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+test_setup()
+{
+  #Test name
+  TEST_NAME="mysql-bench"
+
+  #SERVER DB
+  SERVER_DB=test
+
+  # mysql-bench specific parameters  
+  # Below is used later during post-processing results
+  FS="ext3"
+  HW="8 Cores, Xeon(E5345), 2.3Ghz, 16GB RAM"
+
+  #default list of engines with options
+  ENGINE="myisam,user=root innodb,user=root"  
+}
+

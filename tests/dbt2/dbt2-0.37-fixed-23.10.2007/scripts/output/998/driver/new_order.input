@@ -1,0 +1,7 @@
+plot "new_order.data" using 1:2 title "new_order" 
+set term png small
+set output "new_order.png"
+set grid xtics ytics
+set xlabel "Response Time (seconds)"
+set ylabel "Count"
+replot

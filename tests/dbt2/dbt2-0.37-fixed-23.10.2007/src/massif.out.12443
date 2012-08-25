@@ -1,0 +1,2957 @@
+desc: --stacks=yes --time-unit=ms
+cmd: ./client -u root -t /tmp/mysql.sock -d dbt2w100 -c 100 -h localhost -s 100 -o /tmp/client/
+time_unit: ms
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=172
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=1296
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=344
+mem_heap_B=4711
+mem_heap_extra_B=785
+mem_stacks_B=552
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=481
+mem_heap_B=85901
+mem_heap_extra_B=1259
+mem_stacks_B=6576
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=721
+mem_heap_B=116730
+mem_heap_extra_B=1334
+mem_stacks_B=10256
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=904
+mem_heap_B=178309
+mem_heap_extra_B=1755
+mem_stacks_B=6424
+heap_tree=detailed
+n4: 178309 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 104854 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 65536 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 65536 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 65536 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 65536 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 65536 0x405217: connect_to_db (db.c:49)
+       n1: 65536 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 65536 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 65536 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 32796 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32796 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32796 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 32796 0x405217: connect_to_db (db.c:49)
+      n1: 32796 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 32796 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 32796 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 5088 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 5088 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 5088 0x405217: connect_to_db (db.c:49)
+     n1: 5088 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 5088 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 5088 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 1434 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 9783 in 20 places, all below massif's threshold (01.00%)
+ n1: 2352 0x37FC60AD0D: _dl_new_object (in /lib64/ld-2.12.so)
+  n1: 2352 0x37FC60718C: _dl_map_object_from_fd (in /lib64/ld-2.12.so)
+   n1: 2352 0x37FC608328: _dl_map_object (in /lib64/ld-2.12.so)
+    n1: 2352 0x37FC612997: dl_open_worker (in /lib64/ld-2.12.so)
+     n1: 2352 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+      n1: 2352 0x37FC612448: _dl_open (in /lib64/ld-2.12.so)
+       n1: 2352 0x37FCF1F17E: do_dlopen (in /lib64/libc-2.12.so)
+        n1: 2352 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+         n1: 2352 0x37FCF1F2D5: __libc_dlopen_mode (in /lib64/libc-2.12.so)
+          n0: 2352 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=6
+#-----------
+time=1106
+mem_heap_B=231743
+mem_heap_extra_B=2065
+mem_stacks_B=7288
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=1206
+mem_heap_B=258610
+mem_heap_extra_B=2302
+mem_stacks_B=5232
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=1405
+mem_heap_B=285327
+mem_heap_extra_B=2457
+mem_stacks_B=5544
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=1606
+mem_heap_B=338761
+mem_heap_extra_B=2767
+mem_stacks_B=6552
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=1708
+mem_heap_B=392195
+mem_heap_extra_B=3077
+mem_stacks_B=10456
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=1907
+mem_heap_B=418912
+mem_heap_extra_B=3232
+mem_stacks_B=8064
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=2110
+mem_heap_B=499063
+mem_heap_extra_B=3697
+mem_stacks_B=9808
+heap_tree=empty
+#-----------
+snapshot=13
+#-----------
+time=2309
+mem_heap_B=525780
+mem_heap_extra_B=3852
+mem_stacks_B=10080
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=2411
+mem_heap_B=579205
+mem_heap_extra_B=4147
+mem_stacks_B=13888
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=2610
+mem_heap_B=605931
+mem_heap_extra_B=4317
+mem_stacks_B=11592
+heap_tree=empty
+#-----------
+snapshot=16
+#-----------
+time=2811
+mem_heap_B=659365
+mem_heap_extra_B=4627
+mem_stacks_B=12600
+heap_tree=empty
+#-----------
+snapshot=17
+#-----------
+time=3012
+mem_heap_B=712799
+mem_heap_extra_B=4937
+mem_stacks_B=13608
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=3213
+mem_heap_B=766233
+mem_heap_extra_B=5247
+mem_stacks_B=14616
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=3414
+mem_heap_B=819667
+mem_heap_extra_B=5557
+mem_stacks_B=15624
+heap_tree=empty
+#-----------
+snapshot=20
+#-----------
+time=3617
+mem_heap_B=899818
+mem_heap_extra_B=6022
+mem_stacks_B=17232
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=3817
+mem_heap_B=953109
+mem_heap_extra_B=6267
+mem_stacks_B=22592
+heap_tree=detailed
+n4: 953109 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 865966 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 540672 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 540672 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 540672 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 540672 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 540672 0x405217: connect_to_db (db.c:49)
+       n1: 540672 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 540672 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 540672 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 270567 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 270567 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 270567 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 270567 0x405217: connect_to_db (db.c:49)
+      n1: 270567 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 270567 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 270567 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 41976 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 41976 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 41976 0x405217: connect_to_db (db.c:49)
+     n1: 41976 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 41976 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 41976 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 12751 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 15183 in 20 places, all below massif's threshold (01.00%)
+ n1: 10640 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 10640 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 10032 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 10032 0x403ACE: startup (client.c:321)
+     n0: 10032 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=22
+#-----------
+time=3918
+mem_heap_B=979969
+mem_heap_extra_B=6487
+mem_stacks_B=18752
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=4118
+mem_heap_B=1025054
+mem_heap_extra_B=6698
+mem_stacks_B=22616
+heap_tree=detailed
+n4: 1025054 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 936495 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 589824 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 589824 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 589824 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 589824 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 589824 0x405217: connect_to_db (db.c:49)
+       n1: 589824 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 589824 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 589824 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 286965 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 286965 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 286965 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 286965 0x405217: connect_to_db (db.c:49)
+      n1: 286965 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 286965 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 286965 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 45792 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 45792 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 45792 0x405217: connect_to_db (db.c:49)
+     n1: 45792 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 45792 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 45792 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 13914 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 15687 in 20 places, all below massif's threshold (01.00%)
+ n1: 11552 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 11552 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 10944 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 10944 0x403ACE: startup (client.c:321)
+     n0: 10944 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=24
+#-----------
+time=4318
+mem_heap_B=1060120
+mem_heap_extra_B=6952
+mem_stacks_B=20160
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=4519
+mem_heap_B=1113554
+mem_heap_extra_B=7262
+mem_stacks_B=21168
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=4620
+mem_heap_B=1158639
+mem_heap_extra_B=7473
+mem_stacks_B=25136
+heap_tree=detailed
+n4: 1158639 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1067720 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 671744 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 671744 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 671744 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 671744 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 671744 0x405217: connect_to_db (db.c:49)
+       n1: 671744 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 671744 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 671744 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 327960 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 327960 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 327960 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 327960 0x405217: connect_to_db (db.c:49)
+      n1: 327960 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 327960 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 327960 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 52152 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 52152 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 52152 0x405217: connect_to_db (db.c:49)
+     n1: 52152 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 52152 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 52152 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 15864 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 16527 in 20 places, all below massif's threshold (01.00%)
+ n1: 13072 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 13072 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 12464 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 12464 0x403ACE: startup (client.c:321)
+     n0: 12464 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=27
+#-----------
+time=4820
+mem_heap_B=1193705
+mem_heap_extra_B=7727
+mem_stacks_B=22680
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=5021
+mem_heap_B=1247139
+mem_heap_extra_B=8037
+mem_stacks_B=23688
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=5222
+mem_heap_B=1300573
+mem_heap_extra_B=8347
+mem_stacks_B=24696
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=5323
+mem_heap_B=1345658
+mem_heap_extra_B=8558
+mem_stacks_B=28664
+heap_tree=detailed
+n4: 1345658 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1251435 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 786432 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 786432 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 786432 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 786432 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 786432 0x405217: connect_to_db (db.c:49)
+       n1: 786432 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 786432 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 786432 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 385353 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 385353 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 385353 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 385353 0x405217: connect_to_db (db.c:49)
+      n1: 385353 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 385353 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 385353 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 61056 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 61056 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 61056 0x405217: connect_to_db (db.c:49)
+     n1: 61056 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 61056 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 61056 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 18594 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 17703 in 20 places, all below massif's threshold (01.00%)
+ n1: 15200 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 15200 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 14592 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 14592 0x403ACE: startup (client.c:321)
+     n0: 14592 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=31
+#-----------
+time=5523
+mem_heap_B=1380724
+mem_heap_extra_B=8812
+mem_stacks_B=26208
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=5625
+mem_heap_B=1425809
+mem_heap_extra_B=9023
+mem_stacks_B=30176
+heap_tree=detailed
+n4: 1425809 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1330170 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 835584 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 835584 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 835584 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 835584 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 835584 0x405217: connect_to_db (db.c:49)
+       n1: 835584 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 835584 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 835584 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 409950 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 409950 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 409950 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 409950 0x405217: connect_to_db (db.c:49)
+      n1: 409950 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 409950 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 409950 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 64872 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 64872 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 64872 0x405217: connect_to_db (db.c:49)
+     n1: 64872 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 64872 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 64872 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 19764 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 18207 in 20 places, all below massif's threshold (01.00%)
+ n1: 16112 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 16112 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 15504 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 15504 0x403ACE: startup (client.c:321)
+     n0: 15504 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=33
+#-----------
+time=5825
+mem_heap_B=1460875
+mem_heap_extra_B=9277
+mem_stacks_B=27720
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=6026
+mem_heap_B=1532677
+mem_heap_extra_B=9643
+mem_stacks_B=32192
+heap_tree=detailed
+n4: 1532677 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1435150 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 901120 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 901120 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 901120 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 901120 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 901120 0x405217: connect_to_db (db.c:49)
+       n1: 901120 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 901120 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 901120 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 442746 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 442746 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 442746 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 442746 0x405217: connect_to_db (db.c:49)
+      n1: 442746 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 442746 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 442746 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 69960 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 69960 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 69960 0x405217: connect_to_db (db.c:49)
+     n1: 69960 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 69960 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 69960 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 21324 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 18879 in 20 places, all below massif's threshold (01.00%)
+ n1: 17328 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 17328 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 16720 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 16720 0x403ACE: startup (client.c:321)
+     n0: 16720 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=35
+#-----------
+time=6128
+mem_heap_B=1559394
+mem_heap_extra_B=9798
+mem_stacks_B=32696
+heap_tree=detailed
+n4: 1559394 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1461395 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 917504 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 917504 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 917504 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 917504 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 917504 0x405217: connect_to_db (db.c:49)
+       n1: 917504 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 917504 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 917504 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 450945 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 450945 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 450945 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 450945 0x405217: connect_to_db (db.c:49)
+      n1: 450945 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 450945 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 450945 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 71232 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 71232 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 71232 0x405217: connect_to_db (db.c:49)
+     n1: 71232 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 71232 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 71232 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 21714 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 19047 in 20 places, all below massif's threshold (01.00%)
+ n1: 17632 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 17632 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 17024 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 17024 0x403ACE: startup (client.c:321)
+     n0: 17024 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=36
+#-----------
+time=6329
+mem_heap_B=1612828
+mem_heap_extra_B=10108
+mem_stacks_B=33704
+heap_tree=detailed
+n4: 1612828 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1513885 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 950272 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 950272 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 950272 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 950272 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 950272 0x405217: connect_to_db (db.c:49)
+       n1: 950272 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 950272 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 950272 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 467343 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 467343 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 467343 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 467343 0x405217: connect_to_db (db.c:49)
+      n1: 467343 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 467343 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 467343 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 73776 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 73776 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 73776 0x405217: connect_to_db (db.c:49)
+     n1: 73776 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 73776 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 73776 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 22494 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 19383 in 20 places, all below massif's threshold (01.00%)
+ n1: 18240 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 18240 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 17632 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 17632 0x403ACE: startup (client.c:321)
+     n0: 17632 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=37
+#-----------
+time=6530
+mem_heap_B=1666262
+mem_heap_extra_B=10418
+mem_stacks_B=34712
+heap_tree=detailed
+n4: 1666262 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1566375 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 983040 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 983040 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 983040 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 983040 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 983040 0x405217: connect_to_db (db.c:49)
+       n1: 983040 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 983040 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 983040 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 483741 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 483741 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 483741 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 483741 0x405217: connect_to_db (db.c:49)
+      n1: 483741 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 483741 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 483741 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 76320 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 76320 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 76320 0x405217: connect_to_db (db.c:49)
+     n1: 76320 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 76320 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 76320 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 23274 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 19719 in 20 places, all below massif's threshold (01.00%)
+ n1: 18848 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 18848 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 18240 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 18240 0x403ACE: startup (client.c:321)
+     n0: 18240 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=38
+#-----------
+time=6730
+mem_heap_B=1719696
+mem_heap_extra_B=10728
+mem_stacks_B=35720
+heap_tree=detailed
+n4: 1719696 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1618865 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1015808 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1015808 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1015808 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1015808 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1015808 0x405217: connect_to_db (db.c:49)
+       n1: 1015808 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1015808 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1015808 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 500139 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 500139 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 500139 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 500139 0x405217: connect_to_db (db.c:49)
+      n1: 500139 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 500139 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 500139 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 78864 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 78864 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 78864 0x405217: connect_to_db (db.c:49)
+     n1: 78864 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 78864 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 78864 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 24054 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 20055 in 20 places, all below massif's threshold (01.00%)
+ n1: 19456 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 19456 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 18848 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 18848 0x403ACE: startup (client.c:321)
+     n0: 18848 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=39
+#-----------
+time=6931
+mem_heap_B=1773130
+mem_heap_extra_B=11038
+mem_stacks_B=36728
+heap_tree=detailed
+n4: 1773130 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1671355 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1048576 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1048576 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1048576 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1048576 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1048576 0x405217: connect_to_db (db.c:49)
+       n1: 1048576 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1048576 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1048576 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 516537 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 516537 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 516537 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 516537 0x405217: connect_to_db (db.c:49)
+      n1: 516537 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 516537 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 516537 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 81408 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 81408 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 81408 0x405217: connect_to_db (db.c:49)
+     n1: 81408 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 81408 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 81408 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 24834 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 20391 in 20 places, all below massif's threshold (01.00%)
+ n1: 20064 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 20064 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 19456 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 19456 0x403ACE: startup (client.c:321)
+     n0: 19456 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=40
+#-----------
+time=7132
+mem_heap_B=1826564
+mem_heap_extra_B=11348
+mem_stacks_B=37736
+heap_tree=detailed
+n4: 1826564 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1723845 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1081344 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1081344 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1081344 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1081344 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1081344 0x405217: connect_to_db (db.c:49)
+       n1: 1081344 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1081344 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1081344 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 532935 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 532935 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 532935 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 532935 0x405217: connect_to_db (db.c:49)
+      n1: 532935 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 532935 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 532935 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 83952 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 83952 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 83952 0x405217: connect_to_db (db.c:49)
+     n1: 83952 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 83952 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 83952 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 25614 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 20727 in 20 places, all below massif's threshold (01.00%)
+ n1: 20672 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 20672 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 20064 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 20064 0x403ACE: startup (client.c:321)
+     n0: 20064 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=41
+#-----------
+time=7333
+mem_heap_B=1879998
+mem_heap_extra_B=11658
+mem_stacks_B=38744
+heap_tree=detailed
+n4: 1879998 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1776335 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1114112 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1114112 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1114112 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1114112 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1114112 0x405217: connect_to_db (db.c:49)
+       n1: 1114112 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1114112 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1114112 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 549333 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 549333 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 549333 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 549333 0x405217: connect_to_db (db.c:49)
+      n1: 549333 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 549333 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 549333 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 86496 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 86496 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 86496 0x405217: connect_to_db (db.c:49)
+     n1: 86496 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 86496 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 86496 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 26394 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 21280 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 21280 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 20672 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 20672 0x403ACE: startup (client.c:321)
+     n0: 20672 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 21063 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=42
+#-----------
+time=7534
+mem_heap_B=1933432
+mem_heap_extra_B=11968
+mem_stacks_B=39752
+heap_tree=detailed
+n4: 1933432 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1828825 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1146880 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1146880 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1146880 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1146880 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1146880 0x405217: connect_to_db (db.c:49)
+       n1: 1146880 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1146880 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1146880 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 565731 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 565731 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 565731 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 565731 0x405217: connect_to_db (db.c:49)
+      n1: 565731 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 565731 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 565731 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 89040 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 89040 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 89040 0x405217: connect_to_db (db.c:49)
+     n1: 89040 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 89040 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 89040 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 27174 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 21888 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 21888 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 21280 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 21280 0x403ACE: startup (client.c:321)
+     n0: 21280 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 21399 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=43
+#-----------
+time=7735
+mem_heap_B=1986866
+mem_heap_extra_B=12278
+mem_stacks_B=40760
+heap_tree=detailed
+n4: 1986866 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1881315 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1179648 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1179648 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1179648 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1179648 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1179648 0x405217: connect_to_db (db.c:49)
+       n1: 1179648 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1179648 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1179648 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 582129 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 582129 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 582129 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 582129 0x405217: connect_to_db (db.c:49)
+      n1: 582129 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 582129 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 582129 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 91584 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 91584 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 91584 0x405217: connect_to_db (db.c:49)
+     n1: 91584 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 91584 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 91584 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 27954 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 22496 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 22496 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 21888 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 21888 0x403ACE: startup (client.c:321)
+     n0: 21888 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 21735 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=44
+#-----------
+time=7936
+mem_heap_B=2040300
+mem_heap_extra_B=12588
+mem_stacks_B=41768
+heap_tree=detailed
+n4: 2040300 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1933805 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1212416 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1212416 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1212416 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1212416 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1212416 0x405217: connect_to_db (db.c:49)
+       n1: 1212416 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1212416 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1212416 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 598527 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 598527 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 598527 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 598527 0x405217: connect_to_db (db.c:49)
+      n1: 598527 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 598527 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 598527 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 94128 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 94128 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 94128 0x405217: connect_to_db (db.c:49)
+     n1: 94128 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 94128 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 94128 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 28734 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 23104 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 23104 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 22496 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 22496 0x403ACE: startup (client.c:321)
+     n0: 22496 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 22071 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=45
+#-----------
+time=8037
+mem_heap_B=2067017
+mem_heap_extra_B=12743
+mem_stacks_B=42272
+heap_tree=detailed
+n4: 2067017 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 1960050 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1228800 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1228800 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1228800 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1228800 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1228800 0x405217: connect_to_db (db.c:49)
+       n1: 1228800 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1228800 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1228800 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 606726 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 606726 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 606726 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 606726 0x405217: connect_to_db (db.c:49)
+      n1: 606726 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 606726 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 606726 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 95400 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 95400 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 95400 0x405217: connect_to_db (db.c:49)
+     n1: 95400 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 95400 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 95400 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 29124 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 23408 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 23408 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 22800 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 22800 0x403ACE: startup (client.c:321)
+     n0: 22800 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 22239 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=46
+#-----------
+time=8237
+mem_heap_B=2120451
+mem_heap_extra_B=13053
+mem_stacks_B=43280
+heap_tree=detailed
+n4: 2120451 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2012540 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1261568 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1261568 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1261568 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1261568 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1261568 0x405217: connect_to_db (db.c:49)
+       n1: 1261568 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1261568 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1261568 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 623124 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 623124 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 623124 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 623124 0x405217: connect_to_db (db.c:49)
+      n1: 623124 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 623124 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 623124 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 97944 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 97944 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 97944 0x405217: connect_to_db (db.c:49)
+     n1: 97944 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 97944 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 97944 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 29904 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 24016 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 24016 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 23408 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 23408 0x403ACE: startup (client.c:321)
+     n0: 23408 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 22575 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=47
+#-----------
+time=8438
+mem_heap_B=2173885
+mem_heap_extra_B=13363
+mem_stacks_B=44288
+heap_tree=detailed
+n4: 2173885 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2065030 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1294336 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1294336 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1294336 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1294336 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1294336 0x405217: connect_to_db (db.c:49)
+       n1: 1294336 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1294336 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1294336 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 639522 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 639522 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 639522 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 639522 0x405217: connect_to_db (db.c:49)
+      n1: 639522 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 639522 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 639522 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 100488 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 100488 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 100488 0x405217: connect_to_db (db.c:49)
+     n1: 100488 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 100488 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 100488 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 30684 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 24624 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 24624 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 24016 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 24016 0x403ACE: startup (client.c:321)
+     n0: 24016 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 22911 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=48
+#-----------
+time=8539
+mem_heap_B=2200602
+mem_heap_extra_B=13518
+mem_stacks_B=44792
+heap_tree=detailed
+n4: 2200602 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2091275 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1310720 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1310720 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1310720 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1310720 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1310720 0x405217: connect_to_db (db.c:49)
+       n1: 1310720 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1310720 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1310720 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 647721 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 647721 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 647721 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 647721 0x405217: connect_to_db (db.c:49)
+      n1: 647721 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 647721 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 647721 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 101760 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 101760 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 101760 0x405217: connect_to_db (db.c:49)
+     n1: 101760 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 101760 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 101760 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 31074 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 24928 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 24928 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 24320 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 24320 0x403ACE: startup (client.c:321)
+     n0: 24320 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 23079 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=49
+#-----------
+time=8639
+mem_heap_B=2208951
+mem_heap_extra_B=13617
+mem_stacks_B=41832
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=8640
+mem_heap_B=2227319
+mem_heap_extra_B=13673
+mem_stacks_B=45296
+heap_tree=detailed
+n4: 2227319 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2117520 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1327104 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1327104 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1327104 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1327104 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1327104 0x405217: connect_to_db (db.c:49)
+       n1: 1327104 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1327104 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1327104 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 655920 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 655920 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 655920 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 655920 0x405217: connect_to_db (db.c:49)
+      n1: 655920 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 655920 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 655920 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 103032 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 103032 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 103032 0x405217: connect_to_db (db.c:49)
+     n1: 103032 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 103032 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 103032 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 31464 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 25232 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 25232 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 24624 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 24624 0x403ACE: startup (client.c:321)
+     n0: 24624 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 23247 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=51
+#-----------
+time=8740
+mem_heap_B=2235668
+mem_heap_extra_B=13772
+mem_stacks_B=42336
+heap_tree=empty
+#-----------
+snapshot=52
+#-----------
+time=8741
+mem_heap_B=2254036
+mem_heap_extra_B=13828
+mem_stacks_B=45800
+heap_tree=detailed
+n4: 2254036 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2143765 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1343488 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1343488 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1343488 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1343488 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1343488 0x405217: connect_to_db (db.c:49)
+       n1: 1343488 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1343488 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1343488 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 664119 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 664119 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 664119 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 664119 0x405217: connect_to_db (db.c:49)
+      n1: 664119 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 664119 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 664119 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 104304 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 104304 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 104304 0x405217: connect_to_db (db.c:49)
+     n1: 104304 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 104304 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 104304 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 31854 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 25536 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 25536 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 24928 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 24928 0x403ACE: startup (client.c:321)
+     n0: 24928 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 23415 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=53
+#-----------
+time=8841
+mem_heap_B=2262689
+mem_heap_extra_B=13935
+mem_stacks_B=43040
+heap_tree=empty
+#-----------
+snapshot=54
+#-----------
+time=8841
+mem_heap_B=2280753
+mem_heap_extra_B=13983
+mem_stacks_B=46304
+heap_tree=detailed
+n4: 2280753 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2170010 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1359872 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1359872 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1359872 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1359872 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1359872 0x405217: connect_to_db (db.c:49)
+       n1: 1359872 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1359872 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1359872 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 672318 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 672318 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 672318 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 672318 0x405217: connect_to_db (db.c:49)
+      n1: 672318 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 672318 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 672318 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 105576 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 105576 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 105576 0x405217: connect_to_db (db.c:49)
+     n1: 105576 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 105576 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 105576 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 32244 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 25840 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 25840 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 25232 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 25232 0x403ACE: startup (client.c:321)
+     n0: 25232 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 23583 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=55
+#-----------
+time=8941
+mem_heap_B=2289102
+mem_heap_extra_B=14082
+mem_stacks_B=43344
+heap_tree=empty
+#-----------
+snapshot=56
+#-----------
+time=8942
+mem_heap_B=2307470
+mem_heap_extra_B=14138
+mem_stacks_B=46808
+heap_tree=detailed
+n4: 2307470 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2196255 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1376256 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1376256 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1376256 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1376256 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1376256 0x405217: connect_to_db (db.c:49)
+       n1: 1376256 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1376256 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1376256 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 680517 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 680517 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 680517 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 680517 0x405217: connect_to_db (db.c:49)
+      n1: 680517 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 680517 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 680517 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 106848 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 106848 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 106848 0x405217: connect_to_db (db.c:49)
+     n1: 106848 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 106848 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 106848 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 32634 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 26144 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 26144 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 25536 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 25536 0x403ACE: startup (client.c:321)
+     n0: 25536 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 23751 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=57
+#-----------
+time=9042
+mem_heap_B=2316123
+mem_heap_extra_B=14245
+mem_stacks_B=44000
+heap_tree=empty
+#-----------
+snapshot=58
+#-----------
+time=9042
+mem_heap_B=2334187
+mem_heap_extra_B=14293
+mem_stacks_B=47312
+heap_tree=detailed
+n4: 2334187 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2222500 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1392640 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1392640 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1392640 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1392640 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1392640 0x405217: connect_to_db (db.c:49)
+       n1: 1392640 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1392640 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1392640 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 688716 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 688716 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 688716 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 688716 0x405217: connect_to_db (db.c:49)
+      n1: 688716 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 688716 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 688716 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 108120 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 108120 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 108120 0x405217: connect_to_db (db.c:49)
+     n1: 108120 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 108120 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 108120 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 33024 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 26448 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 26448 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 25840 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 25840 0x403ACE: startup (client.c:321)
+     n0: 25840 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 23919 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=59
+#-----------
+time=9142
+mem_heap_B=2342536
+mem_heap_extra_B=14392
+mem_stacks_B=44352
+heap_tree=empty
+#-----------
+snapshot=60
+#-----------
+time=9143
+mem_heap_B=2360904
+mem_heap_extra_B=14448
+mem_stacks_B=47816
+heap_tree=detailed
+n4: 2360904 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2248745 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1409024 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1409024 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1409024 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1409024 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1409024 0x405217: connect_to_db (db.c:49)
+       n1: 1409024 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1409024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1409024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 696915 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 696915 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 696915 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 696915 0x405217: connect_to_db (db.c:49)
+      n1: 696915 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 696915 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 696915 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 109392 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 109392 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 109392 0x405217: connect_to_db (db.c:49)
+     n1: 109392 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 109392 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 109392 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 33414 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 26752 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 26752 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 26144 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 26144 0x403ACE: startup (client.c:321)
+     n0: 26144 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 24087 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=61
+#-----------
+time=9243
+mem_heap_B=2369557
+mem_heap_extra_B=14555
+mem_stacks_B=45008
+heap_tree=empty
+#-----------
+snapshot=62
+#-----------
+time=9243
+mem_heap_B=2387621
+mem_heap_extra_B=14603
+mem_stacks_B=48320
+heap_tree=detailed
+n4: 2387621 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2274990 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1425408 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1425408 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1425408 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1425408 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1425408 0x405217: connect_to_db (db.c:49)
+       n1: 1425408 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1425408 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1425408 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 705114 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 705114 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 705114 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 705114 0x405217: connect_to_db (db.c:49)
+      n1: 705114 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 705114 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 705114 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 110664 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 110664 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 110664 0x405217: connect_to_db (db.c:49)
+     n1: 110664 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 110664 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 110664 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 33804 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 27056 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 27056 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 26448 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 26448 0x403ACE: startup (client.c:321)
+     n0: 26448 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 24255 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=63
+#-----------
+time=9343
+mem_heap_B=2395970
+mem_heap_extra_B=14702
+mem_stacks_B=45360
+heap_tree=empty
+#-----------
+snapshot=64
+#-----------
+time=9344
+mem_heap_B=2414338
+mem_heap_extra_B=14758
+mem_stacks_B=48824
+heap_tree=detailed
+n4: 2414338 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2301235 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1441792 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1441792 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1441792 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1441792 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1441792 0x405217: connect_to_db (db.c:49)
+       n1: 1441792 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1441792 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1441792 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 713313 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 713313 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 713313 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 713313 0x405217: connect_to_db (db.c:49)
+      n1: 713313 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 713313 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 713313 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 111936 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 111936 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 111936 0x405217: connect_to_db (db.c:49)
+     n1: 111936 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 111936 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 111936 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 34194 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 27360 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 27360 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 26752 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 26752 0x403ACE: startup (client.c:321)
+     n0: 26752 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 24423 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=65
+#-----------
+time=9444
+mem_heap_B=2422991
+mem_heap_extra_B=14865
+mem_stacks_B=46016
+heap_tree=empty
+#-----------
+snapshot=66
+#-----------
+time=9444
+mem_heap_B=2441055
+mem_heap_extra_B=14913
+mem_stacks_B=49328
+heap_tree=detailed
+n4: 2441055 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2327480 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1458176 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1458176 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1458176 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1458176 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1458176 0x405217: connect_to_db (db.c:49)
+       n1: 1458176 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1458176 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1458176 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 721512 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 721512 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 721512 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 721512 0x405217: connect_to_db (db.c:49)
+      n1: 721512 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 721512 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 721512 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 113208 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 113208 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 113208 0x405217: connect_to_db (db.c:49)
+     n1: 113208 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 113208 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 113208 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 34584 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 27664 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 27664 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 27056 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 27056 0x403ACE: startup (client.c:321)
+     n0: 27056 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 24591 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=67
+#-----------
+time=9544
+mem_heap_B=2449404
+mem_heap_extra_B=15012
+mem_stacks_B=46368
+heap_tree=empty
+#-----------
+snapshot=68
+#-----------
+time=9545
+mem_heap_B=2467772
+mem_heap_extra_B=15068
+mem_stacks_B=49832
+heap_tree=detailed
+n4: 2467772 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2353725 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1474560 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1474560 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1474560 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1474560 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1474560 0x405217: connect_to_db (db.c:49)
+       n1: 1474560 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1474560 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1474560 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 729711 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 729711 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 729711 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 729711 0x405217: connect_to_db (db.c:49)
+      n1: 729711 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 729711 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 729711 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 114480 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 114480 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 114480 0x405217: connect_to_db (db.c:49)
+     n1: 114480 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 114480 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 114480 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 34974 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 27968 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 27968 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 27360 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 27360 0x403ACE: startup (client.c:321)
+     n0: 27360 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 24759 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=69
+#-----------
+time=9645
+mem_heap_B=2476425
+mem_heap_extra_B=15175
+mem_stacks_B=47024
+heap_tree=empty
+#-----------
+snapshot=70
+#-----------
+time=9645
+mem_heap_B=2494489
+mem_heap_extra_B=15223
+mem_stacks_B=50336
+heap_tree=detailed
+n4: 2494489 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2379970 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1490944 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1490944 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1490944 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1490944 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1490944 0x405217: connect_to_db (db.c:49)
+       n1: 1490944 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1490944 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1490944 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 737910 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 737910 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 737910 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 737910 0x405217: connect_to_db (db.c:49)
+      n1: 737910 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 737910 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 737910 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 115752 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 115752 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 115752 0x405217: connect_to_db (db.c:49)
+     n1: 115752 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 115752 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 115752 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 35364 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 28272 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 28272 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 27664 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 27664 0x403ACE: startup (client.c:321)
+     n0: 27664 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 24927 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=71
+#-----------
+time=9745
+mem_heap_B=2502838
+mem_heap_extra_B=15322
+mem_stacks_B=47376
+heap_tree=empty
+#-----------
+snapshot=72
+#-----------
+time=9745
+mem_heap_B=2521206
+mem_heap_extra_B=15378
+mem_stacks_B=50840
+heap_tree=detailed
+n4: 2521206 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2406215 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1507328 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1507328 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1507328 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1507328 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1507328 0x405217: connect_to_db (db.c:49)
+       n1: 1507328 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1507328 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1507328 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 746109 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 746109 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 746109 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 746109 0x405217: connect_to_db (db.c:49)
+      n1: 746109 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 746109 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 746109 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 117024 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 117024 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 117024 0x405217: connect_to_db (db.c:49)
+     n1: 117024 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 117024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 117024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 35754 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 28576 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 28576 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 27968 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 27968 0x403ACE: startup (client.c:321)
+     n0: 27968 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 25095 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=73
+#-----------
+time=9845
+mem_heap_B=2529555
+mem_heap_extra_B=15477
+mem_stacks_B=47880
+heap_tree=empty
+#-----------
+snapshot=74
+#-----------
+time=9846
+mem_heap_B=2547923
+mem_heap_extra_B=15533
+mem_stacks_B=51344
+heap_tree=detailed
+n4: 2547923 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2432460 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1523712 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1523712 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1523712 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1523712 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1523712 0x405217: connect_to_db (db.c:49)
+       n1: 1523712 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1523712 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1523712 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 754308 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 754308 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 754308 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 754308 0x405217: connect_to_db (db.c:49)
+      n1: 754308 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 754308 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 754308 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 118296 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 118296 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 118296 0x405217: connect_to_db (db.c:49)
+     n1: 118296 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 118296 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 118296 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 36144 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 28880 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 28880 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 28272 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 28272 0x403ACE: startup (client.c:321)
+     n0: 28272 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 25263 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=75
+#-----------
+time=9946
+mem_heap_B=2556272
+mem_heap_extra_B=15632
+mem_stacks_B=48384
+heap_tree=empty
+#-----------
+snapshot=76
+#-----------
+time=9946
+mem_heap_B=2574640
+mem_heap_extra_B=15688
+mem_stacks_B=51848
+heap_tree=detailed
+n4: 2574640 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2458705 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1540096 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1540096 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1540096 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1540096 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1540096 0x405217: connect_to_db (db.c:49)
+       n1: 1540096 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1540096 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1540096 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 762507 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 762507 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 762507 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 762507 0x405217: connect_to_db (db.c:49)
+      n1: 762507 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 762507 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 762507 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 119568 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 119568 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 119568 0x405217: connect_to_db (db.c:49)
+     n1: 119568 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 119568 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 119568 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 36534 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 29184 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 29184 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 28576 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 28576 0x403ACE: startup (client.c:321)
+     n0: 28576 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 25431 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=77
+#-----------
+time=10046
+mem_heap_B=2582989
+mem_heap_extra_B=15787
+mem_stacks_B=48888
+heap_tree=empty
+#-----------
+snapshot=78
+#-----------
+time=10047
+mem_heap_B=2601357
+mem_heap_extra_B=15843
+mem_stacks_B=52352
+heap_tree=detailed
+n4: 2601357 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2484950 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1556480 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1556480 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1556480 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1556480 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1556480 0x405217: connect_to_db (db.c:49)
+       n1: 1556480 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1556480 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1556480 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 770706 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 770706 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 770706 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 770706 0x405217: connect_to_db (db.c:49)
+      n1: 770706 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 770706 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 770706 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 120840 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 120840 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 120840 0x405217: connect_to_db (db.c:49)
+     n1: 120840 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 120840 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 120840 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 36924 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 29488 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 29488 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 28880 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 28880 0x403ACE: startup (client.c:321)
+     n0: 28880 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 25599 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=79
+#-----------
+time=10147
+mem_heap_B=2609706
+mem_heap_extra_B=15942
+mem_stacks_B=49392
+heap_tree=empty
+#-----------
+snapshot=80
+#-----------
+time=10147
+mem_heap_B=2628074
+mem_heap_extra_B=15998
+mem_stacks_B=52856
+heap_tree=detailed
+n4: 2628074 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2511195 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1572864 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1572864 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1572864 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1572864 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1572864 0x405217: connect_to_db (db.c:49)
+       n1: 1572864 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1572864 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1572864 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 778905 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 778905 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 778905 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 778905 0x405217: connect_to_db (db.c:49)
+      n1: 778905 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 778905 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 778905 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 122112 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 122112 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 122112 0x405217: connect_to_db (db.c:49)
+     n1: 122112 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 122112 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 122112 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 37314 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 29792 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 29792 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 29184 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 29184 0x403ACE: startup (client.c:321)
+     n0: 29184 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 25767 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=81
+#-----------
+time=10247
+mem_heap_B=2636423
+mem_heap_extra_B=16097
+mem_stacks_B=49896
+heap_tree=empty
+#-----------
+snapshot=82
+#-----------
+time=10248
+mem_heap_B=2654791
+mem_heap_extra_B=16153
+mem_stacks_B=53360
+heap_tree=detailed
+n4: 2654791 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2537440 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1589248 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1589248 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1589248 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1589248 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1589248 0x405217: connect_to_db (db.c:49)
+       n1: 1589248 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1589248 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1589248 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 787104 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 787104 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 787104 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 787104 0x405217: connect_to_db (db.c:49)
+      n1: 787104 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 787104 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 787104 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 123384 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 123384 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 123384 0x405217: connect_to_db (db.c:49)
+     n1: 123384 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 123384 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 123384 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 37704 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 30096 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 30096 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 29488 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 29488 0x403ACE: startup (client.c:321)
+     n0: 29488 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 25935 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=83
+#-----------
+time=10348
+mem_heap_B=2663140
+mem_heap_extra_B=16252
+mem_stacks_B=50400
+heap_tree=empty
+#-----------
+snapshot=84
+#-----------
+time=10348
+mem_heap_B=2681508
+mem_heap_extra_B=16308
+mem_stacks_B=53864
+heap_tree=detailed
+n4: 2681508 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2563685 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1605632 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1605632 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1605632 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1605632 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1605632 0x405217: connect_to_db (db.c:49)
+       n1: 1605632 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1605632 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1605632 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 795303 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 795303 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 795303 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 795303 0x405217: connect_to_db (db.c:49)
+      n1: 795303 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 795303 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 795303 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 124656 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 124656 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 124656 0x405217: connect_to_db (db.c:49)
+     n1: 124656 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 124656 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 124656 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 38094 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 30400 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 30400 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 29792 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 29792 0x403ACE: startup (client.c:321)
+     n0: 29792 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 26103 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=85
+#-----------
+time=10448
+mem_heap_B=2689857
+mem_heap_extra_B=16407
+mem_stacks_B=50904
+heap_tree=empty
+#-----------
+snapshot=86
+#-----------
+time=10449
+mem_heap_B=2708225
+mem_heap_extra_B=16463
+mem_stacks_B=54760
+heap_tree=detailed
+n4: 2708225 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2589930 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1622016 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1622016 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1622016 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1622016 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1622016 0x405217: connect_to_db (db.c:49)
+       n1: 1622016 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1622016 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1622016 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 803502 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 803502 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 803502 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 803502 0x405217: connect_to_db (db.c:49)
+      n1: 803502 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 803502 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 803502 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 125928 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 125928 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 125928 0x405217: connect_to_db (db.c:49)
+     n1: 125928 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 125928 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 125928 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 38484 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 30704 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 30704 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 30096 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 30096 0x403ACE: startup (client.c:321)
+     n0: 30096 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 26271 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=87
+#-----------
+time=10549
+mem_heap_B=2716574
+mem_heap_extra_B=16562
+mem_stacks_B=51400
+heap_tree=empty
+#-----------
+snapshot=88
+#-----------
+time=10549
+mem_heap_B=2734942
+mem_heap_extra_B=16618
+mem_stacks_B=56944
+heap_tree=peak
+n4: 2734942 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n4: 2616175 0x3DFEE2A560: my_malloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 1638400 0x3DFEE5642A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 1638400 0x3DFEE56597: vio_new (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 1638400 0x3DFEE53B1E: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+     n1: 1638400 0x406F72: _connect_to_db (dbc_common.c:41)
+      n1: 1638400 0x405217: connect_to_db (db.c:49)
+       n1: 1638400 0x404FFB: db_worker (db_threadpool.c:91)
+        n1: 1638400 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 1638400 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 811701 0x3DFEE58124: my_net_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 811701 0x3DFEE53223: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 811701 0x406F72: _connect_to_db (dbc_common.c:41)
+     n1: 811701 0x405217: connect_to_db (db.c:49)
+      n1: 811701 0x404FFB: db_worker (db_threadpool.c:91)
+       n1: 811701 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 811701 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 127200 0x3DFEE5189D: mysql_init (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 127200 0x406F1E: _connect_to_db (dbc_common.c:38)
+    n1: 127200 0x405217: connect_to_db (db.c:49)
+     n1: 127200 0x404FFB: db_worker (db_threadpool.c:91)
+      n1: 127200 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+       n0: 127200 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 38874 in 5 places, all below massif's threshold (01.00%)
+ n2: 61320 0x3DFEE32587: my_once_alloc (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+  n1: 32704 0x3DFEE32EFE: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 32704 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 32704 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 32704 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 32704 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 32704 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 32704 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 32704 0x405217: connect_to_db (db.c:49)
+          n1: 32704 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 32704 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 32704 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n1: 28616 0x3DFEE32F1A: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+   n1: 28616 0x3DFEE33BA2: ??? (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+    n1: 28616 0x37FD20CB21: pthread_once (in /lib64/libpthread-2.12.so)
+     n1: 28616 0x3DFEE33822: get_charset_by_csname (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+      n1: 28616 0x3DFEE515E9: mysql_init_character_set (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+       n1: 28616 0x3DFEE533B2: mysql_real_connect (in /usr/lib64/mysql/libmysqlclient_r.so.16.0.0)
+        n1: 28616 0x406F72: _connect_to_db (dbc_common.c:41)
+         n1: 28616 0x405217: connect_to_db (db.c:49)
+          n1: 28616 0x404FFB: db_worker (db_threadpool.c:91)
+           n1: 28616 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+            n0: 28616 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 31008 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n2: 31008 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 30400 0x404C08: db_threadpool_init (db_threadpool.c:225)
+    n1: 30400 0x403ACE: startup (client.c:321)
+     n0: 30400 0x404366: main (client.c:122)
+   n0: 608 in 2 places, all below massif's threshold (01.00%)
+ n0: 26439 in 20 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=89
+#-----------
+time=10649
+mem_heap_B=2743291
+mem_heap_extra_B=16717
+mem_stacks_B=51912
+heap_tree=empty
+#-----------
+snapshot=90
+#-----------
+time=13841
+mem_heap_B=2744614
+mem_heap_extra_B=16818
+mem_stacks_B=52856
+heap_tree=empty
+#-----------
+snapshot=91
+#-----------
+time=36636
+mem_heap_B=2744614
+mem_heap_extra_B=16818
+mem_stacks_B=52856
+heap_tree=empty

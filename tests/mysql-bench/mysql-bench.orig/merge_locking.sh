@@ -1,0 +1,108 @@
+#!@PERL@
+# Copyright (C) 2000 MySQL AB & MySQL Finland AB & TCX DataKonsult AB
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+# MA 02111-1307, USA
+#
+##################### Standard benchmark inits ##############################
+
+use DBI;
+use Benchmark qw(:all :hireswallclock);
+use My::Timer;
+#use Getopt::Long qw(GetOptionsFromArray);
+
+$opt_loop_count=1000; # Change this to make test harder/easier
+# This is the default value for the amount of tables used in this test.
+
+chomp($pwd = `pwd`); $pwd = "." if ($pwd eq '');
+require "$pwd/bench-init.pl" || die "Can't read Configuration file: $!\n";
+
+$opt_insert_rows=0;
+$opt_tables=1;
+$opt_insert_mode="last";
+$opt_tables=100;
+$opt_skip_flush='';
+
+Getopt::Long::GetOptions( 'skip-flush','insert-rows=i','tables=i','insert-mode=s');
+
+$create_loop_count=$opt_loop_count;
+if ($opt_small_test)
+{
+  $opt_loop_count/=100;
+  $create_loop_count/=1000;
+}
+
+$max_tables=min($limits->{'max_tables'},$opt_loop_count);
+
+if ($opt_small_test)
+{
+  $max_tables=10;
+}
+
+$max_tables=$opt_tables;
+
+print "Testing the speed of open MERGE and underlying tables in cold and hot modes\n";
+print "Testing with $max_tables tables and $opt_loop_count loop count\n\n";
+
+####
+####  Connect and start timeing
+####
+
+$dbh = $server->connect();
+
+create_many_tables($dbh,$max_tables);
+
+for($i=1;$i<=$max_tables;$i++)
+{
+  push @table_list,"bench_$i";
+}
+
+$table_list=join(",",@table_list);
+
+
+$dbh->do("drop table if exists bench_merge");
+#create merge table
+do_many($dbh,
+        $server->create("bench_merge",
+                        ["i int NOT NULL",
+                         "d double",
+                         "f float",
+                         "s char(10)",
+                         "v varchar(100)"],
+                         ["index (i)"], 
+                         "engine=merge union=($table_list) insert_method=$opt_insert_mode"));
+
+$max_rows=$opt_insert_rows;
+
+#if ($max_rows)
+#{
+  $loop_time=$start_time=My::Timer::get_timer();
+  for ($i=1 ; $i <= $max_rows ; $i++)
+  { 
+    $dbh->do("insert into bench_merge values ($i, 11.3, 11.7,'1234567890','12345678901234567890')") or die "$DBI::errstr";
+  }
+  $end_time=My::Timer::get_timer();
+  print "Time for inserting rows ($max_rows): " .
+    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+#}
+
+# select from merge table in loop without flush
+select_with_flush($dbh,"merge_select","bench_merge",1000,1);
+
+# select from merge table in loop with flush right after select
+select_with_flush($dbh,"merge_select+flush","bench_merge",1000,'');
+
+$dbh->disconnect;				# close connection
+end_benchmark($start_time);

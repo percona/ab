@@ -1,0 +1,44 @@
+Linux 2.6.32-100.28.11.el6.x86_64 (caneland.se.oracle.com) 	09/23/2011 	_x86_64_	(24 CPU)
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        2.39       207.97        19.94  387099714   37118436
+cciss/c0d1      112.82       945.35      3785.52 1759613259 7046138809
+dm-0              2.17        18.74         9.98   34881874   18575648
+dm-1              2.72       189.22         9.96  352207682   18542784
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        2.40         5.20        37.87        312       2272
+cciss/c0d1     1102.80     27586.53     10673.60    1655192     640416
+dm-0              5.38         5.20        37.87        312       2272
+dm-1              0.00         0.00         0.00          0          0
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        2.15        75.87        17.20       4552       1032
+cciss/c0d1     1420.32     27713.20      8008.93    1662792     480536
+dm-0              6.90        75.87        17.20       4552       1032
+dm-1              0.00         0.00         0.00          0          0
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        1.02         0.27        48.93         16       2936
+cciss/c0d1     2209.67     23656.53     21346.93    1419392    1280816
+dm-0              6.15         0.27        48.93         16       2936
+dm-1              0.00         0.00         0.00          0          0
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        1.58        67.33        18.27       4040       1096
+cciss/c0d1     2848.05     18842.67     33270.40    1130560    1996224
+dm-0              3.37        67.33        18.27       4040       1096
+dm-1              0.00         0.00         0.00          0          0
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        3.75        20.53       100.40       1232       6024
+cciss/c0d1     2905.23     12889.07     37787.73     773344    2267264
+dm-0             14.65        20.53       100.40       1232       6024
+dm-1              0.00         0.00         0.00          0          0
+
+Device:            tps   Blk_read/s   Blk_wrtn/s   Blk_read   Blk_wrtn
+cciss/c0d0        2.95         0.13       100.53          8       6032
+cciss/c0d1     2979.77     11208.13     39529.47     672488    2371768
+dm-0             12.58         0.13       100.53          8       6032
+dm-1              0.00         0.00         0.00          0          0
+

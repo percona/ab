@@ -1,0 +1,188 @@
+########################################################################
+#
+#   Autobench test configuration file for mysql-bench benchmark
+#
+########################################################################
+
+TEST_MODULE=sysbench_standard
+if [[ $AUTOBENCH_INCDIR ]]; then 
+. $AUTOBENCH_INCDIR/$TEST_MODULE.lua.inc
+
+. $AUTOBENCH_INCDIR/engine_stat.inc.1
+fi
+
+test_stage_run_pre()
+{
+  engine_stat.setup
+  engine_stat.pse_start
+}
+
+test_stage_run_post()
+{
+  engine_stat.stop
+  engine_stat.pse_stop
+}
+
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=0
+  #VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+  #VMLINUX=/tmp/vmlinux-2.6.16.60-0.21-smp
+  #VMLINUX=/tmp/vmlinux-2.6.18-92.1.18.el5
+  VMLINUX=/data0/ranger/vmlinux-2.6.27.25-170.2.72.oprofile_fix.fc10.x86_64
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="sysbench_standard"
+  MALLOC="jem"
+
+  #If test have subtests specify them here
+  TEST_CASES="OLTP_RW OLTP_RO"
+
+  # Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUP_BASEDIR/std-1M"
+  TEST_BACKUP_BASEDIR="/data/fio/alexey.s/std-16.50M"
+
+  TEST_STAGE_PREPARE_GENERATE=""  # GENERATE INITIAL DATASET AND LOAD IT
+  TEST_STAGE_PREPARE_RESTORE="1"  # RESTORE DATADIR FROM BACKUP
+
+  # Number of rows for sbtest database
+#  SYSBENCH_NUM_ROWS=1000000
+  SYSBENCH_NUM_ROWS=50000000
+  SB_NUM_ROWS_PREPARE=$SYSBENCH_NUM_ROWS
+  SYSBENCH_NUM_TABLES=16
+
+  # sysbench binary
+  TEST_STAGE_RUN_EXE=$SYSBENCH_0_5_EXE
+
+  SERVER_DB=sbtest16t50M
+
+  #
+  ENGINE_DEFAULTS_FILE_MYISAM=$TEST_CNF_DIR/sysbench-std-myisam.cnf
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std-innodb-multi.55.50M.orig.malloc.cnf
+  ENGINE_DEFAULTS_FILE_TOKUDB=$TEST_CNF_DIR/sysbench-std-tokudb-multi.55.50M.orig.cnf
+
+  ENGINE_DEFAULTS_FILE_INNODB_PLUGIN=$TEST_CNF_DIR/sysbench-std-innodb-multi.55.50M.orig.plugin.cnf
+  ENGINE_DEFAULTS_FILE_TOKUDB_LD=$TEST_CNF_DIR/sysbench-std-tokudb-multi.55.50M.cnf
+ 
+
+
+  ENGINE_DEFAULTS_FILE_MYISAM_NOAUTOINC=$TEST_CNF_DIR/sysbench-std-myisam.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_NOAUTOINC=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+
+  ENGINE_DEFAULTS_FILE_INNODB_BARRACUDA=$TEST_CNF_DIR/sysbench-std-innodb.cnf
+ 
+  TEST_STAGE_WARMUP="1"
+  TEST_STAGE_WARMUP_EXE='/bin/true'
+#  TEST_ARGS_STAGE_WARMUP=" -uroot  $MYSQL_ARGS -e\'check table sbtest\'"
+#  MYSQLD_ENV="LD_PRELOAD=/usr/local/lib/libjemalloc.so "  
+#  MYSQLD_ENV="LD_PRELOAD=/data/bench/alexey.s/bin64_5152.toku/lib/mysql/libjemalloc-2.2.5-5.2.7-38674.so "
+#  MYSQLD_ENV="LD_PRELOAD=/data/opt/alexey.s/bin64_5521.toku/lib/libjemalloc-2.2.5-6.0.0-42634.so "
+ 
+} 
+
+test_pre_run()
+{
+  if [[ $MALLOC == "jem" ]]; then 
+    MYSQLD_ENV="LD_PRELOAD=/data/opt/alexey.s/jemalloc-2.2.5/lib/libjemalloc.so  "
+  elif [[ $MALLOC == "jem3" ]]; then 
+    MYSQLD_ENV="LD_PRELOAD=/data/opt/alexey.s/jemalloc-3.0.0/lib/libjemalloc.so  "
+  elif [[ $MALLOC == "ll" ]]; then 
+    MYSQLD_ENV="LD_PRELOAD=/data/opt/alexey.s/lockless/64bit/libllalloc.so  "
+  elif [[ $MALLOC == "tcm" ]]; then
+    MYSQLD_ENV="LD_PRELOAD=/data/opt/alexey.s/gperftools-2.0/.libs/libtcmalloc_minimal.so  "
+  elif [[ $MALLOC == "glibc.new" ]]; then
+    MYSQLD_ENV="/data/opt/alexey.s/glibc2.13.regular/lib/ld-2.13.so --library-path /data/opt/alexey.s/glibc2.13.regular/lib:/lib64:/usr/lib64"
+  elif [[ $MALLOC == "glibc.old" ]]; then
+    MYSQLD_ENV="/data/opt/alexey.s/glibc2.13.old.malloc/lib/ld-2.13.so --library-path /data/opt/alexey.s/glibc2.13.old.malloc/lib:/lib64:/usr/lib64"
+  elif [[ $MALLOC == "glibc.215" ]]; then
+    MYSQLD_ENV="/data/opt/alexey.s/glibc2.15.new/lib/ld-2.15.so --library-path /data/opt/alexey.s/glibc2.15.new/lib:/lib64:/usr/lib64"
+  fi
+
+  MYSQLD_ENV="numactl --cpunodebind=0,1 --interleave=all /usr/bin/env $MYSQLD_ENV  "
+  TEST_ENV="numactl --membind=1 --cpunodebind=1 "
+  # /usr/bin/env $JLD  "
+
+  show_msg_date "MALLOC --------------------------------------------- $MALLOC"
+  show_msg_date "$MYSQLD_ENV $AUTOBENCH_TEST_MALLOC"
+
+
+
+
+  if [ -n "$MYSQL_CREATE_OPTIONS" ]; 
+  then 
+    SB_ARGS=$SB_ARGS' --mysql-create-options="$MYSQL_CREATE_OPTIONS"'
+    echo "HERE $MYSQL_CREATE_OPTIONS"
+  fi
+
+  TEST_ARGS_STAGE_PREPARE='--db-name=$SERVER_DB --mysql-bin=$MYSQL \
+                           --mysql-args=\"$MYSQL_ARGS\" \
+                           --sysbench-bin=$TEST_STAGE_RUN_EXE \
+                           --sysbench-args=\"'$SB_ARGS' prepare\"'
+
+  TEST_ARGS_STAGE_RUN=$SB_ARGS' ${!TEST_CASE} run'
+
+}
+
+test_stage_warmup_pre()
+{
+  show_msg_date "WARMUP: do with mysql $MYSQL_ARGS -e 'select avg(id) from sbtest$i FORCE KEY (PRIMARY)'"
+  ( for i in `seq 1 $SYSBENCH_NUM_TABLES` ; do mysql $MYSQL_ARGS -e "select avg(id) from sbtest$i FORCE KEY (PRIMARY); " sbtest ; done ) >> $TEST_OUTDIR/warmup.out
+#  for i in `seq 1 $SYSBENCH_NUM_TABLES` ; do mysql $MYSQL_ARGS -e "check table sbtest$i " sbtest ; done
+  show_msg_date "WARMUP: done"
+
+}
+test_stage_warmup_pre()
+{
+  PIDLIST=""
+  show_msg_date "WARMUP: do with mysql $MYSQL_ARGS -e 'select avg(id) from sbtest$i FORCE KEY (PRIMARY)'"
+   for i in `seq 1 $SYSBENCH_NUM_TABLES` ; do
+      ( time mysql $MYSQL_ARGS -e "select avg(id) from sbtest$i FORCE KEY (PRIMARY); " $SERVER_DB  ) > $TEST_OUTDIR/warmup.${i}.out 2>&1   &
+      PIDLIST="$PIDLIST $!"
+    done
+# >> $TEST_OUTDIR/warmup.out
+    show_msg_date "WARMUP: $PIDLIST"
+    wait $PIDLIST
+#
+#      #  for i in `seq 1 $SYSBENCH_NUM_TABLES` ; do mysql $MYSQL_ARGS -e "check table sbtest$i " sbtest ; done
+#      #  for i in `seq 1 16` ; do sleep 30 & ; done 
+#
+        show_msg_date "WARMUP: done"
+}
+test_stage_cleanup_post()
+{
+#  killall -9 mysqld
+  echo 3 > /proc/sys/vm/drop_caches
+  pmap `pidof mysqld` >> $TEST_OUTDIR/pmap.out
+  ps --sort=-rss -eopid,rss,vsz,pcpu | head >> $TEST_OUTDIR/mem_cleanup.out
+}
+
+test_stage_run_pre()
+{
+ get_mysqld_pid
+ ( i=1; while [ true ] ; do d=`date`; echo -n "$d $i "; ps --sort=-rss -eopid,rss,vsz,pcpu | grep $MYSQLD_PID ; sleep 1; i=$((i+1));  done ) > $TEST_OUTDIR/mem.out 2>&1 &
+ MEM_PID=$!
+ echo $MEM_PID > $TEST_OUTDIR/mem.pid
+ ps --sort=-rss -eopid,rss,vsz,pcpu | head >> $TEST_OUTDIR/mem_run_pre.out
+}
+
+test_stage_run_post()
+{
+ ps --sort=-rss -eopid,rss,vsz,pcpu | head >> $TEST_OUTDIR/mem_run_post.out
+ kill -HUP $MEM_PID >> $TEST_OUTDIR/mem_run_post.out
+
+}
+
+test_stage_server_start_post()
+{
+ ps --sort=-rss -eopid,rss,vsz,pcpu | head >> $TEST_OUTDIR/mem_server_start_post.out
+}
+

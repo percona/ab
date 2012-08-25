@@ -1,0 +1,708 @@
+desc: --stacks=yes --time-unit=ms
+cmd: ./driver -d localhost -l 900 -wmin 1 -wmax 10 -w 100 -sleep 100 -tpw 10 -outdir /tmp/driver/ -ktd 0 -ktn 0 -kto 0 -ktp 0 -kts 0 -ttd 0 -ttn 0 -tto 0 -ttp 0 -tts 0
+time_unit: ms
+#-----------
+snapshot=0
+#-----------
+time=0
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=0
+heap_tree=empty
+#-----------
+snapshot=1
+#-----------
+time=96
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=3728
+heap_tree=empty
+#-----------
+snapshot=2
+#-----------
+time=173
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=744
+heap_tree=empty
+#-----------
+snapshot=3
+#-----------
+time=223
+mem_heap_B=0
+mem_heap_extra_B=0
+mem_stacks_B=944
+heap_tree=empty
+#-----------
+snapshot=4
+#-----------
+time=306
+mem_heap_B=568
+mem_heap_extra_B=16
+mem_stacks_B=1464
+heap_tree=empty
+#-----------
+snapshot=5
+#-----------
+time=371
+mem_heap_B=2640
+mem_heap_extra_B=88
+mem_stacks_B=3288
+heap_tree=empty
+#-----------
+snapshot=6
+#-----------
+time=453
+mem_heap_B=7135
+mem_heap_extra_B=897
+mem_stacks_B=3816
+heap_tree=empty
+#-----------
+snapshot=7
+#-----------
+time=553
+mem_heap_B=7447
+mem_heap_extra_B=921
+mem_stacks_B=5592
+heap_tree=empty
+#-----------
+snapshot=8
+#-----------
+time=646
+mem_heap_B=7447
+mem_heap_extra_B=921
+mem_stacks_B=5592
+heap_tree=empty
+#-----------
+snapshot=9
+#-----------
+time=694
+mem_heap_B=7759
+mem_heap_extra_B=945
+mem_stacks_B=7304
+heap_tree=empty
+#-----------
+snapshot=10
+#-----------
+time=753
+mem_heap_B=8071
+mem_heap_extra_B=969
+mem_stacks_B=8896
+heap_tree=empty
+#-----------
+snapshot=11
+#-----------
+time=847
+mem_heap_B=8071
+mem_heap_extra_B=969
+mem_stacks_B=9016
+heap_tree=empty
+#-----------
+snapshot=12
+#-----------
+time=949
+mem_heap_B=9263
+mem_heap_extra_B=1033
+mem_stacks_B=21336
+heap_tree=detailed
+n8: 9263 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2128 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n1: 2128 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 2128 0x404CAA: start_driver (driver.c:328)
+    n0: 2128 0x404079: main (driver_main.c:245)
+ n4: 1704 0x37FCE66839: __fopen_internal (in /lib64/libc-2.12.so)
+  n1: 568 0x405C0C: init_logging (logging.c:40)
+   n0: 568 0x403BA5: main (driver_main.c:155)
+  n1: 568 0x4050BF: init_driver_logging (driver.c:125)
+   n0: 568 0x403BD5: main (driver_main.c:155)
+  n1: 568 0x37FCEF328C: __res_vinit (in /lib64/libc-2.12.so)
+   n1: 568 0x37FCEF69AE: __nss_hostname_digits_dots (in /lib64/libc-2.12.so)
+    n1: 568 0x37FCEFC22E: gethostbyname (in /lib64/libc-2.12.so)
+     n1: 568 0x4060A6: _connect (_socket.c:56)
+      n1: 568 0x4043A9: terminal_worker (driver.c:465)
+       n1: 568 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 568 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 0 in 3 places, all below massif's threshold (01.00%)
+ n1: 1241 0x37FCEF54B9: nss_parse_service_list (in /lib64/libc-2.12.so)
+  n1: 1241 0x37FCEF5FBF: __nss_database_lookup (in /lib64/libc-2.12.so)
+   n1: 1241 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+    n1: 1241 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+     n1: 1241 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+      n1: 1241 0x405D37: resolveproto (_socket.c:163)
+       n1: 1241 0x406045: _connect (_socket.c:73)
+        n1: 1241 0x4043A9: terminal_worker (driver.c:465)
+         n1: 1241 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+          n0: 1241 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1178 0x37FC60AD0D: _dl_new_object (in /lib64/ld-2.12.so)
+  n1: 1178 0x37FC60718C: _dl_map_object_from_fd (in /lib64/ld-2.12.so)
+   n1: 1178 0x37FC608328: _dl_map_object (in /lib64/ld-2.12.so)
+    n1: 1178 0x37FC612997: dl_open_worker (in /lib64/ld-2.12.so)
+     n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+      n1: 1178 0x37FC612448: _dl_open (in /lib64/ld-2.12.so)
+       n1: 1178 0x37FCF1F17E: do_dlopen (in /lib64/libc-2.12.so)
+        n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+         n1: 1178 0x37FCF1F2D5: __libc_dlopen_mode (in /lib64/libc-2.12.so)
+          n1: 1178 0x37FCEF52F1: __nss_lookup_function (in /lib64/libc-2.12.so)
+           n1: 1178 0x37FCEF535A: __nss_lookup (in /lib64/libc-2.12.so)
+            n1: 1178 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+             n1: 1178 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+              n1: 1178 0x405D37: resolveproto (_socket.c:163)
+               n1: 1178 0x406045: _connect (_socket.c:73)
+                n1: 1178 0x4043A9: terminal_worker (driver.c:465)
+                 n1: 1178 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+                  n0: 1178 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFC343: gethostbyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x4060A6: _connect (_socket.c:56)
+   n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+    n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+     n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFE427: getprotobyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x405D37: resolveproto (_socket.c:163)
+   n1: 1024 0x406045: _connect (_socket.c:73)
+    n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+     n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+      n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 602 in 13 places, all below massif's threshold (01.00%)
+ n1: 362 0x37FCEF5F96: __nss_database_lookup (in /lib64/libc-2.12.so)
+  n1: 362 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+   n1: 362 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+    n1: 362 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+     n1: 362 0x405D37: resolveproto (_socket.c:163)
+      n1: 362 0x406045: _connect (_socket.c:73)
+       n1: 362 0x4043A9: terminal_worker (driver.c:465)
+        n1: 362 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 362 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+#-----------
+snapshot=13
+#-----------
+time=1050
+mem_heap_B=8695
+mem_heap_extra_B=1017
+mem_stacks_B=12440
+heap_tree=empty
+#-----------
+snapshot=14
+#-----------
+time=1109
+mem_heap_B=9007
+mem_heap_extra_B=1041
+mem_stacks_B=14152
+heap_tree=empty
+#-----------
+snapshot=15
+#-----------
+time=1152
+mem_heap_B=9887
+mem_heap_extra_B=1081
+mem_stacks_B=24592
+heap_tree=detailed
+n8: 9887 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 2736 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n1: 2736 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 2736 0x404CAA: start_driver (driver.c:328)
+    n0: 2736 0x404079: main (driver_main.c:245)
+ n4: 1704 0x37FCE66839: __fopen_internal (in /lib64/libc-2.12.so)
+  n1: 568 0x405C0C: init_logging (logging.c:40)
+   n0: 568 0x403BA5: main (driver_main.c:155)
+  n1: 568 0x4050BF: init_driver_logging (driver.c:125)
+   n0: 568 0x403BD5: main (driver_main.c:155)
+  n1: 568 0x37FCEF328C: __res_vinit (in /lib64/libc-2.12.so)
+   n1: 568 0x37FCEF69AE: __nss_hostname_digits_dots (in /lib64/libc-2.12.so)
+    n1: 568 0x37FCEFC22E: gethostbyname (in /lib64/libc-2.12.so)
+     n1: 568 0x4060A6: _connect (_socket.c:56)
+      n1: 568 0x4043A9: terminal_worker (driver.c:465)
+       n1: 568 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 568 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 0 in 3 places, all below massif's threshold (01.00%)
+ n1: 1241 0x37FCEF54B9: nss_parse_service_list (in /lib64/libc-2.12.so)
+  n1: 1241 0x37FCEF5FBF: __nss_database_lookup (in /lib64/libc-2.12.so)
+   n1: 1241 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+    n1: 1241 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+     n1: 1241 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+      n1: 1241 0x405D37: resolveproto (_socket.c:163)
+       n1: 1241 0x406045: _connect (_socket.c:73)
+        n1: 1241 0x4043A9: terminal_worker (driver.c:465)
+         n1: 1241 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+          n0: 1241 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1178 0x37FC60AD0D: _dl_new_object (in /lib64/ld-2.12.so)
+  n1: 1178 0x37FC60718C: _dl_map_object_from_fd (in /lib64/ld-2.12.so)
+   n1: 1178 0x37FC608328: _dl_map_object (in /lib64/ld-2.12.so)
+    n1: 1178 0x37FC612997: dl_open_worker (in /lib64/ld-2.12.so)
+     n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+      n1: 1178 0x37FC612448: _dl_open (in /lib64/ld-2.12.so)
+       n1: 1178 0x37FCF1F17E: do_dlopen (in /lib64/libc-2.12.so)
+        n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+         n1: 1178 0x37FCF1F2D5: __libc_dlopen_mode (in /lib64/libc-2.12.so)
+          n1: 1178 0x37FCEF52F1: __nss_lookup_function (in /lib64/libc-2.12.so)
+           n1: 1178 0x37FCEF535A: __nss_lookup (in /lib64/libc-2.12.so)
+            n1: 1178 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+             n1: 1178 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+              n1: 1178 0x405D37: resolveproto (_socket.c:163)
+               n1: 1178 0x406045: _connect (_socket.c:73)
+                n1: 1178 0x4043A9: terminal_worker (driver.c:465)
+                 n1: 1178 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+                  n0: 1178 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFC343: gethostbyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x4060A6: _connect (_socket.c:56)
+   n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+    n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+     n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFE427: getprotobyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x405D37: resolveproto (_socket.c:163)
+   n1: 1024 0x406045: _connect (_socket.c:73)
+    n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+     n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+      n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 618 in 13 places, all below massif's threshold (01.00%)
+ n1: 362 0x37FCEF5F96: __nss_database_lookup (in /lib64/libc-2.12.so)
+  n1: 362 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+   n1: 362 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+    n1: 362 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+     n1: 362 0x405D37: resolveproto (_socket.c:163)
+      n1: 362 0x406045: _connect (_socket.c:73)
+       n1: 362 0x4043A9: terminal_worker (driver.c:465)
+        n1: 362 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+         n0: 362 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+#-----------
+snapshot=16
+#-----------
+time=1253
+mem_heap_B=10199
+mem_heap_extra_B=1105
+mem_stacks_B=26304
+heap_tree=detailed
+n7: 10199 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3040 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n1: 3040 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 3040 0x404CAA: start_driver (driver.c:328)
+    n0: 3040 0x404079: main (driver_main.c:245)
+ n4: 1704 0x37FCE66839: __fopen_internal (in /lib64/libc-2.12.so)
+  n1: 568 0x405C0C: init_logging (logging.c:40)
+   n0: 568 0x403BA5: main (driver_main.c:155)
+  n1: 568 0x4050BF: init_driver_logging (driver.c:125)
+   n0: 568 0x403BD5: main (driver_main.c:155)
+  n1: 568 0x37FCEF328C: __res_vinit (in /lib64/libc-2.12.so)
+   n1: 568 0x37FCEF69AE: __nss_hostname_digits_dots (in /lib64/libc-2.12.so)
+    n1: 568 0x37FCEFC22E: gethostbyname (in /lib64/libc-2.12.so)
+     n1: 568 0x4060A6: _connect (_socket.c:56)
+      n1: 568 0x4043A9: terminal_worker (driver.c:465)
+       n1: 568 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 568 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 0 in 3 places, all below massif's threshold (01.00%)
+ n1: 1241 0x37FCEF54B9: nss_parse_service_list (in /lib64/libc-2.12.so)
+  n1: 1241 0x37FCEF5FBF: __nss_database_lookup (in /lib64/libc-2.12.so)
+   n1: 1241 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+    n1: 1241 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+     n1: 1241 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+      n1: 1241 0x405D37: resolveproto (_socket.c:163)
+       n1: 1241 0x406045: _connect (_socket.c:73)
+        n1: 1241 0x4043A9: terminal_worker (driver.c:465)
+         n1: 1241 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+          n0: 1241 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1178 0x37FC60AD0D: _dl_new_object (in /lib64/ld-2.12.so)
+  n1: 1178 0x37FC60718C: _dl_map_object_from_fd (in /lib64/ld-2.12.so)
+   n1: 1178 0x37FC608328: _dl_map_object (in /lib64/ld-2.12.so)
+    n1: 1178 0x37FC612997: dl_open_worker (in /lib64/ld-2.12.so)
+     n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+      n1: 1178 0x37FC612448: _dl_open (in /lib64/ld-2.12.so)
+       n1: 1178 0x37FCF1F17E: do_dlopen (in /lib64/libc-2.12.so)
+        n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+         n1: 1178 0x37FCF1F2D5: __libc_dlopen_mode (in /lib64/libc-2.12.so)
+          n1: 1178 0x37FCEF52F1: __nss_lookup_function (in /lib64/libc-2.12.so)
+           n1: 1178 0x37FCEF535A: __nss_lookup (in /lib64/libc-2.12.so)
+            n1: 1178 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+             n1: 1178 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+              n1: 1178 0x405D37: resolveproto (_socket.c:163)
+               n1: 1178 0x406045: _connect (_socket.c:73)
+                n1: 1178 0x4043A9: terminal_worker (driver.c:465)
+                 n1: 1178 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+                  n0: 1178 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFC343: gethostbyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x4060A6: _connect (_socket.c:56)
+   n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+    n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+     n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFE427: getprotobyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x405D37: resolveproto (_socket.c:163)
+   n1: 1024 0x406045: _connect (_socket.c:73)
+    n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+     n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+      n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 988 in 14 places, all below massif's threshold (01.00%)
+#-----------
+snapshot=17
+#-----------
+time=1352
+mem_heap_B=9631
+mem_heap_extra_B=1089
+mem_stacks_B=17576
+heap_tree=empty
+#-----------
+snapshot=18
+#-----------
+time=1445
+mem_heap_B=10023
+mem_heap_extra_B=1121
+mem_stacks_B=19288
+heap_tree=empty
+#-----------
+snapshot=19
+#-----------
+time=1454
+mem_heap_B=10903
+mem_heap_extra_B=1161
+mem_stacks_B=29728
+heap_tree=detailed
+n7: 10903 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 3648 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n1: 3648 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 3648 0x404CAA: start_driver (driver.c:328)
+    n0: 3648 0x404079: main (driver_main.c:245)
+ n4: 1704 0x37FCE66839: __fopen_internal (in /lib64/libc-2.12.so)
+  n1: 568 0x405C0C: init_logging (logging.c:40)
+   n0: 568 0x403BA5: main (driver_main.c:155)
+  n1: 568 0x4050BF: init_driver_logging (driver.c:125)
+   n0: 568 0x403BD5: main (driver_main.c:155)
+  n1: 568 0x37FCEF328C: __res_vinit (in /lib64/libc-2.12.so)
+   n1: 568 0x37FCEF69AE: __nss_hostname_digits_dots (in /lib64/libc-2.12.so)
+    n1: 568 0x37FCEFC22E: gethostbyname (in /lib64/libc-2.12.so)
+     n1: 568 0x4060A6: _connect (_socket.c:56)
+      n1: 568 0x4043A9: terminal_worker (driver.c:465)
+       n1: 568 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+        n0: 568 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+  n0: 0 in 3 places, all below massif's threshold (01.00%)
+ n1: 1241 0x37FCEF54B9: nss_parse_service_list (in /lib64/libc-2.12.so)
+  n1: 1241 0x37FCEF5FBF: __nss_database_lookup (in /lib64/libc-2.12.so)
+   n1: 1241 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+    n1: 1241 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+     n1: 1241 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+      n1: 1241 0x405D37: resolveproto (_socket.c:163)
+       n1: 1241 0x406045: _connect (_socket.c:73)
+        n1: 1241 0x4043A9: terminal_worker (driver.c:465)
+         n1: 1241 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+          n0: 1241 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1178 0x37FC60AD0D: _dl_new_object (in /lib64/ld-2.12.so)
+  n1: 1178 0x37FC60718C: _dl_map_object_from_fd (in /lib64/ld-2.12.so)
+   n1: 1178 0x37FC608328: _dl_map_object (in /lib64/ld-2.12.so)
+    n1: 1178 0x37FC612997: dl_open_worker (in /lib64/ld-2.12.so)
+     n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+      n1: 1178 0x37FC612448: _dl_open (in /lib64/ld-2.12.so)
+       n1: 1178 0x37FCF1F17E: do_dlopen (in /lib64/libc-2.12.so)
+        n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+         n1: 1178 0x37FCF1F2D5: __libc_dlopen_mode (in /lib64/libc-2.12.so)
+          n1: 1178 0x37FCEF52F1: __nss_lookup_function (in /lib64/libc-2.12.so)
+           n1: 1178 0x37FCEF535A: __nss_lookup (in /lib64/libc-2.12.so)
+            n1: 1178 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+             n1: 1178 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+              n1: 1178 0x405D37: resolveproto (_socket.c:163)
+               n1: 1178 0x406045: _connect (_socket.c:73)
+                n1: 1178 0x4043A9: terminal_worker (driver.c:465)
+                 n1: 1178 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+                  n0: 1178 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n0: 1084 in 14 places, all below massif's threshold (01.00%)
+ n1: 1024 0x37FCEFC343: gethostbyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x4060A6: _connect (_socket.c:56)
+   n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+    n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+     n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFE427: getprotobyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x405D37: resolveproto (_socket.c:163)
+   n1: 1024 0x406045: _connect (_socket.c:73)
+    n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+     n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+      n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+#-----------
+snapshot=20
+#-----------
+time=1553
+mem_heap_B=10335
+mem_heap_extra_B=1145
+mem_stacks_B=21000
+heap_tree=empty
+#-----------
+snapshot=21
+#-----------
+time=1653
+mem_heap_B=10647
+mem_heap_extra_B=1169
+mem_stacks_B=22712
+heap_tree=empty
+#-----------
+snapshot=22
+#-----------
+time=1674
+mem_heap_B=10959
+mem_heap_extra_B=1193
+mem_stacks_B=26328
+heap_tree=empty
+#-----------
+snapshot=23
+#-----------
+time=1758
+mem_heap_B=10959
+mem_heap_extra_B=1193
+mem_stacks_B=24424
+heap_tree=empty
+#-----------
+snapshot=24
+#-----------
+time=1823
+mem_heap_B=11271
+mem_heap_extra_B=1217
+mem_stacks_B=26136
+heap_tree=empty
+#-----------
+snapshot=25
+#-----------
+time=1866
+mem_heap_B=11583
+mem_heap_extra_B=1241
+mem_stacks_B=27840
+heap_tree=empty
+#-----------
+snapshot=26
+#-----------
+time=1959
+mem_heap_B=11583
+mem_heap_extra_B=1241
+mem_stacks_B=27848
+heap_tree=empty
+#-----------
+snapshot=27
+#-----------
+time=2009
+mem_heap_B=11895
+mem_heap_extra_B=1265
+mem_stacks_B=29560
+heap_tree=empty
+#-----------
+snapshot=28
+#-----------
+time=2092
+mem_heap_B=12207
+mem_heap_extra_B=1289
+mem_stacks_B=31280
+heap_tree=empty
+#-----------
+snapshot=29
+#-----------
+time=2172
+mem_heap_B=12519
+mem_heap_extra_B=1313
+mem_stacks_B=32992
+heap_tree=empty
+#-----------
+snapshot=30
+#-----------
+time=2260
+mem_heap_B=12519
+mem_heap_extra_B=1313
+mem_stacks_B=32984
+heap_tree=empty
+#-----------
+snapshot=31
+#-----------
+time=2291
+mem_heap_B=12831
+mem_heap_extra_B=1337
+mem_stacks_B=34648
+heap_tree=empty
+#-----------
+snapshot=32
+#-----------
+time=2366
+mem_heap_B=13223
+mem_heap_extra_B=1369
+mem_stacks_B=36640
+heap_tree=empty
+#-----------
+snapshot=33
+#-----------
+time=2461
+mem_heap_B=13223
+mem_heap_extra_B=1369
+mem_stacks_B=36408
+heap_tree=empty
+#-----------
+snapshot=34
+#-----------
+time=2511
+mem_heap_B=13535
+mem_heap_extra_B=1393
+mem_stacks_B=38120
+heap_tree=empty
+#-----------
+snapshot=35
+#-----------
+time=2594
+mem_heap_B=13847
+mem_heap_extra_B=1417
+mem_stacks_B=39792
+heap_tree=empty
+#-----------
+snapshot=36
+#-----------
+time=2684
+mem_heap_B=14159
+mem_heap_extra_B=1441
+mem_stacks_B=41544
+heap_tree=empty
+#-----------
+snapshot=37
+#-----------
+time=2768
+mem_heap_B=15039
+mem_heap_extra_B=1481
+mem_stacks_B=43600
+heap_tree=empty
+#-----------
+snapshot=38
+#-----------
+time=2863
+mem_heap_B=14471
+mem_heap_extra_B=1465
+mem_stacks_B=43256
+heap_tree=empty
+#-----------
+snapshot=39
+#-----------
+time=2887
+mem_heap_B=14783
+mem_heap_extra_B=1489
+mem_stacks_B=44968
+heap_tree=empty
+#-----------
+snapshot=40
+#-----------
+time=2969
+mem_heap_B=15095
+mem_heap_extra_B=1513
+mem_stacks_B=46664
+heap_tree=empty
+#-----------
+snapshot=41
+#-----------
+time=3064
+mem_heap_B=15095
+mem_heap_extra_B=1513
+mem_stacks_B=46680
+heap_tree=empty
+#-----------
+snapshot=42
+#-----------
+time=3135
+mem_heap_B=15407
+mem_heap_extra_B=1537
+mem_stacks_B=48392
+heap_tree=empty
+#-----------
+snapshot=43
+#-----------
+time=3168
+mem_heap_B=16287
+mem_heap_extra_B=1577
+mem_stacks_B=50464
+heap_tree=empty
+#-----------
+snapshot=44
+#-----------
+time=3250
+mem_heap_B=15719
+mem_heap_extra_B=1561
+mem_stacks_B=50104
+heap_tree=empty
+#-----------
+snapshot=45
+#-----------
+time=3272
+mem_heap_B=16031
+mem_heap_extra_B=1585
+mem_stacks_B=51768
+heap_tree=empty
+#-----------
+snapshot=46
+#-----------
+time=3367
+mem_heap_B=16031
+mem_heap_extra_B=1585
+mem_stacks_B=51816
+heap_tree=empty
+#-----------
+snapshot=47
+#-----------
+time=3452
+mem_heap_B=16423
+mem_heap_extra_B=1617
+mem_stacks_B=53528
+heap_tree=empty
+#-----------
+snapshot=48
+#-----------
+time=3470
+mem_heap_B=17303
+mem_heap_extra_B=1657
+mem_stacks_B=64080
+heap_tree=peak
+n7: 17303 (heap allocation functions) malloc/new/new[], --alloc-fns, etc.
+ n1: 9728 0x37FC6117A1: _dl_allocate_tls (in /lib64/ld-2.12.so)
+  n1: 9728 0x37FD20700E: pthread_create@@GLIBC_2.2.5 (in /lib64/libpthread-2.12.so)
+   n1: 9728 0x404CAA: start_driver (driver.c:328)
+    n0: 9728 0x404079: main (driver_main.c:245)
+ n1: 1704 0x37FCE66839: __fopen_internal (in /lib64/libc-2.12.so)
+  n0: 1704 in 6 places, all below massif's threshold (01.00%)
+ n0: 1404 in 14 places, all below massif's threshold (01.00%)
+ n1: 1241 0x37FCEF54B9: nss_parse_service_list (in /lib64/libc-2.12.so)
+  n1: 1241 0x37FCEF5FBF: __nss_database_lookup (in /lib64/libc-2.12.so)
+   n1: 1241 0x37FCEF70B1: __nss_protocols_lookup2 (in /lib64/libc-2.12.so)
+    n1: 1241 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+     n1: 1241 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+      n1: 1241 0x405D37: resolveproto (_socket.c:163)
+       n1: 1241 0x406045: _connect (_socket.c:73)
+        n1: 1241 0x4043A9: terminal_worker (driver.c:465)
+         n1: 1241 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+          n0: 1241 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1178 0x37FC60AD0D: _dl_new_object (in /lib64/ld-2.12.so)
+  n1: 1178 0x37FC60718C: _dl_map_object_from_fd (in /lib64/ld-2.12.so)
+   n1: 1178 0x37FC608328: _dl_map_object (in /lib64/ld-2.12.so)
+    n1: 1178 0x37FC612997: dl_open_worker (in /lib64/ld-2.12.so)
+     n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+      n1: 1178 0x37FC612448: _dl_open (in /lib64/ld-2.12.so)
+       n1: 1178 0x37FCF1F17E: do_dlopen (in /lib64/libc-2.12.so)
+        n1: 1178 0x37FC60E0F4: _dl_catch_error (in /lib64/ld-2.12.so)
+         n1: 1178 0x37FCF1F2D5: __libc_dlopen_mode (in /lib64/libc-2.12.so)
+          n1: 1178 0x37FCEF52F1: __nss_lookup_function (in /lib64/libc-2.12.so)
+           n1: 1178 0x37FCEF535A: __nss_lookup (in /lib64/libc-2.12.so)
+            n1: 1178 0x37FCEFE606: getprotobyname_r@@GLIBC_2.2.5 (in /lib64/libc-2.12.so)
+             n1: 1178 0x37FCEFE37E: getprotobyname (in /lib64/libc-2.12.so)
+              n1: 1178 0x405D37: resolveproto (_socket.c:163)
+               n1: 1178 0x406045: _connect (_socket.c:73)
+                n1: 1178 0x4043A9: terminal_worker (driver.c:465)
+                 n1: 1178 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+                  n0: 1178 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFC343: gethostbyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x4060A6: _connect (_socket.c:56)
+   n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+    n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+     n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+ n1: 1024 0x37FCEFE427: getprotobyname (in /lib64/libc-2.12.so)
+  n1: 1024 0x405D37: resolveproto (_socket.c:163)
+   n1: 1024 0x406045: _connect (_socket.c:73)
+    n1: 1024 0x4043A9: terminal_worker (driver.c:465)
+     n1: 1024 0x37FD2077DF: start_thread (in /lib64/libpthread-2.12.so)
+      n0: 1024 0x37FCEE18EB: clone (in /lib64/libc-2.12.so)
+#-----------
+snapshot=49
+#-----------
+time=3487
+mem_heap_B=15084
+mem_heap_extra_B=972
+mem_stacks_B=57104
+heap_tree=empty
+#-----------
+snapshot=50
+#-----------
+time=3496
+mem_heap_B=13656
+mem_heap_extra_B=904
+mem_stacks_B=56224
+heap_tree=empty

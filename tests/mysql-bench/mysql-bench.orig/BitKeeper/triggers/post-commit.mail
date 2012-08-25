@@ -1,0 +1,36 @@
+#!/bin/sh
+
+#shift
+TO=benchmarks@mysql.com
+FROM=$BK_USER@mysql.com
+LIMIT=1000
+
+if [ "$REAL_EMAIL" = "" ]
+then
+ echo "Warning: you must set REAL_EMAIL in your profile"
+else
+ FROM=$REAL_EMAIL 
+fi
+
+BK_STATUS=$BK_STATUS$BK_COMMIT
+
+if [ "$BK_STATUS" = OK ]
+then 
+
+CHANGESET=`bk -R prs -r+ -h -d':I:' ChangeSet`
+
+echo "Commit successful, notifying developers at $TO"
+ (
+   cat <<EOF
+From: $FROM
+To: $TO
+Subject: bk commit - mysql-bench-2 tree ($CHANGESET)
+
+EOF
+  bk changes -v -r+
+  bk cset -r+ -d
+ ) | head -n $LIMIT | /usr/sbin/sendmail -t
+
+else
+  echo "commit failed because '$BK_STATUS', you may need to re-clone..." 
+fi

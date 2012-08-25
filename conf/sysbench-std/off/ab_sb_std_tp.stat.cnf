@@ -1,0 +1,109 @@
+########################################################################
+#
+#   Autobench test configuration file for mysql-bench benchmark
+#
+########################################################################
+
+TEST_MODULE=sysbench_standard
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+. $AUTOBENCH_INCDIR/engine_stat.inc.1
+
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.60-0.21-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="sysbench_standard"
+  
+  #If test have subtests specify them here
+  TEST_CASES="OLTP_RW \
+  SELECT_DISTINCT_RANGES \
+  SELECT_ORDER_RANGES \
+  SELECT_SUM_RANGES \
+  SELECT_SIMPLE_RANGES \
+  POINT_SELECT \
+  OLTP_RO \
+  UPDATE_KEY \
+  UPDATE_NO_KEY"
+
+  # Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-standard"
+  #TEST_BACKUP_BASEDIR="/data0/qauser/ab/backup/std-1M"
+  TEST_BACKUP_BASEDIR="/data1/qauser/autobench-backup-5.1/backup-sysbench"
+  TEST_BACKUP_BASEDIR="/data0/ranger/ab/backup/sysbench-std-1M"
+
+  TEST_STAGE_PREPARE_GENERATE=""  # GENERATE INITIAL DATASET AND LOAD IT
+  TEST_STAGE_PREPARE_RESTORE="1"  # RESTORE DATADIR FROM BACKUP
+  TEST_STAGE_RUN="1"              # RUN || "" - RUN STAGE WILL BE SKIPPED
+  TEST_STAGE_WARMUP="1"
+  TEST_STAGE_CLEANUP="1"          #
+	
+#  MAX_TABLES=50000
+  MAX_TABLES=20000
+
+  # Number of rows for sbtest database
+  SYSBENCH_NUM_ROWS=1000000
+
+  # sysbench binary
+  TEST_STAGE_RUN_EXE=$SYSBENCH_0_4_EXE
+  
+  #
+  ENGINE_DEFAULTS_FILE_MYISAM=$TEST_CNF_DIR/sysbench-std-myisam-tp.stat.cnf
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std-innodb-tp-adj.cnf
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std-innodb-tp-stat.cnf
+
+ 
+  #sysctl  -w net.ipv4.ip_local_port_range="1024  61000"
+}
+
+test_stage_prepare_pre()
+{
+ OPEN_FILES=`ulimit -n`;
+ if [ $OPEN_FILES -le $MAX_TABLES ]; then
+   ulimit -n $MAX_TABLES > /dev/null 2>&1
+   if [ $? -ne 0 ]; then
+     echo "ERROR: Can't increase number of open files to $MAX_TABLES"
+     echo "Available number of open files: $OPEN_FILES. Please fix this and run test again"
+     exit 1
+   fi
+ fi
+
+}
+
+test_stage_cleanup_pre()
+{
+$MYSQL $MYSQL_ARGS -vvv -f -e'select * from information_schema.TP_THREAD_GROUP_STATE' > $TEST_OUTDIR/TP_THREAD_GROUP_STATE.out
+$MYSQL $MYSQL_ARGS -vvv -f -e'select * from information_schema.TP_THREAD_GROUP_STATS' > $TEST_OUTDIR/TP_THREAD_GROUP_STATS.out
+$MYSQL $MYSQL_ARGS -vvv -f -e'select * from information_schema.TP_THREAD_STATE' > $TEST_OUTDIR/TP_THREAD_STATE.out
+
+}
+
+test_stage_run_pre()
+{
+  engine_stat.setup
+  engine_stat.pse_start
+}
+
+test_stage_run_post()
+{
+  engine_stat.stop
+  engine_stat.pse_stop
+}
+
+test_pre_run()                                                                                                                
+{                                                                                                                             
+  TEST_STAGE_WARMUP_EXE=$MYSQL                                                                                                
+  TEST_ARGS_STAGE_WARMUP=" -uroot sbtest $MYSQL_ARGS -e\'check table sbtest\'"                                                
+}        
+             

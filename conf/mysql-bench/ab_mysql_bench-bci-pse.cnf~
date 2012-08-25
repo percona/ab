@@ -1,0 +1,118 @@
+########################################################################
+#
+#   Autobench test configuration file for mysql-bench benchmark
+#
+########################################################################
+
+TEST_MODULE=mysql_bench
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+. $AUTOBENCH_INCDIR/engine_stat.inc.1
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="bci"
+  
+  #If test have subtests specify them here
+  TEST_CASES="BCI"
+  #SELECT_DISTINCT_RANGES \
+  #SELECT_ORDER_RANGES \
+  #SELECT_SUM_RANGES \
+  #SELECT_SIMPLE_RANGES \
+  #POINT_SELECT \
+  #OLTP_RO \
+  #UPDATE_KEY \
+  #UPDATE_NO_KEY"
+
+  TEST_STAGE_PREPARE_GENERATE=""
+  TEST_STAGE_PREPARE_RESTORE="1"
+
+  # Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-standard"
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-std.10M"
+  TEST_BACKUP_BASEDIR="/data1/ranger/backup/data.bci"
+
+  # sysbench binary
+  TEST_BASEDIR="/data0/ranger/bci"
+  TEST_STAGE_RUN_EXE="./bug_bci.pl"
+
+  #default configuration files for engine
+  #ENGINE_DEFAULTS_FILE_MYISAM=$TEST_CNF_DIR/sysbench-std-myisam-10M-pse.cnf
+  #ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std-innodb-10M-pse.v2.cnf
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/bci-10M-pse.cnf
+
+  ENGINE_DEFAULTS_FILE_INNODB_554=$TEST_CNF_DIR/bci-10M-pse.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_553=$TEST_CNF_DIR/bci-10M-pse.cnf
+
+  TEST_STAGE_PREPARE_RESTORE="1"   # RESTORE DATADIR FROM BACKUP
+  TEST_STAGE_RUN=1                # RUN || "" - RUN STAGE WILL BE SKIPPED
+  TEST_STAGE_CLEANUP="1"           #
+  TEST_STAGE_PREPARE_INSTALL=""
+	
+
+  ICB_TYPE=all
+  
+}
+
+
+test_pre_run()
+{
+  echo "Adjusting comment"
+  COMMENT="${COMMENT}_pse-"
+  if [ -n "${PSE_MODE}" ]; then 
+    COMMENT="${COMMENT}mode_${PSE_MODE}."
+  else
+    COMMENT="${COMMENT}mode_none."
+  fi
+
+  if [ -n "${PSE_TYPE}" ]; then 
+    COMMENT="${COMMENT}type_${PSE_TYPE}."
+  else
+    COMMENT="${COMMENT}type_none."
+  fi
+  
+  if [ -n "${PSE_CONSUMER_MODE}" ]; then 
+    COMMENT="${COMMENT}consumer_mode_${PSE_CONSUMER_MODE}"
+  else
+    COMMENT="${COMMENT}consumer_mode_none"
+  fi
+
+  TEST_ARGS_STAGE_RUN=" --db-socket=$SERVER_SOCKET --db-user=root --update --stat --count=20 --num=2 --buffering=$ICB_TYPE"
+
+
+}
+
+test_stage_run_pre()
+{
+
+TEST_ARGS_COMMON=""
+
+engine_stat.setup
+engine_stat.pse_start
+
+mysql -vvv $MYSQL_ARGS >> $TEST_OUTDIR/test_stage_run_pre.out << SQL1EOF
+UPDATE performance_schema.SETUP_INSTRUMENTS SET ENABLED = 'NO' where NAME like 'wait/synch/rwlock/innodb/buf_block_lock';
+UPDATE performance_schema.SETUP_INSTRUMENTS SET ENABLED = 'NO' where NAME like 'wait/synch/mutex/innodb/buffer_block_mutex';
+SQL1EOF
+
+
+}
+
+test_stage_run_post()
+{
+engine_stat.stop
+engine_stat.pse_stop
+
+}

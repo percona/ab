@@ -1,0 +1,3 @@
+[mysqld]
+user=root
+port=3306

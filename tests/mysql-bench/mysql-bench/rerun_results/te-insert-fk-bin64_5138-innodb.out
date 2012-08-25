@@ -1,0 +1,22 @@
+Testing server 'MySQL 5.1.38 enterprise commercial advanced/' at 2009-08-26 14:22:48
+
+Extra tests 1
+
+Creating tables
+Inserting data to bench1
+Inserting 100000 rows
+Time for insert (100000): 11.574 wallclock secs ( 1.16 usr  0.70 sys +  0.00 cusr  0.00 csys =  1.86 CPU)
+
+Fill tables for unions (bench4)
+Inserting data to bench3
+Inserting 100000 rows
+Time for insert (100000): 11.476 wallclock secs ( 1.18 usr  0.82 sys +  0.00 cusr  0.00 csys =  2.00 CPU)
+
+Time for insert_without_fk (500000): 62.579 wallclock secs ( 7.46 usr  5.21 sys +  0.00 cusr  0.00 csys = 12.67 CPU)
+
+Inserting 500000 rows with FK checking
+Time for insert_with_fk (500000): 65.171 wallclock secs ( 8.45 usr  5.23 sys +  0.00 cusr  0.00 csys = 13.68 CPU)
+
+Inserting 500000 rows with FK checking
+Time for insert_with_fk_non_exists (500000): 133.740 wallclock secs (10.06 usr  4.93 sys +  0.00 cusr  0.00 csys = 14.99 CPU)
+

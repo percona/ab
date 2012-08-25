@@ -1,0 +1,17 @@
+Testing server 'MySQL 5.0.84 enterprise/' at 2009-08-19 14:51:40
+
+Testing the speed of inserting data into 1 table and do some selects on it.
+The tests are done with a table that has 300000 rows.
+
+Generating random keys
+Creating tables
+Inserting 100000 rows in order
+Time for insert_in_order (100000): 6.296 wallclock secs ( 0.81 usr  1.22 sys +  0.00 cusr  0.00 csys =  2.03 CPU)
+
+Inserting 100000 rows in reverse order
+Time for insert_reverse_order (100000): 6.689 wallclock secs ( 0.95 usr  1.30 sys +  0.00 cusr  0.00 csys =  2.25 CPU)
+
+Inserting 100000 rows in random order
+Time for insert (100000): 7.436 wallclock secs ( 1.38 usr  1.26 sys +  0.00 cusr  0.00 csys =  2.64 CPU)
+
+

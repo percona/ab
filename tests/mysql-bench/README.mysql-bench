@@ -1,0 +1,14 @@
+1. Get mysql-bench suite:
+   bzr branch <you account>@bk-internal.mysql.com/bzrroot/mysql-bench 
+
+2. Build it 
+
+   cd mysql-bench
+   ./Build
+   make
+   
+3. Check path to mysql-bench suite in autobench configuration files and 
+   update it if needed:
+ 
+  #Test basedir
+  TEST_BASEDIR=$AUTOBENCH_TESTBASEDIR/mysql-bench/mysql-bench

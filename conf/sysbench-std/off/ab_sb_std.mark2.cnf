@@ -1,0 +1,167 @@
+########################################################################
+#
+#   Autobench test configuration file for mysql-bench benchmark
+#
+########################################################################
+
+TEST_MODULE=sysbench_standard
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+. $AUTOBENCH_INCDIR/engine_stat.inc.1
+
+test_setup()
+{
+  # 
+  # Put additional initialization code below
+  #
+  #profile information
+  USE_OPROFILE=1
+  #VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+  #VMLINUX=/tmp/vmlinux-2.6.16.60-0.21-smp
+  #VMLINUX=/tmp/vmlinux-2.6.18-92.1.18.el5
+  VMLINUX=/data0/ranger/vmlinux-2.6.27.25-170.2.72.oprofile_fix.fc10.x86_64
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+
+  #Test name
+  TEST_NAME="sysbench_standard"
+  
+  #If test have subtests specify them here
+  TEST_CASES="OLTP_RW OLTP_RO UPDATE_KEY UPDATE_NO_KEY \
+  SELECT_DISTINCT_RANGES \
+  SELECT_ORDER_RANGES \
+  SELECT_SUM_RANGES \
+  SELECT_SIMPLE_RANGES \
+  POINT_SELECT"
+
+  # Basedir for backup datafiles
+  #TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/sysbench-standard"
+  TEST_BACKUP_BASEDIR="/home/ranger/std-4M.8"
+  TEST_BACKUP_BASEDIR="/data0/ranger/ab/backup/std-1M.8"
+  TEST_BACKUP_BASEDIR="/mnt/std-1M.8"
+
+  TEST_STAGE_PREPARE_GENERATE=""  # GENERATE INITIAL DATASET AND LOAD IT
+  TEST_STAGE_PREPARE_RESTORE="1"  # RESTORE DATADIR FROM BACKUP
+  TEST_STAGE_WARMUP="1"
+  # Number of rows for sbtest database
+#  SYSBENCH_NUM_ROWS=1000000
+  SYSBENCH_NUM_ROWS=1000000
+
+  # sysbench binary
+  #TEST_STAGE_RUN_EXE=$SYSBENCH_0_4_EXE
+  TEST_STAGE_RUN_EXE=/usr/local/bin/sysbench-0.4.mark
+  
+  #
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/sysbench-std.mark-innodb.cnf
+  ENGINE_DEFAULTS_FILE_INNODB_51=$TEST_CNF_DIR/sysbench-std.mark-innodb.cnf
+
+  ENGINE_DEFAULTS_FILE_INNODB_BARRACUDA=$TEST_CNF_DIR/sysbench-std.mark-innodb.cnf
+
+  OLTP_RO=" --batch  --batch-delay=60 --test=oltp \
+  --oltp-table-size=4000000  --max-requests=0 \
+    --mysql-table-engine=innodb --db-ps-mode=disable \
+      --mysql-engine-trx=yes --oltp-table-name=sbtest \
+        --oltp-read-only --oltp-skip-trx --oltp-test-mode=simple \
+          --oltp-point-select-all-cols --oltp-dist-type=uniform \
+            --oltp-range-size=1  --seed-rng=1 "
+ 
+
+  OLTP_RW=" --batch  --batch-delay=60 --test=oltp \
+  --oltp-table-size=4000000  --max-requests=0 \
+  --mysql-table-engine=innodb --db-ps-mode=disable \
+  --mysql-engine-trx=yes --oltp-table-name=sbtest \
+   --oltp-skip-trx --oltp-test-mode=simple \
+   --oltp-point-select-all-cols --oltp-dist-type=uniform \
+   --oltp-range-size=1  --seed-rng=1 "
+
+  TEST_STAGE_RUN_EXE=sysbench-0.5.1
+  TEST_STAGE_WARMUP_EXE=sysbench-0.5.1
+
+  OLTP_RO2=" --report-interval=15 --test=$TEST_BASEDIR/multi_table_rw.lua \
+  --oltp-table-size=4000000  --max-requests=0 --only-ro=1 \
+  --mysql-table-engine=innodb --db-ps-mode=disable \
+  --mysql-engine-trx=yes --rand-type=uniform --rand-init=1 --tables=8"
+
+  OLTP_RW2=" --report-interval=1  --test=$TEST_BASEDIR/multi_table_rw.lua \
+  --oltp-table-size=1000000  --max-requests=0 --only-ro=0 \
+  --mysql-table-engine=innodb --db-ps-mode=disable --mysql-db=sb1 --dbs=1 \
+  --mysql-engine-trx=yes --rand-type=uniform --rand-init=1 --tables=8"
+
+
+  IMONITOR=1
+  
+}
+
+test_pre_run()
+{
+  if [ -n "$MYSQL_CREATE_OPTIONS" ]; 
+  then 
+    SB_ARGS=$SB_ARGS' --mysql-create-options="$MYSQL_CREATE_OPTIONS"'
+    echo "HERE $MYSQL_CREATE_OPTIONS"
+  fi
+
+#   SB_ARGS=$SB_ARGS' --test=oltp --db-ps-mode=disable \
+#                    --mysql-engine-trx=yes --oltp-table-name=sbtest  \
+#                    --oltp-skip-trx --oltp-table-size=4000000 --oltp-dist-type=uniform --seed-rng=1'
+
+
+  TEST_ARGS_STAGE_PREPARE='--db-name=$SERVER_DB --mysql-bin=$MYSQL \
+                           --mysql-args=\"$MYSQL_ARGS\" \
+                           --sysbench-bin=$TEST_STAGE_RUN_EXE \
+                           --sysbench-args=\"'$SB_ARGS' prepare\"'
+
+  TEST_ARGS_STAGE_RUN=$SB_ARGS' ${!TEST_CASE} run'
+  TEST_ARGS_STAGE_WARMUP=$SB_ARGS' --max-time=300 ${OLTP_RO2} run'
+
+}
+
+test_stage_cleanup_pre()
+{
+  PSE_MIX=ALL
+  PS_TEST_STAGE="cleanup"
+  engine_stat.pse_start
+  Z=99999
+  Z_count=0
+  Z_OLD=0
+  D1=$(date +%s)
+  ls -l $AUTOBENCH_DATADIR/ibdata1 >> $TEST_OUTDIR/innodb-history.out
+  mysql -vvv -uroot -e'show engine innodb status\G' -S /tmp/mysql.sock >> $TEST_OUTDIR/innodb-history.out
+  mysql -vvv -uroot -e'set global innodb_purge_disabled=0' -S /tmp/mysql.sock >> $TEST_OUTDIR/innodb-history.out
+  while [ $Z -gt 1 ]; do
+     Z=`mysql -uroot -e'show engine innodb status\G' -S /tmp/mysql.sock | grep -o "length [0-9]*" | grep -o "[0-9]*\$"`
+     if [ $Z_OLD -eq $Z ]; then
+      Z_count=$((Z_count+1))
+     else
+      Z_count=0
+      Z_OLD=$Z
+     fi
+     echo `date` `date +%s` "OLD: $Z_OLD CURRENT: $Z CURRENT COUNT: $Z_count" >> $TEST_OUTDIR/innodb-history.out
+     sleep 1
+     if [ $Z_count -gt 10 ]; then
+       break
+     fi
+  done
+  ls -l $AUTOBENCH_DATADIR/ibdata1 >> $TEST_OUTDIR/innodb-history.out
+  ls -l $AUTOBENCH_DATADIR/sbtest  >> $TEST_OUTDIR/innodb-history.out
+  /usr/local/bin/innocheckext $AUTOBENCH_DATADIR/ibdata1 >> $TEST_OUTDIR/innodb-history.out
+  D2=$(date +%s)
+  D_DIFF=`echo "$D2-$D1" | bc`
+  echo "PURGE_TIME: $D_DIFF" >> $TEST_OUTDIR/innodb-history.out
+  engine_stat.pse_stop
+  exit
+}
+
+test_stage_run_pre()
+{
+  engine_stat.setup
+#  engine_stat.pse_start
+}
+
+test_stage_run_post()   
+{
+  engine_stat.stop
+#  engine_stat.pse_stop
+}
+

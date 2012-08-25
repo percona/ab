@@ -1,0 +1,7 @@
+plot "stock_level.data" using 1:2 title "stock_level" 
+set term png small
+set output "stock_level.png"
+set grid xtics ytics
+set xlabel "Response Time (seconds)"
+set ylabel "Count"
+replot

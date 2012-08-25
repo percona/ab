@@ -1,0 +1,12 @@
+23.10.2007
++ Fixed issue with one of the transaction that may cause test failure
+
+16.10.2007
++ Added check for error severity and in case of FATAL errors (like 2013) 
+  DB thread encountered error will be stopped
++ Added vm_io_stats.sh script to produce charts from VM and IO statistics
++ Scripts cleanups 
+
+20.04.2007
+
++ Various scripts adjustments

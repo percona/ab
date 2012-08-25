@@ -1,0 +1,15 @@
+1. Get the latest code of sysbench development branch:
+
+   bzr branch lp:sysbench 
+
+2. Build it:
+
+   cd sysbench 
+   ./configure --with-mysql 
+   make
+
+3. Check/update path to sysbench binary in autobench configuration files that use
+   sysbench as workload.
+   
+   
+ 

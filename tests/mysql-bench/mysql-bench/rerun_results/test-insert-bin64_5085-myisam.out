@@ -1,0 +1,44 @@
+Testing server 'MySQL 5.0.85 enterprise/' at 2009-08-19 11:15:29
+
+Testing the speed of inserting data into 1 table and do some selects on it.
+The tests are done with a table that has 300000 rows.
+
+Generating random keys
+Creating tables
+Inserting 100000 rows in order
+Time for insert_in_order (100000): 6.268 wallclock secs ( 0.81 usr  1.23 sys +  0.00 cusr  0.00 csys =  2.04 CPU)
+
+Inserting 100000 rows in reverse order
+Time for insert_reverse_order (100000): 6.591 wallclock secs ( 0.91 usr  1.20 sys +  0.00 cusr  0.00 csys =  2.11 CPU)
+
+Inserting 100000 rows in random order
+Time for insert (100000): 7.322 wallclock secs ( 1.41 usr  1.24 sys +  0.00 cusr  0.00 csys =  2.65 CPU)
+
+
+Testing SELECT ... WHERE id in (10 values)
+Time for select_in (5000:50000): 1.285 wallclock secs ( 0.48 usr  0.08 sys +  0.00 cusr  0.00 csys =  0.56 CPU)
+
+Time for select_join_in (5000:50000): 1.032 wallclock secs ( 0.50 usr  0.05 sys +  0.00 cusr  0.00 csys =  0.55 CPU)
+
+Time for subselect_in (500:5000): 107.802 wallclock secs ( 0.03 usr  0.02 sys +  0.00 cusr  0.00 csys =  0.05 CPU)
+
+Time for subselect_exists (500:5000): 174.852 wallclock secs ( 0.05 usr  0.00 sys +  0.00 cusr  0.00 csys =  0.05 CPU)
+
+Testing SELECT ... WHERE id in (100 values)
+Time for select_in (5000:500000): 6.780 wallclock secs ( 1.69 usr  0.09 sys +  0.00 cusr  0.00 csys =  1.78 CPU)
+
+Time for select_join_in (5000:500000): 4.089 wallclock secs ( 1.64 usr  0.06 sys +  0.00 cusr  0.00 csys =  1.70 CPU)
+
+Time for subselect_in (500:50000): 117.333 wallclock secs ( 0.20 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.21 CPU)
+
+Time for subselect_exists (500:50000): 183.256 wallclock secs ( 0.14 usr  0.01 sys +  0.00 cusr  0.00 csys =  0.15 CPU)
+
+Testing SELECT ... WHERE id in (1000 values)
+Time for select_in (5000:5000000): 64.453 wallclock secs (13.44 usr  0.17 sys +  0.00 cusr  0.00 csys = 13.61 CPU)
+
+Time for select_join_in (5000:5000000): 34.369 wallclock secs (13.37 usr  0.19 sys +  0.00 cusr  0.00 csys = 13.56 CPU)
+
+Time for subselect_in (500:500000): 179.511 wallclock secs ( 1.38 usr  0.00 sys +  0.00 cusr  0.00 csys =  1.38 CPU)
+
+Time for subselect_exists (500:500000): 248.713 wallclock secs ( 1.32 usr  0.01 sys +  0.00 cusr  0.00 csys =  1.33 CPU)
+

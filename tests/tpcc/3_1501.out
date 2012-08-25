@@ -1,0 +1,1321 @@
+*************************************
+*** ###easy### TPC-C Data Loader  ***
+*************************************
+<Parameters>
+     [server]: 127.0.0.1
+     [port]: 3306
+     [DBname]: tpccw2500
+       [user]: root
+       [pass]: 
+  [warehouse]: 2500
+  [part(1-4)]: 3
+     [MIN WH]: 1501
+     [MAX WH]: 2000
+TPCC Data Load Started...
+Loading Customer for DID=1, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1501
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1502
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1503
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1504
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1505
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1506
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1507
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1508
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1509
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1510
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1511
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1512
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1513
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1514
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1515
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1516
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1517
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1518
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1519
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1520
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1521
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1522
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1523
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1524
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1525
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=3, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=4, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=5, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=6, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=7, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=8, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=9, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=10, WID=1526
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=1, WID=1527
+.......... 1000
+.......... 2000
+.......... 3000
+Customer Done.
+Loading Customer for DID=2, WID=1527
+.

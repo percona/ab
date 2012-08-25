@@ -1,0 +1,69 @@
+########################################################################
+#
+#   Autobench test configuration file for dbt2 test
+#
+########################################################################
+
+TEST_MODULE=dbt2
+. $AUTOBENCH_INCDIR/$TEST_MODULE.inc
+
+test_setup()
+{
+  #profile information
+  USE_OPROFILE=1
+  VMLINUX=/tmp/vmlinux-2.6.16.46-0.12-smp
+
+  #System statistic information: sar/vmstat/iostat
+  COLLECT_STAT=1
+  TEST_STAT_SAMPLE=1 # Get sample each 10 seconds
+  
+  #Test name
+  TEST_NAME="dbt2w10"
+
+  #If test have subtests specify them here
+  TEST_CASES="dbt2w10-backup"
+
+  #Basedir for backup datafiles
+  TEST_BACKUP_BASEDIR="$AUTOBENCH_BACKUPDIR/dbt2-w10"
+
+  # DBT2 options
+  # IMPORTANT: ScaleFactor(number of warehouses).
+  DBT2_SF=10
+
+  #SERVER DB
+  SERVER_DB="dbt2w10"
+
+  ENGINE_DEFAULTS_FILE_INNODB=$TEST_CNF_DIR/dbt2w10-innodb-backup.cnf
+
+  #BACKGROUND TASK
+  TEST_BG_TASK="backup of dbt2w10 database"
+  #TEST_BG_TASK=""
+
+  if [[ -n $TEST_BG_TASK ]]; then
+    TEST_BG_TASK_MODULE=backup
+    . $AUTOBENCH_INCDIR/$TEST_BG_TASK_MODULE.inc
+
+    TEST_BG_TASK_DELAY=5
+    TEST_BG_TASK_RUN_EXE="$AUTOBENCH_LIBDIR/backup.sh"
+
+    #MODES: BACKUP | DUMP | RESTORE | RESTORE_OVERWTITE | RESTORE_DUMP
+    DUMP_MODE="BACKUP"
+
+    KEEP_DUMP_FILE=""
+  fi
+}
+
+test_stage_run_pre()
+{
+  if [[ -n $TEST_BG_TASK ]]; then
+    check_and_run ${TEST_BG_TASK_MODULE}.bg_task.test_stage_run_pre
+  fi
+}
+
+test_stage_cleanup_post()
+{
+  if [[ -n $TEST_BG_TASK ]]; then
+    check_and_run ${TEST_BG_TASK_MODULE}.bg_task.test_stage_cleanup_post
+  fi
+}
+

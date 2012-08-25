@@ -1,0 +1,20 @@
+Fri Sep 23 10:05:19 2011
+tid:-1272956992 client.c:129
+16 DB worker threads have started
+Fri Sep 23 10:08:50 2011
+tid:-1283012864 mysql/dbc_common.c:133
+NEW_ORDER_9: UPDATE stock
+SET s_quantity = s_quantity - 5
+WHERE s_i_id = 73728
+  AND s_w_id = 13
+mysql reports: 1213 Deadlock found when trying to get lock; try restarting transaction
+Fri Sep 23 10:08:50 2011
+tid:-1283012864 nonsp/dbc_new_order.c:259
+NEW_ORDER_9 query: UPDATE stock
+SET s_quantity = s_quantity - 5
+WHERE s_i_id = 73728
+  AND s_w_id = 13
+Fri Sep 23 10:08:50 2011
+tid:-1283012864 nonsp/dbc_new_order.c:31
+NEW_ORDER FINISHED WITH RC 17
+

@@ -1,0 +1,7 @@
+plot "delivery.data" using 1:2 title "delivery" 
+set term png small
+set output "delivery.png"
+set grid xtics ytics
+set xlabel "Response Time (seconds)"
+set ylabel "Count"
+replot

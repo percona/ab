@@ -1,0 +1,7 @@
+plot "payment.data" using 1:2 title "payment" 
+set term png small
+set output "payment.png"
+set grid xtics ytics
+set xlabel "Response Time (seconds)"
+set ylabel "Count"
+replot

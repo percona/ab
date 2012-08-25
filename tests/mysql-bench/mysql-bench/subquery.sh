@@ -1,0 +1,510 @@
+#!@PERL@
+# Copyright (C) 2008 MySQL AB & MySQL Finland AB & TCX DataKonsult AB
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Library General Public
+# License as published by the Free Software Foundation; either
+# version 2 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Library General Public License for more details.
+#
+# You should have received a copy of the GNU Library General Public
+# License along with this library; if not, write to the Free
+# Software Foundation, Inc., 59 Temple Place - Suite 330, Boston,
+# MA 02111-1307, USA
+#
+##################### Standard benchmark inits##############################
+
+use DBI;
+use Benchmark;
+use Data::Dumper;
+use My::Timer;
+
+$opt_outer_rows=10000;             # Number of records in the outer table
+
+$opt_fanout = 32;                  # Number of records that record from the 
+                                   # outer table has in the inner table 
+
+chomp($pwd = `pwd`); $pwd = "." if ($pwd eq '');
+require "$pwd/bench-init.pl" || die "Can't read Configuration file: $!\n";
+
+%table_names=( ot =>"outer.txt", it=>"inner.txt" );
+
+$outer_rows=$opt_outer_rows;
+$inner_rows=$outer_rows*$opt_fanout;
+
+#print $outer_rows, $inner_rows,"\n";
+
+####
+####  Connect to server 
+####
+
+$dbh = $server->connect();
+
+####
+####  Generate dataset for test 
+####
+
+generate_data("$pwd/Data");
+
+####
+####  Load data 
+####
+
+load_data();
+
+exit;
+
+sub print_dashes
+{
+  my ($max_len)=@_;
+
+  print "+";
+  foreach $i (0 .. $#{$max_len})
+  {
+     print "-"x(${$max_len}[$i]+2),"+";
+  }
+  print "\n";
+}
+
+sub get_explain
+{
+  my ($query)=@_;
+
+  print "EXPLAIN $query\n";
+ 
+  $sth_explain=$dbh->prepare("explain " . $query) or die "error: $@";
+  $sth_explain->execute() or die "error: $@";
+
+  @max_len=();
+  @rows=();
+  
+  push @rows,[@{$sth_explain->{NAME_lc}}];
+  while (@row = $sth_explain->fetchrow_array)
+  {
+    push @rows,[@row];
+  }
+
+  foreach $row (@rows)
+  {
+    foreach $index (0 .. $#{$row})
+    {
+      if ($max_len[$index]<length(${$row}[$index]))
+      {
+        $max_len[$index]=length(${$row}[$index]);
+      }
+    }
+  }   
+
+  print_dashes(\@max_len);
+  foreach $row (@rows)
+  {
+    print "|";
+    foreach $index (0 .. $#{$row})
+    {
+      if (!defined(${$row}[$index]))
+      {
+        printf(" %-*s |", $max_len[$index], "NULL");
+      }
+      else
+      {
+        printf(" %-*s |", $max_len[$index], ${$row}[$index]);
+      }
+    }
+    print "\n";
+    print_dashes(\@max_len);
+  }   
+}
+
+#TODO: Give names for constants below
+%query_groups=(
+  subqueries_in_correlated =>
+  {
+    group_full_desc => 'SUBQUERIES_IN,correlated',
+    group_short_desc => 'subq_in_corr_',
+    queries => 
+    {  
+      #The range for outer table should be adjusted to 50% of rows and not 10% as
+      #now
+      #Pull out strategy
+      1 => 'select count(id) from it where it.expr_key in 
+            (select id from ot where ot.expr_multi<it.expr_nokey)',
+      #Duplicate elimination strategy
+      2 => 'select count(expr_key) from ot where expr_key in 
+            ( SELECT expr_nokey FROM it where it.expr_key+1=ot.expr_key+1) and ot.expr_key<100000000',
+      #First match strategy
+      3 => 'select count(expr_key) from ot where expr_key in 
+            ( SELECT expr_key FROM it where it.expr_key+1=ot.expr_key+1 and it.id>160000) and ot.id<5000'
+      #TODO: Add query for LooseScan strategy
+    }
+  },
+ 
+  subqueries_in_uncorrelated =>
+  {
+    group_full_desc => 'SUBQUERIES_IN,Uncorrelated',
+    group_short_desc => 'subq_in_uncorr_',
+    queries=> 
+    {  
+      #The range for outer table should be adjusted to 50% of rows vs 10% 
+      #Pull out strategy 
+      1 => 'select count(expr_key) from it where expr_key in 
+            (select id from ot where ot.expr_nokey>10000000)',
+      #Duplicate elimination strategy
+      2 => 'select count(expr_key) from ot where expr_key in
+            ( SELECT expr_nokey FROM it ) and ot.expr_key<100000000',
+      #First match strategy
+      3 => 'select count(expr_key) from ot where expr_key in
+           ( SELECT expr_key FROM it where it.id>160000) and ot.id<5000'
+      #TODO: Add query for LooseScan strategy
+    }
+  }
+);
+ 
+foreach $query_group (keys %query_groups)
+{
+  if ($limits->{$query_group} && keys %{$query_groups{$query_group}->{queries}})
+  {
+    print "Query group: $query_group\n\n";
+    foreach $query_id (sort {$a<=>$b} keys %{$query_groups{$query_group}->{queries}})
+    {
+      foreach $optimization (keys %{$limits->{$query_group}})
+      {
+        print "Optimization: $optimization:\n\n";
+        if ($limits->{$query_group}->{$optimization} ne '')
+        {
+          $dbh->do("$limits->{$query_group}->{$optimization}") or die "error: $@";
+        }
+        get_explain($query_groups{$query_group}->{queries}->{$query_id});
+
+        time_fetch_all_rows($query_groups{$query_group}->{group_full_desc}." Mode: $optimization",
+                            $query_groups{$query_group}->{group_short_desc}.$query_id."_".$optimization,
+                            $query_groups{$query_group}->{queries}->{$query_id},
+                            $dbh, 100);
+      }
+    }
+  }
+}
+
+sub generate_data
+{
+  my ($datadir)=@_;
+
+  print "Generate data\n";
+
+  $loop_time= My::Timer::get_timer();
+  generate_outer_table($datadir."/".$table_names{ot});
+  generate_inner_table($datadir."/".$table_names{it});
+
+  $end_time=My::Timer::get_timer();
+  print "Time to generate data: ot_rows($outer_rows),it_rows($inner_rows): " .
+    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+}
+
+sub generate_outer_table
+{
+  my ($filename)=@_;
+
+  open(OUTER,">$filename") || die "Can't open file $filename";
+
+  $outer_id=new my_ordinal($outer_rows,    1, $outer_rows);
+  $outer_key=new my_uniform($outer_rows,   0, 1000000000, $outer_rows);
+  $outer_multi=new my_uniform($outer_rows, 0, 1000, 1000);
+  $outer_padder=new my_alphanum($outer_rows, 4, 100);
+
+  for ($i=0;$i<$outer_rows;$i++)
+  {
+    $outer_expr_key=$outer_expr_nokey=$outer_key->get_next_value();
+
+    print OUTER join(",",$outer_id->get_next_value(),
+                         $outer_expr_key,
+                         $outer_expr_nokey,
+                         $outer_multi->get_next_value(),
+                         "'".$outer_padder->get_next_value()."'"
+                    ),"\n";
+  }
+  close(OUTER);
+}
+
+sub generate_inner_table
+{
+  my ($filename)=@_;
+
+  open(INNER,">$filename") || die "Can't open file $filename" ;
+
+  $inner_id=new my_ordinal($inner_rows,    1, $inner_rows);
+  $inner_key=new my_uniform($inner_rows,   0, 1000000000, $outer_rows);
+  $inner_padder=new my_alphanum($inner_rows, 4, 100);
+ 
+  for ($i=0;$i<$inner_rows;$i++)
+  {
+    $inner_expr_key=$inner_expr_nokey=$inner_key->get_next_value();
+
+    print INNER join(",",$inner_id->get_next_value(),
+                         $inner_expr_key,
+                         $inner_expr_nokey,
+                         "'".$inner_padder->get_next_value()."'"
+                    ),"\n";
+  }
+  close(INNER);
+}
+
+sub load_data
+{
+  print "Creating tables\n";
+  $dbh->do("drop table ot" . $server->{'drop_attr'});
+  $dbh->do("drop table it" . $server->{'drop_attr'});
+
+  do_many($dbh,$server->create("ot",
+                              ["id int NOT NULL",
+                                "expr_key int NOT NULL",
+                                "expr_nokey int NOT NULL",
+                                "expr_multi int NOT NULL",
+                                "expr_padder char(10) not null"
+                               ],
+                               ["primary key (id)",
+                               "index  expr_key (expr_key)"]));
+
+  do_many($dbh,$server->create("it",
+                               ["id int NOT NULL",
+                                "expr_key int NOT NULL",
+                                "expr_nokey int NOT NULL",
+                                "expr_padder char(10) not null"
+                               ],
+                               ["primary key (id)",
+                               "index  expr_key (expr_key)"]));
+
+  print "Inserting data\n";
+  $loop_time= My::Timer::get_timer();
+  $row_count=0;
+
+  if ($opt_lock_tables)
+  {
+    $sth = $dbh->do("LOCK TABLES " . join(" WRITE,", keys %table_names) . " WRITE") ||
+      die $DBI::errstr;
+  }
+
+  if ($opt_fast && $server->{'limits'}->{'load_data_infile'})
+  {
+    foreach my $table_name (keys %table_names)
+    {
+      my $filename = "$pwd/Data/".$table_names{$table_name};
+      $row_count+=$server->insert_file($table_name,$filename, $dbh);
+    }
+  }
+  else
+  {
+    if ($opt_fast && $server->{transactions})
+    {
+      $dbh->{AutoCommit} = 0;
+    }
+
+    foreach my $table_name (keys %table_names)
+    {
+      my $filename = "$pwd/Data/".$table_names{$table_name};
+      my $insert_start = "insert into $table_name values (";
+
+      open(DATA, "$filename") || die "Can't open text file: $filename\n";
+      while(<DATA>)
+      {
+        chomp;
+        $command = $insert_start . $_ . ")";
+        print "$command\n" if ($opt_debug);
+        $sth = $dbh->do($command) or die $DBI::errstr;
+        $row_count++;
+      }
+    }
+    close(DATA);
+  }
+
+  if ($opt_lock_tables)
+  {
+    do_query($dbh,"UNLOCK TABLES");
+  }
+  if ($opt_fast && $server->{transactions})
+  {
+    $dbh->commit;
+    $dbh->{AutoCommit} = 1;
+  }
+
+  $end_time=My::Timer::get_timer();
+  print "Time to insert ($row_count): " .
+    My::Timer::timestr(timediff($end_time, $loop_time),"all") . "\n\n";
+
+  cleanup();
+}
+
+sub cleanup
+{
+  chomp($cwd = `pwd`);
+  $cwd="$cwd/Data";
+
+  print "Clean up dataset files:";
+
+  foreach $table (keys %table_names)
+  {
+    $file=$table_names{$table};
+    
+    if (-f "$cwd/$file" && -o "$cwd/$file")
+    {
+      #Trying to delete file;
+      if(! unlink "$cwd/$file")
+      {
+        print "Can't unlink $cwd/$file.\n";
+      }
+    }
+  }
+  print " Done.\n\n";
+}
+
+package my_ordinal;
+
+sub new
+{
+  my ($class,$nrows,$min,$max)=@_;
+  my $self={};
+  bless $self,$class;
+
+  $self->{'nrows'}= $nrows;
+  $self->{'min'}= $min;
+  $self->{'max'}= $max;
+
+  $self->{'value'}= 0;
+  $self->{'resvalue'}= '';
+  $self->{'range'}= $max-$min;
+  $self->{'step'}= 1;
+
+  #range sparse?
+  if ($self->{'nrows'} < $self->{'range'})
+  {
+    $self->{'step'}=$self->{'range'}/($self->{'nrows'}-1);
+  }
+
+  return $self;
+}
+
+sub get_next_value
+{
+  my ($self)=@_;
+  
+  $self->{'resvalue'}= sprintf("%.0f", $self->{'min'} + $self->{'value'});
+  $self->{'value'}+= $self->{'step'};
+  if ($self->{'value'} > $self->{'range'})
+  {
+    $self->{'value'}=0;
+  }
+  return $self->{'resvalue'};
+}
+
+package my_uniform;
+
+# Generator below is able to genarate sequence of uniformly 
+# distributed values in range [0..10^15]
+#
+# It is possible to define range and number of uniques values
+# that will be generated in this range
+
+sub new
+{
+  my ($class,$nrows,$min,$max,$uniq)=@_;
+  my $self={};
+  bless $self,$class;
+
+  @root=(2, 7, 26, 59, 242, 568, 1792, 5649, 16807, 30001, 
+         60010, 180001, 360002, 1000001, 2000000);
+
+  @prime=(11, 101, 1009, 10007, 100003, 1000003, 10000019,
+          100000007, 2147483647, 10000000019, 100000000003,
+          1000000000039, 10000000000037, 100000000000031,
+          1000000000000037);
+
+  $self->{'nrows'}= $nrows;
+  $self->{'min'}= $min;
+  $self->{'max'}= $max;
+  $self->{'uniq'}= $uniq;
+
+  $self->{'range'}= $max-$min;
+
+  $self->{'index'}=(log($self->{'range'})/log(10));
+
+  $self->{'R'}= $root[$self->{'index'}];
+  $self->{'P'}= $prime[$self->{'index'}];
+  $self->{'seed'}= $self->{'R'};
+  $self->{'uniq_count'}=0;
+
+  return $self;
+}
+
+sub get_next_value()
+{
+  my ($self)=@_;
+
+  if ($self->{'uniq_count'} >= $self->{'uniq'})
+  {
+    $self->{'R'}= $root[$self->{'index'}];
+    $self->{'P'}= $prime[$self->{'index'}];
+    $self->{'seed'}= $self->{'R'};
+    $self->{'uniq_count'}=0;
+  }
+  $self->{'resvalue'}=$self->{'min'}+$self->get_uniform();
+  $self->{'uniq_count'}++;
+
+  return $self->{'resvalue'};
+}
+
+sub get_uniform()
+{
+  my ($self)=@_;
+
+  $self->{'seed'} = ($self->{'R'} * $self->{'seed'}) % $self->{'P'};
+  while ( $self->{'seed'} > $self->{'range'})
+  {
+    $self->{'seed'}= ($self->{'R'}* $self->{'seed'}) % $self->{'P'};
+  }
+  return ($self->{'seed'} - 1);
+}
+
+package my_alphanum;
+
+sub new
+{
+  my ($class,$nrows,$len,$uniques)=@_;
+  my $self={};
+  bless $self,$class;
+
+  $self->{'nrows'}= $nrows;
+  $self->{'len'}= $len;
+  $self->{'uniques'}= $uniques;
+
+  $self->{'charset'}= ['.', '/',' ',0..9, 'A'..'Z', 'a'..'z'];
+  $self->{'charset_size'}= $#{$self->{'charset'}};
+  #todo: add uniq part
+
+  $self->{'count'}=0;
+
+  return $self;
+}
+
+sub get_next_value()
+{
+  my ($self)=@_;
+
+  $self->{'string'}="";
+
+  if ($self->{'count'} % $self->{'uniques'})
+  {
+
+    for ($i=0;$i<$self->{'len'};$i++)
+    {
+      $self->{'string'}.=@{$self->{'charset'}}[rand $self->{'charset_size'}];
+    }
+  }
+  else
+  {
+    $self->{'string'}="@{$self->{'charset'}}[rand $self->{'charset_size'}]"x$self->{'len'};
+  }
+  $self->{'count'}++;
+  return $self->{'string'};
+}

@@ -1,0 +1,5 @@
+/data0/ranger/mysql-test-extra-5.1/mysql-test/test_tools/scripts/autobench/tests/dbt2/dbt2-0.37-fixed-23.10.2007/scripts/../scripts/sysstats.sh: line 90: run_number: No such file or directory
+expr: syntax error
+expr: syntax error
+starting system statistics data collection
+Linux 2.6.32-100.28.11.el6.x86_64 (caneland.se.oracle.com) 	09/24/2011 	_x86_64_	(24 CPU)
